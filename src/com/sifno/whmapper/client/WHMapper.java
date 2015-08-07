@@ -6,7 +6,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
-import com.sifno.whmapper.server.SolarSystem;
+import com.sifno.whmapper.client.Graph.GraphPanel;
+import com.sifno.whmapper.client.Graph.SolarSystemWidget;
 
 /**
  * Created by Pavel on 01.08.2015.
@@ -15,8 +16,10 @@ public class WHMapper implements EntryPoint {
 
     private Label label;
     private Button button, drawConnection;
-    private PickupDragController dragController;
+
     private GraphPanel graphPanel;
+
+    public static Label debug;
 
     public void onModuleLoad() {
 
@@ -31,19 +34,41 @@ public class WHMapper implements EntryPoint {
         graphPanel.addStyleName("gwt-GraphPanel");
         RootPanel.get().add(graphPanel);
 
-        dragController = new PickupDragController(graphPanel,true);
+        final PickupDragController dragController = new PickupDragController(graphPanel,true);
+
+        debug = new Label("HELLO");
+        graphPanel.add(debug, 50, 50);
+        dragController.makeDraggable(debug);
 
 
-        label = new Label("Hello");
+        SolarSystemWidget ssw1 = new SolarSystemWidget(new SolarSystemClient(),graphPanel);
+        SolarSystemWidget ssw2 = new SolarSystemWidget(new SolarSystemClient(),graphPanel);
+
+
+        graphPanel.add(ssw1, 50, 100);
+        graphPanel.add(ssw2, 50, 150);
+        dragController.makeDraggable(ssw1);
+        dragController.makeDraggable(ssw2);
+
+
+
+
+        graphPanel.addConnection(ssw1, ssw2);
+
+
+
+
+        label = new Label("BLAD");
         RootPanel.get().add(label);
         dragController.makeDraggable(label);
 
-        button = new Button("get Jita");
+        button = new Button("get BLAD");
         RootPanel.get().add(button);
 
 
         button.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
+
 /*
                 AsyncCallback<MyClass> callback = new AsyncCallback<MyClass>() {
                     public void onFailure(Throwable caught) {
@@ -67,7 +92,7 @@ public class WHMapper implements EntryPoint {
 
                     @Override
                     public void onSuccess(SolarSystemClient result) {
-                        SolarSystemWidget ssw = new SolarSystemWidget(result);
+                        SolarSystemWidget ssw = new SolarSystemWidget(result, graphPanel);
                         graphPanel.add(ssw, 100, 100);
                         dragController.makeDraggable(ssw);
                     }
@@ -86,6 +111,8 @@ public class WHMapper implements EntryPoint {
         drawConnection.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
+
+                WHMapper.debug.setText(event.getSource() + " " + event.getSource().getClass());
                 graphPanel.drawConnections();
             }
         });

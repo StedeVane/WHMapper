@@ -5,6 +5,8 @@ package com.sifno.whmapper.server;
 import com.sifno.whmapper.client.Signature;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ������ on 29.06.15.
@@ -19,6 +21,8 @@ public class Main extends JFrame {
 
         WormholeMap wormholeMap = new WormholeMap();
         add(wormholeMap);
+
+
 
 
         pack();
@@ -36,6 +40,11 @@ public class Main extends JFrame {
                 new Main();
 
 
+            /*    List<Integer> integerList = null;
+                for (Integer integer : integerList) {
+                    System.out.println(integer);
+                }
+*/
                 Signature.parse(
                         "BVI-856\tCosmic Signature\t\t\t0,00%\t2,39 AU\n" +
                                 "GTJ-136\tCosmic Signature\tData Site\tCentral Guristas Sparking Transmitter\t100,00%\t1,90 AU\n" +

@@ -47,5 +47,6 @@
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.15" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.36" level="project" />
     <orderEntry type="library" name="Maven: org.xerial:sqlite-jdbc:3.8.10.1" level="project" />
+    <orderEntry type="library" name="Maven: com.levigo:gwt-awt:1.0.1" level="project" />
   </component>
 </module>

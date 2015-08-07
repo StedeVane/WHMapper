@@ -3,7 +3,7 @@ import java.io.File;
 import java.sql.*;
 
 public class SQLiteJDBC {
-    public final static String path = "F:\\GitHub\\WHMapper\\universeDataDx.db";
+    public final static String path = "D:\\GitHub\\WHMapper\\universeDataDx.db";
 
     Connection connection = null;
 

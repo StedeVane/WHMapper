@@ -12,7 +12,7 @@ import java.util.Map;
 public class SolarSystemClient implements Serializable {
 
     private int id;
-    private String name;
+    private String name = "default";
  //   private ConstellationClietn constellation;
  //   private RegionClient region;
     private double security;
@@ -20,7 +20,7 @@ public class SolarSystemClient implements Serializable {
     private double luminosity;
     private int sunType;
 
-    private String classType;
+    private String classType = "xxx";
 
     public SolarSystemClient() {}
 
