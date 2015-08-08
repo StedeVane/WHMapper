@@ -1,5 +1,7 @@
 package com.sifno.whmapper.client.Graph;
 
+import com.allen_sauer.gwt.dnd.client.drop.AbsolutePositionDropController;
+import com.allen_sauer.gwt.dnd.client.drop.DropController;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.touch.client.Point;
@@ -10,6 +12,7 @@ import com.sifno.whmapper.client.Graph.SolarSystemWidget;
 import com.sifno.whmapper.client.SolarSystemClient;
 import com.sifno.whmapper.client.WHMapper;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,13 +22,11 @@ import java.util.Map;
  */
 public class GraphPanel extends AbsolutePanel {
 
-
+    DropController dropController;
     GraphCanvas graphCanvas;
 
-
-    //Canvas canvas;
-
     public GraphPanel() {
+
 
         setPixelSize(800, 500);
 
@@ -34,38 +35,35 @@ public class GraphPanel extends AbsolutePanel {
         graphCanvas.getCanvas().setCoordinateSpaceHeight(500);
         add(graphCanvas.getCanvas());
 
+        dropController = new GraphDropController(this);
+
+
+    }
+
+    public void repaint() {
+        graphCanvas.repaint();
+    }
+
+    public void setBackground(Color color) {
+        graphCanvas.setBackground(color);
     }
 
     public void addConnection(SolarSystemWidget ssw1, SolarSystemWidget ssw2) {
         graphCanvas.add(new NodeConnection(graphCanvas, ssw1, ssw2));
     }
 
+    public DropController getDropController() {
+        return dropController;
+    }
 
-    public Point getWidgetPosition(int index) {
-
-        Widget widget = list.get(index);
-
-        return new Point(widget.getAbsoluteLeft()-getAbsoluteLeft(),widget.getAbsoluteTop()-getAbsoluteTop());
+    public void setDropController(DropController dropController) {
+        this.dropController = dropController;
     }
 
     public void drawConnections() {
-
+        graphCanvas.repaint();
     }
-
-    List<SolarSystemWidget> list;
-
-
-    public void add(SolarSystemWidget w, int left, int top) {
-        super.add(w, left, top);
-
-        if (list == null) {
-            list = new ArrayList<>();
-        }
-
-        list.add(w);
-
-    }
-
+/*
     @Override
     protected void setWidgetPositionImpl(Widget w, int left, int top) {
         super.setWidgetPositionImpl(w, left, top);
@@ -76,11 +74,5 @@ public class GraphPanel extends AbsolutePanel {
         SolarSystemWidget ssw = (SolarSystemWidget) w;
         ssw.firePositionChange();
     }
-
-    /*
-    @Override
-    public void add(Widget w) {
-
-        //super.add(w);
-    }*/
+*/
 }

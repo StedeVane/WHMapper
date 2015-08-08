@@ -1,5 +1,6 @@
 package com.sifno.whmapper.client.Graph;
 
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.levigo.util.gwtawt.client.WebGraphics;
 import com.sifno.whmapper.client.WHMapper;
 
@@ -12,7 +13,7 @@ import java.awt.geom.*;
 public class NodeConnection extends GraphComponent {
 
 
-
+    private boolean click = false;
     private Shape shape;
 
     private SolarSystemWidget ssw1, ssw2;
@@ -25,6 +26,13 @@ public class NodeConnection extends GraphComponent {
 
         updateShape();
 
+        addMouseClickListener(new MouseClickListener() {
+            @Override
+            public void onMouseClick(ClickEvent event) {
+                click = true;
+                repaint();
+            }
+        });
 
 
         ssw1.addPositionListener(new PositionHandler(this));
@@ -33,26 +41,38 @@ public class NodeConnection extends GraphComponent {
 
     }
 
+
     public void updateShape() {
-        WHMapper.debug.setText("I'm here");
 
-        WHMapper.debug.setText("ssw1 "+ ssw1);
-        WHMapper.debug.setText("sww1 xy: " + ssw1.getX()+ " " + ssw1.getY());
+        int x = Math.min(ssw1.getX(), ssw2.getX());
+        int y = Math.min(ssw1.getY(), ssw2.getY());
 
-        WHMapper.debug.setText("ssw2 "+ ssw2);
-        WHMapper.debug.setText("sww2 xy: " + ssw2.getX()+ " " + ssw2.getY());
+        int w = Math.abs(ssw1.getX() - ssw2.getX());
+        int h = Math.abs(ssw1.getY() - ssw2.getY());
 
-        WHMapper.debug.setText(ssw1.getX() + " " + ssw1.getY() + " " + ssw2.getX() + " " + ssw2.getY());
-        shape = new Line2D.Double(ssw1.getX(),ssw1.getY(),ssw2.getX(),ssw2.getY());
-        WHMapper.debug.setText(ssw1.getX() + " " + ssw1.getY() + " " + ssw2.getX() + " " + ssw2.getY());
+        shape = new Rectangle2D.Double(x,y,w,h);
+//        shape = new Line2D.Double(ssw1.getX(),ssw1.getY(),ssw2.getX(),ssw2.getY());
 
-     //   repaint();
+       // shape = new P
     }
 
 
-
+    @Override
     public void paint(WebGraphics g) {
+        WHMapper.debug2.setText("paint ");
+        WHMapper.debug2.setText(g.toString());
+
+        Color defaultColor;
+        if (click) g.setColor(Color.GREEN);
+
         g.draw(shape);
+
+
+    }
+
+    @Override
+    boolean contains(double x, double y) {
+        return shape.contains(x,y);
     }
 
     public String getSomething() {

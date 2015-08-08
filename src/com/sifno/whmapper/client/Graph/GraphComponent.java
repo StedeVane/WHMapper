@@ -1,16 +1,19 @@
 package com.sifno.whmapper.client.Graph;
 
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.levigo.util.gwtawt.client.WebGraphics;
 
-import java.awt.Shape;
+
 import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.List;
 
 /**
  * Created by Алёна on 07.08.2015.
  */
 public abstract class GraphComponent {
+
+    List<MouseClickListener> mouseClickListenerList;
 
     private GraphComponent parent;
 
@@ -41,6 +44,23 @@ public abstract class GraphComponent {
     List<GraphComponent> getChildren() {
         return null;
     }
+
+    void addMouseClickListener(MouseClickListener clickListener) {
+        if (mouseClickListenerList==null)
+            mouseClickListenerList = new ArrayList<MouseClickListener>();
+
+        mouseClickListenerList.add(clickListener);
+    }
+
+    void fireMouseClick(ClickEvent event) {
+        if (mouseClickListenerList!=null) {
+            for (MouseClickListener clickListener: mouseClickListenerList) {
+                clickListener.onMouseClick(event);
+            }
+        }
+
+    }
+    abstract boolean contains(double x, double y);
 
 //    Boolean add(GraphComponent component);
 //    Boolean remove(GraphComponent component);

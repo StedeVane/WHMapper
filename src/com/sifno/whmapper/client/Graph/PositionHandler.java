@@ -15,7 +15,8 @@ public class PositionHandler implements PositionListener{
 
     @Override
     public void positionChange() {
-        WHMapper.debug.setText("change " + connection.getSomething());
-                 connection.updateShape();
+
+        connection.updateShape();
+        connection.repaint();
     }
 }

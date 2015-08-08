@@ -5,6 +5,7 @@ package com.sifno.whmapper.server;
 import com.sifno.whmapper.client.Signature;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,13 @@ public class Main extends JFrame {
 
 
 
+    @Override
+    public void paintComponents(Graphics g) {
+        super.paintComponents(g);
+
+
+    }
+
     public Main() {
 
 
@@ -22,7 +30,8 @@ public class Main extends JFrame {
         WormholeMap wormholeMap = new WormholeMap();
         add(wormholeMap);
 
-
+        Label label = new Label();
+       // label.set
 
 
         pack();

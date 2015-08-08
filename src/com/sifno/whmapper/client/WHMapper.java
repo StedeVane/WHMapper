@@ -1,13 +1,20 @@
 package com.sifno.whmapper.client;
 
-import com.allen_sauer.gwt.dnd.client.PickupDragController;
+import com.allen_sauer.gwt.dnd.client.*;
+import com.allen_sauer.gwt.dnd.client.drop.AbsolutePositionDropController;
+import com.allen_sauer.gwt.dnd.client.drop.DropController;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.client.Messages;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Label;
 import com.sifno.whmapper.client.Graph.GraphPanel;
 import com.sifno.whmapper.client.Graph.SolarSystemWidget;
+
+import java.awt.*;
 
 /**
  * Created by Pavel on 01.08.2015.
@@ -17,9 +24,12 @@ public class WHMapper implements EntryPoint {
     private Label label;
     private Button button, drawConnection;
 
+    public static PickupDragController dragController;
     private GraphPanel graphPanel;
 
-    public static Label debug;
+    public static Label x,y;
+
+    public static Label debug2;
 
     public void onModuleLoad() {
 
@@ -30,33 +40,52 @@ public class WHMapper implements EntryPoint {
         RootPanel.get().add(img, 40, 30);
         dragController.makeDraggable(img);*/
 
+        debug2 = new Label("HELLO");
+
+        x = new Label("x:");
+        RootPanel.get().add(x);
+
+        y = new Label("y:");
+        RootPanel.get().add(y);
+
         graphPanel = new GraphPanel();
         graphPanel.addStyleName("gwt-GraphPanel");
         RootPanel.get().add(graphPanel);
 
-        final PickupDragController dragController = new PickupDragController(graphPanel,true);
+        dragController = new PickupDragController(graphPanel,true);
 
-        debug = new Label("HELLO");
-        graphPanel.add(debug, 50, 50);
-        dragController.makeDraggable(debug);
+        dragController.addDragHandler(new DragHandlerAdapter() {
+            @Override
+            public void onDragEnd(DragEndEvent event) {
+                super.onDragEnd(event);
 
+                if (!(event.getContext().draggable instanceof SolarSystemWidget)) return;
+
+                SolarSystemWidget ssw = (SolarSystemWidget) event.getContext().draggable;
+                ssw.firePositionChange();
+            }
+        });
+
+
+        dragController.registerDropController(graphPanel.getDropController());
+
+        graphPanel.add(debug2, 50, 50);
+        dragController.makeDraggable(debug2);
 
         SolarSystemWidget ssw1 = new SolarSystemWidget(new SolarSystemClient(),graphPanel);
         SolarSystemWidget ssw2 = new SolarSystemWidget(new SolarSystemClient(),graphPanel);
-
+        SolarSystemWidget ssw3 = new SolarSystemWidget(new SolarSystemClient(),graphPanel);
 
         graphPanel.add(ssw1, 50, 100);
         graphPanel.add(ssw2, 50, 150);
+        graphPanel.add(ssw3, 50, 150);
+
         dragController.makeDraggable(ssw1);
         dragController.makeDraggable(ssw2);
-
-
-
+        dragController.makeDraggable(ssw3);
 
         graphPanel.addConnection(ssw1, ssw2);
-
-
-
+        graphPanel.addConnection(ssw3, ssw2);
 
         label = new Label("BLAD");
         RootPanel.get().add(label);
@@ -112,7 +141,7 @@ public class WHMapper implements EntryPoint {
             @Override
             public void onClick(ClickEvent event) {
 
-                WHMapper.debug.setText(event.getSource() + " " + event.getSource().getClass());
+
                 graphPanel.drawConnections();
             }
         });

@@ -1,6 +1,7 @@
 package com.sifno.whmapper.client.Graph;
 
 
+import com.allen_sauer.gwt.dnd.client.util.DOMUtil;
 import com.google.gwt.user.client.ui.*;
 import com.sifno.whmapper.client.SolarSystemClient;
 import com.sifno.whmapper.client.WHMapper;
@@ -41,14 +42,10 @@ public class SolarSystemWidget extends FocusPanel {
     }
 
     int getX() {
-
-
-        return parent.getWidgetLeft(this);
+        return getAbsoluteLeft() - parent.getAbsoluteLeft() - DOMUtil.getBorderLeft(parent.getElement());
     }
     int getY() {
-
-
-        return parent.getWidgetTop(this);
+        return getAbsoluteTop() - parent.getAbsoluteTop() - DOMUtil.getBorderTop(parent.getElement());
     }
 
     void addPositionListener(PositionListener positionListener) {
@@ -58,10 +55,10 @@ public class SolarSystemWidget extends FocusPanel {
         positionListenerList.add(positionListener);
     }
 
-    void firePositionChange() {
-        WHMapper.debug.setText("fire");
+    public void firePositionChange() {
+
         if (positionListenerList==null) return;
-        WHMapper.debug.setText(String.valueOf(positionListenerList.size()));
+
         for (PositionListener listener : positionListenerList) {
             listener.positionChange();
         }

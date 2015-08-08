@@ -1,6 +1,8 @@
 package com.sifno.whmapper.client.Graph;
 
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.levigo.util.gwtawt.client.WebGraphics;
+import com.sifno.whmapper.client.WHMapper;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,10 +39,32 @@ public class GraphComposite extends GraphComponent {
     }
 
     @Override
+    void fireMouseClick(ClickEvent event) {
+        super.fireMouseClick(event);
+
+        if (children != null)
+            for (GraphComponent component: children) {
+                if (component.contains(event.getX(), event.getY())) {
+                    component.fireMouseClick(event);
+                }
+            }
+    }
+
+    @Override
+    boolean contains(double x, double y) {
+        boolean result = false;
+        if (children != null)
+            for (int i=0; i<children.size()&&!result;i++) {
+                result|= children.get(i).contains(x, y);
+            }
+        return result;
+    }
+
+    @Override
     void paint(WebGraphics g) {
         if (children != null)
-            for (GraphComponent component: children)
+            for (GraphComponent component: children) {
                 component.paint(g);
-
+            }
     }
 }
