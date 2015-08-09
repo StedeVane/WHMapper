@@ -2,14 +2,8 @@ package com.sifno.whmapper.client.Graph;
 
 import com.allen_sauer.gwt.dnd.client.DragContext;
 import com.allen_sauer.gwt.dnd.client.drop.AbsolutePositionDropController;
-import com.allen_sauer.gwt.dnd.client.drop.AbstractDropController;
 import com.allen_sauer.gwt.dnd.client.util.DOMUtil;
-import com.google.gwt.canvas.client.Canvas;
-import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.sifno.whmapper.client.WHMapper;
-
-import java.awt.*;
 
 
 /**
@@ -17,34 +11,34 @@ import java.awt.*;
  */
 public class GraphDropController extends AbsolutePositionDropController {
 
-    GraphPanel graphPanel;
+    VisualizationViewer vv;
 
-    public GraphDropController(GraphPanel dropTarget) {
+    public GraphDropController(VisualizationViewer dropTarget) {
         super(dropTarget);
-        this.graphPanel = dropTarget;
+        this.vv = dropTarget;
     }
 
     @Override
     public void onEnter(DragContext context) {
         super.onEnter(context);
 
-     //   graphPanel.setBackground(Color.CYAN);
-        graphPanel.repaint();
+     //   vv.setBackground(Color.CYAN);
+        vv.repaint();
     }
 
     @Override
     public void onLeave(DragContext context) {
         super.onLeave(context);
-     //   graphPanel.setBackground(Color.WHITE);
-        graphPanel.repaint();
+     //   vv.setBackground(Color.WHITE);
+        vv.repaint();
     }
 
     @Override
     public void onMove(DragContext context) {
         super.onMove(context);
 
-        WHMapper.x.setText("x: " + (context.desiredDraggableX - graphPanel.getAbsoluteLeft() - DOMUtil.getBorderLeft(graphPanel.getElement()) ));
-        WHMapper.y.setText("y: " + (context.desiredDraggableY - graphPanel.getAbsoluteTop() - DOMUtil.getBorderTop(graphPanel.getElement()) ));
+        WHMapper.x.setText("x: " + (context.desiredDraggableX - vv.getAbsoluteLeft() - DOMUtil.getBorderLeft(vv.getElement()) ));
+        WHMapper.y.setText("y: " + (context.desiredDraggableY - vv.getAbsoluteTop() - DOMUtil.getBorderTop(vv.getElement()) ));
 
         if (!(context.draggable instanceof SolarSystemWidget)) return;
 

@@ -49,7 +49,7 @@ public class GraphCanvas extends GraphComposite {
         g.setFillColor(background);
         g.fill(new Rectangle2D.Double(0, 0, canvas.getCoordinateSpaceWidth(), canvas.getCoordinateSpaceHeight()));
    //     g.clearRect(0,0,canvas.getCoordinateSpaceWidth(),canvas.getCoordinateSpaceHeight());
-        WHMapper.debug2.setText(g.toString());
+
         paint(g);
     }
 

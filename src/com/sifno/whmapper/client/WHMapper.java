@@ -1,20 +1,20 @@
 package com.sifno.whmapper.client;
 
 import com.allen_sauer.gwt.dnd.client.*;
-import com.allen_sauer.gwt.dnd.client.drop.AbsolutePositionDropController;
-import com.allen_sauer.gwt.dnd.client.drop.DropController;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.i18n.client.Messages;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
-import com.sifno.whmapper.client.Graph.GraphPanel;
+import com.sifno.whmapper.client.Graph.VisualizationViewer;
 import com.sifno.whmapper.client.Graph.SolarSystemWidget;
-
-import java.awt.*;
+import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.ObservableGraph;
+import edu.uci.ics.jung.graph.UndirectedGraph;
+import edu.uci.ics.jung.graph.UndirectedSparseGraph;
+import edu.uci.ics.jung.graph.util.Graphs;
 
 /**
  * Created by Pavel on 01.08.2015.
@@ -25,7 +25,7 @@ public class WHMapper implements EntryPoint {
     private Button button, drawConnection;
 
     public static PickupDragController dragController;
-    private GraphPanel graphPanel;
+    private VisualizationViewer vv;
 
     public static Label x,y;
 
@@ -48,11 +48,11 @@ public class WHMapper implements EntryPoint {
         y = new Label("y:");
         RootPanel.get().add(y);
 
-        graphPanel = new GraphPanel();
-        graphPanel.addStyleName("gwt-GraphPanel");
-        RootPanel.get().add(graphPanel);
+        vv = new VisualizationViewer();
+        vv.addStyleName("gwt-GraphPanel");
+        RootPanel.get().add(vv);
 
-        dragController = new PickupDragController(graphPanel,true);
+        dragController = new PickupDragController(vv,true);
 
         dragController.addDragHandler(new DragHandlerAdapter() {
             @Override
@@ -67,25 +67,25 @@ public class WHMapper implements EntryPoint {
         });
 
 
-        dragController.registerDropController(graphPanel.getDropController());
+        dragController.registerDropController(vv.getDropController());
 
-        graphPanel.add(debug2, 50, 50);
+        vv.add(debug2, 50, 50);
         dragController.makeDraggable(debug2);
 
-        SolarSystemWidget ssw1 = new SolarSystemWidget(new SolarSystemClient(),graphPanel);
-        SolarSystemWidget ssw2 = new SolarSystemWidget(new SolarSystemClient(),graphPanel);
-        SolarSystemWidget ssw3 = new SolarSystemWidget(new SolarSystemClient(),graphPanel);
+        SolarSystemWidget ssw1 = new SolarSystemWidget(new SolarSystemClient(), vv);
+        SolarSystemWidget ssw2 = new SolarSystemWidget(new SolarSystemClient(), vv);
+        SolarSystemWidget ssw3 = new SolarSystemWidget(new SolarSystemClient(), vv);
 
-        graphPanel.add(ssw1, 50, 100);
-        graphPanel.add(ssw2, 50, 150);
-        graphPanel.add(ssw3, 50, 150);
+        vv.add(ssw1, 50, 100);
+        vv.add(ssw2, 50, 150);
+        vv.add(ssw3, 50, 150);
 
         dragController.makeDraggable(ssw1);
         dragController.makeDraggable(ssw2);
         dragController.makeDraggable(ssw3);
 
-        graphPanel.addConnection(ssw1, ssw2);
-        graphPanel.addConnection(ssw3, ssw2);
+        vv.addConnection(ssw1, ssw2);
+        vv.addConnection(ssw3, ssw2);
 
         label = new Label("BLAD");
         RootPanel.get().add(label);
@@ -121,8 +121,8 @@ public class WHMapper implements EntryPoint {
 
                     @Override
                     public void onSuccess(SolarSystemClient result) {
-                        SolarSystemWidget ssw = new SolarSystemWidget(result, graphPanel);
-                        graphPanel.add(ssw, 100, 100);
+                        SolarSystemWidget ssw = new SolarSystemWidget(result, vv);
+                        vv.add(ssw, 100, 100);
                         dragController.makeDraggable(ssw);
                     }
                 };
@@ -142,7 +142,7 @@ public class WHMapper implements EntryPoint {
             public void onClick(ClickEvent event) {
 
 
-                graphPanel.drawConnections();
+                vv.drawConnections();
             }
         });
 

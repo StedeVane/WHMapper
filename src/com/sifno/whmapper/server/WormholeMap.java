@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Point2D;
 import java.util.Timer;
 
 /**
@@ -46,6 +47,7 @@ public class WormholeMap extends JPanel {
 
         this.layout = new KKLayout(this.g); // new FRLayout2(this.g);
 
+      //  Point2D transform = layout.transform(5);
 
 
         this.vv = new VisualizationViewer(this.layout, new Dimension(600, 600));

@@ -6,7 +6,6 @@
     <inherits name="com.allen_sauer.gwt.dnd.gwt-dnd"/>
     <inherits name="com.levigo.util.GwtAwt"/>
 
-
     <entry-point class='com.sifno.whmapper.client.WHMapper'/>
     <servlet path="/LayoutMap" class="com.sifno.whmapper.server.LayoutMapImpl"/>
 

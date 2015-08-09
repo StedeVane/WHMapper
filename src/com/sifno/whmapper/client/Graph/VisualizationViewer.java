@@ -20,12 +20,12 @@ import java.util.Map;
 /**
  * Created by Pavel on 05.08.2015.
  */
-public class GraphPanel extends AbsolutePanel {
+public class VisualizationViewer extends AbsolutePanel {
 
     DropController dropController;
     GraphCanvas graphCanvas;
 
-    public GraphPanel() {
+    public VisualizationViewer() {
 
 
         setPixelSize(800, 500);

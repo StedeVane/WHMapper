@@ -26,6 +26,8 @@ public class SolarSystemWidget extends FocusPanel {
     SolarSystemClient system;
 
     public SolarSystemWidget(SolarSystemClient system, AbsolutePanel parent) {
+        addStyleName("gwt-SolarSystemWidget");
+
         this.parent = parent;
         this.system = system;
 
@@ -35,6 +37,8 @@ public class SolarSystemWidget extends FocusPanel {
 
         systemName = new Label(system.getName());
         systemType = new Label(system.getClassType());
+
+        systemName.addStyleName("SystemName");
 
         horizontalPanel.add(systemType);
         horizontalPanel.add(systemName);

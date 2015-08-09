@@ -7,3 +7,14 @@ body {
 }
 
 .gwt-GraphPanel {border: 10px dotted red}
+
+.gwt-SolarSystemWidget {
+    border: 1px solid black;
+    padding: 5px;
+    background: white;
+}
+
+.SystemName {
+    margin-left: 5px;
+    font-weight: bold;
+}
