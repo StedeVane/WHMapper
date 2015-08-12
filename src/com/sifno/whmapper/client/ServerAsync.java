@@ -1,7 +1,7 @@
 package com.sifno.whmapper.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.sifno.whmapper.server.SolarSystem;
+import com.sifno.stellarmap.SolarSystemClient;
 
 /**
  * Created by Pavel on 01.08.2015.

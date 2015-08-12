@@ -8,13 +8,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
+import com.sifno.stellarmap.SolarSystemClient;
 import com.sifno.whmapper.client.Graph.VisualizationViewer;
 import com.sifno.whmapper.client.Graph.SolarSystemWidget;
 import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.graph.ObservableGraph;
-import edu.uci.ics.jung.graph.UndirectedGraph;
-import edu.uci.ics.jung.graph.UndirectedSparseGraph;
-import edu.uci.ics.jung.graph.util.Graphs;
 
 /**
  * Created by Pavel on 01.08.2015.
@@ -32,6 +29,8 @@ public class WHMapper implements EntryPoint {
     public static Label debug2;
 
     public void onModuleLoad() {
+
+        Graph<Integer,Integer> graph;
 
         //RootPanel.get().setPixelSize(600, 600);
 
@@ -98,20 +97,20 @@ public class WHMapper implements EntryPoint {
         button.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
 
-/*
-                AsyncCallback<MyClass> callback = new AsyncCallback<MyClass>() {
-                    public void onFailure(Throwable caught) {
+//
+//                AsyncCallback<MyClass> callback = new AsyncCallback<MyClass>() {
+//                    public void onFailure(Throwable caught) {
+//
+//                        label.setText(caught.getMessage());
+//                    }
+//
+//                    public void onSuccess(MyClass result) {
+//                        label.setText(result.getName());
+//                    }
+//                };
+//
+//                Server.App.getInstance().getObject("Pavel",callback);
 
-                        label.setText(caught.getMessage());
-                    }
-
-                    public void onSuccess(MyClass result) {
-                        label.setText(result.getName());
-                    }
-                };
-
-                LayoutMap.App.getInstance().getObject("Pavel",callback);
-*/
                 AsyncCallback<SolarSystemClient> callback = new AsyncCallback<SolarSystemClient>() {
                     @Override
                     public void onFailure(Throwable caught) {
@@ -127,7 +126,7 @@ public class WHMapper implements EntryPoint {
                     }
                 };
 
-                LayoutMap.App.getInstance().getSolarSystemClient("Jita", callback);
+                Server.App.getInstance().getSolarSystemClient("Jita", callback);
 
             }
         });

@@ -2,12 +2,10 @@ package com.sifno.whmapper.server;
 
 
 
-import com.sifno.whmapper.client.Signature;
+import com.sifno.stellarmap.Signature;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by ������ on 29.06.15.

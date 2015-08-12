@@ -1,9 +1,5 @@
 package com.sifno.stellarmap;
 
-import com.sifno.stellarmap.Endpoint;
-import com.sifno.stellarmap.Link;
-import com.sifno.whmapper.server.Stargate;
-
 /**
  * Created by Крочак on 16.07.15.
  */

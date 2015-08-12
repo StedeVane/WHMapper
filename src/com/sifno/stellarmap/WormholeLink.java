@@ -1,9 +1,5 @@
 package com.sifno.stellarmap;
 
-import com.sifno.stellarmap.Endpoint;
-import com.sifno.stellarmap.Link;
-import com.sifno.whmapper.server.Wormhole;
-
 /**
  * Created by Крочак on 16.07.15.
  */
@@ -62,6 +58,7 @@ public class WormholeLink extends Link {
 
     @Override
     public Wormhole getSource() {
+        //TODO uncomment;
 //        if (wh1!=null && wh1.getIndex() != NewEden.K162)
 //            return wh1;
 //
@@ -73,6 +70,7 @@ public class WormholeLink extends Link {
 
     @Override
     public Wormhole getDest() {
+        //TODO uncomment;
 //        if (wh1!=null && wh1.getIndex() == NewEden.K162)
 //            return wh1;
 //
@@ -84,6 +82,7 @@ public class WormholeLink extends Link {
 
     @Override
     public boolean isSource(Endpoint endpoint) {
+        //TODO uncomment;
 //        if (!(endpoint instanceof Wormhole))
 //            return false;
 //
@@ -97,6 +96,7 @@ public class WormholeLink extends Link {
 
     @Override
     public boolean isDest(Endpoint endpoint) {
+        //TODO uncomment;
 //        if (!(endpoint instanceof Wormhole))
 //            return false;
 //

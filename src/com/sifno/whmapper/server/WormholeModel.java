@@ -1,6 +1,7 @@
 package com.sifno.whmapper.server;
 
 //import edu.uci.ics.jung.graph.*;
+import com.sifno.stellarmap.*;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.ObservableGraph;
 import edu.uci.ics.jung.graph.UndirectedGraph;
@@ -15,22 +16,22 @@ import java.util.*;
 
 public class WormholeModel {
 
-    private Graph<SolarSystem, Jump> graph;
+    private Graph<SolarSystemServer, Link> graph;
 
-    //private Map<String,SolarSystem> systemList;
+    //private Map<String,SolarSystemServer> systemList;
 
-    private void add(SolarSystem s1, SolarSystem s2) {
-        graph.addEdge(new WormholeJump(new Wormhole(s1), new Wormhole(s2)),s1,s2);
+    private void add(SolarSystemServer s1, SolarSystemServer s2) {
+        graph.addEdge(new WormholeLink(new Wormhole(s1), new Wormhole(s2)),s1,s2);
     }
 
     private void addGatewayTunnel(Stargate gw1, Stargate gw2) {
-        new StargateJump(gw1, gw2);
+        new StargateLink(gw1, gw2);
 
      //   graph.containsVertex()
     }
 
     private void initSolarSystems(Set<SolarSystem> solarSystems) {
-        Set<Jump> jumpSet = new HashSet<>();
+        Set<Link> linkSet = new HashSet<>();
 
         for (SolarSystem system : solarSystems) {
             graph.addVertex(system);
@@ -38,9 +39,9 @@ public class WormholeModel {
 
         for (SolarSystem system: solarSystems) {
             for (Stargate stargate : system.getStargates()) {
-                SolarSystem oppositeSystem = stargate.getJump().getOpposite(stargate).getSystem();
-                if ( solarSystems.contains(oppositeSystem) && jumpSet.add(stargate.getJump()))
-                    graph.addEdge(stargate.getJump(),system,oppositeSystem);
+                SolarSystem oppositeSystem = stargate.getLink().getOpposite(stargate).getSystem();
+                if ( solarSystems.contains(oppositeSystem) && linkSet.add(stargate.getLink()))
+                    graph.addEdge(stargate.getLink(),system,oppositeSystem);
             }
         }
 
@@ -55,17 +56,17 @@ public class WormholeModel {
         og.addGraphEventListener(evt -> System.out.println("got " + evt));
         this.graph = og;
 
-//        Set<SolarSystem> solarSystems = new HashSet<>(NewEden.getSolarSystems(NewEden.getConstellation("Kimotoro")));
+//        Set<SolarSystemServer> solarSystems = new HashSet<>(NewEden.getSolarSystems(NewEden.getConstellation("Kimotoro")));
 //        solarSystems.addAll(NewEden.getSolarSystems(NewEden.getConstellation("Okomon")));
 //        solarSystems.addAll(NewEden.getSolarSystems(NewEden.getConstellation("Ihilakken")));
 
-        Set<SolarSystem> solarSystems = new HashSet<>(NewEden.getSolarSystems(NewEden.getRegion("The Forge")));
+        Set<SolarSystemServer> solarSystems = new HashSet<>(NewEden.getSolarSystems(NewEden.getRegion("The Forge")));
 
         initSolarSystems(solarSystems);
     }
 
 
-    public Graph<SolarSystem, Jump> getGraph() {
+    public Graph<SolarSystemServer, Link> getGraph() {
         return graph;
     }
 }

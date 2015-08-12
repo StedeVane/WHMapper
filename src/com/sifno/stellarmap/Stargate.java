@@ -1,9 +1,5 @@
 package com.sifno.stellarmap;
 
-import com.sifno.stellarmap.Endpoint;
-import com.sifno.stellarmap.SolarSystemServer;
-import com.sifno.stellarmap.StargateLink;
-
 /**
  * Created by Крочак on 16.07.15.
  */
@@ -12,8 +8,8 @@ public class Stargate implements Endpoint {
 
     private int id;
     private String name;
-    private SolarSystemServer system;
-    private StargateLink jump;
+    private SolarSystem system;
+    private StargateLink link;
 
 
 
@@ -32,18 +28,18 @@ public class Stargate implements Endpoint {
     }
 
     @Override
-    public SolarSystemServer getSystem() {
+    public SolarSystem getSystem() {
         return system;
     }
-    public void setSystem(SolarSystemServer system) {
+    public void setSystem(SolarSystem system) {
         this.system = system;
     }
 
-    public StargateLink getJump() {
-        return jump;
+    public StargateLink getLink() {
+        return link;
     }
-    public void setJump(StargateLink jump) {
-        this.jump = jump;
+    public void setLink(StargateLink link) {
+        this.link = link;
     }
 
     public Stargate() {
@@ -51,9 +47,9 @@ public class Stargate implements Endpoint {
 
     @Override
     public Endpoint getOpposite() {
-        if (jump ==null)
+        if (link ==null)
             return null;
-        return jump.getOpposite(this);
+        return link.getOpposite(this);
     }
 
 

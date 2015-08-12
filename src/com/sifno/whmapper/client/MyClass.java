@@ -9,7 +9,6 @@ public class MyClass implements IsSerializable {
 
     private String name = "default";
     public MyClass() {
-
     }
     public MyClass(String name) {
         this.name = name;

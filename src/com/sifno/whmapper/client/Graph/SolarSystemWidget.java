@@ -3,9 +3,7 @@ package com.sifno.whmapper.client.Graph;
 
 import com.allen_sauer.gwt.dnd.client.util.DOMUtil;
 import com.google.gwt.user.client.ui.*;
-import com.sifno.whmapper.client.SolarSystemClient;
-import com.sifno.whmapper.client.WHMapper;
-import com.sifno.whmapper.server.SolarSystem;
+import com.sifno.stellarmap.SolarSystemClient;
 
 import java.util.ArrayList;
 import java.util.List;

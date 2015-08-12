@@ -5,7 +5,7 @@
          version="3.1">
     <servlet>
         <servlet-name>com.sifno.whmapper.WHMapper LayoutMap</servlet-name>
-        <servlet-class>com.sifno.whmapper.server.LayoutMapImpl</servlet-class>
+        <servlet-class>com.sifno.whmapper.server.ServerImpl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>com.sifno.whmapper.WHMapper LayoutMap</servlet-name>

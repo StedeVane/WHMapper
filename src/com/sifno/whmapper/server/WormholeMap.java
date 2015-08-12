@@ -1,5 +1,7 @@
 package com.sifno.whmapper.server;
 
+import com.sifno.stellarmap.Link;
+import com.sifno.stellarmap.SolarSystemServer;
 import edu.uci.ics.jung.algorithms.layout.*;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
@@ -12,7 +14,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Point2D;
 import java.util.Timer;
 
 /**
@@ -20,12 +21,12 @@ import java.util.Timer;
  */
 public class WormholeMap extends JPanel {
 
-    public static SolarSystem currentSystem  = NewEden.getSolarSystem("Jita");
+    public static SolarSystemServer currentSystem  = NewEden.getSolarSystem("Jita");
 
     WormholeModel model;
 
     private static final long serialVersionUID = -5345319851341875800L;
-    private Graph<SolarSystem, Jump> g = null;
+    private Graph<SolarSystemServer, Link> g = null;
     private VisualizationViewer<Number, Number> vv = null;
     private AbstractLayout<Number, Number> layout = null;
     java.util.Timer timer;
@@ -41,7 +42,7 @@ public class WormholeMap extends JPanel {
         model = new WormholeModel();
         g = model.getGraph();
 
-        KKLayout<SolarSystem,Jump> kkLayout = new KKLayout<SolarSystem, Jump>(g);
+        KKLayout<SolarSystemServer,Link> kkLayout = new KKLayout<SolarSystemServer, Link>(g);
     //    kkLayout.
 
 

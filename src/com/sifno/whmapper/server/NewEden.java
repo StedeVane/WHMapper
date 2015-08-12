@@ -1,5 +1,7 @@
 package com.sifno.whmapper.server;
 
+import com.sifno.stellarmap.*;
+
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,11 +34,11 @@ public class NewEden {
     Map<String,Index> indexes = new HashMap<>();
 
     Map<Integer,Stargate> stargateIdMap = new HashMap<>();
-    Set<StargateJump> stargateJumpSet = new HashSet<>();
+    Set<StargateLink> stargateJumpSet = new HashSet<>();
 
-   // List<SolarSystem> solarSystemList;
-   // List<Constellation> constellationList;
-   // List<Region> regionList;
+   // List<SolarSystemServer> solarSystemList;
+   // List<ConstellationServer> constellationList;
+   // List<RegionServer> regionList;
 
     final String SELECT_REGIONS = "SELECT * FROM regions;";
     final String SELECT_CONSTELLATIONS = "SELECT * FROM constellations;";
@@ -83,7 +85,7 @@ public class NewEden {
             ResultSet result = preparedStatement.executeQuery();
 
             while (result.next()) {
-                Region region= new Region();
+                Region region= new RegionServer();
 
                 region.setId(result.getInt("id"));
                 region.setName(result.getString("name"));
@@ -99,7 +101,7 @@ public class NewEden {
             result = preparedStatement.executeQuery();
 
             while (result.next()) {
-                Constellation constellation = new Constellation();
+                Constellation constellation = new ConstellationServer();
 
                 constellation.setId(result.getInt("id"));
                 constellation.setName(result.getString("name"));
@@ -113,7 +115,7 @@ public class NewEden {
             result = preparedStatement.executeQuery();
 
             while (result.next()) {
-                SolarSystem solarSystem = new SolarSystem();
+                SolarSystem solarSystem = new SolarSystemServer();
 
                 solarSystem.setId(result.getInt("id"));
                 solarSystem.setName(result.getString("name"));
@@ -159,10 +161,10 @@ public class NewEden {
             while (result.next()) {
                 Stargate stargate1 = stargateIdMap.get(result.getInt("id"));
                 Stargate stargate2 = stargateIdMap.get(result.getInt("destination_stargate_id"));
-                if (stargate1.getJump()==null && stargate2.getJump()==null) {
-                    StargateJump jump = new StargateJump(stargate1, stargate2);
-                    stargate1.setJump(jump);
-                    stargate2.setJump(jump);
+                if (stargate1.getLink()==null && stargate2.getLink()==null) {
+                    StargateLink jump = new StargateLink(stargate1, stargate2);
+                    stargate1.setLink(jump);
+                    stargate2.setLink(jump);
                     stargateJumpSet.add(jump);
                 }
             }
@@ -220,11 +222,11 @@ public class NewEden {
         return  instance.solarSystemIdMap.values();
     }
 
-    public static Collection<SolarSystem> getSolarSystems(Constellation constellation) {
+    public static Collection<SolarSystem> getSolarSystems(ConstellationServer constellation) {
         return instance.newEden.get(constellation.getRegion()).get(constellation);
     }
 
-    public static Collection<SolarSystem> getSolarSystems(Region region) {
+    public static Collection<SolarSystem> getSolarSystems(RegionServer region) {
         Set<SolarSystem> result = new HashSet<>();
         for (Constellation constellation: instance.newEden.get(region).keySet()) {
             result.addAll(instance.newEden.get(region).get(constellation));

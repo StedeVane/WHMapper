@@ -1,21 +1,9 @@
 package com.sifno.whmapper.client.Graph;
 
-import com.allen_sauer.gwt.dnd.client.drop.AbsolutePositionDropController;
 import com.allen_sauer.gwt.dnd.client.drop.DropController;
-import com.google.gwt.canvas.client.Canvas;
-import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.touch.client.Point;
 import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Widget;
-import com.sifno.whmapper.client.Graph.SolarSystemWidget;
-import com.sifno.whmapper.client.SolarSystemClient;
-import com.sifno.whmapper.client.WHMapper;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Pavel on 05.08.2015.
