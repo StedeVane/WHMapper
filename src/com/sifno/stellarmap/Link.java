@@ -1,11 +1,13 @@
-package com.sifno.whmapper.server;
+package com.sifno.stellarmap;
+
+import com.sifno.stellarmap.Endpoint;
 
 import java.io.Serializable;
 
 /**
  * Created by Крочак on 16.07.15.
  */
-public abstract class Jump implements Serializable {
+public abstract class Link implements Serializable {
     abstract Endpoint[] getEndpoints();
 
     abstract Endpoint getSource();

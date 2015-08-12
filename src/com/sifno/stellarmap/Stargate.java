@@ -1,4 +1,8 @@
-package com.sifno.whmapper.server;
+package com.sifno.stellarmap;
+
+import com.sifno.stellarmap.Endpoint;
+import com.sifno.stellarmap.SolarSystemServer;
+import com.sifno.stellarmap.StargateLink;
 
 /**
  * Created by Крочак on 16.07.15.
@@ -8,8 +12,8 @@ public class Stargate implements Endpoint {
 
     private int id;
     private String name;
-    private SolarSystem system;
-    private StargateJump jump;
+    private SolarSystemServer system;
+    private StargateLink jump;
 
 
 
@@ -28,17 +32,17 @@ public class Stargate implements Endpoint {
     }
 
     @Override
-    public SolarSystem getSystem() {
+    public SolarSystemServer getSystem() {
         return system;
     }
-    public void setSystem(SolarSystem system) {
+    public void setSystem(SolarSystemServer system) {
         this.system = system;
     }
 
-    public StargateJump getJump() {
+    public StargateLink getJump() {
         return jump;
     }
-    public void setJump(StargateJump jump) {
+    public void setJump(StargateLink jump) {
         this.jump = jump;
     }
 

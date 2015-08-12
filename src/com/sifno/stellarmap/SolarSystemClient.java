@@ -1,4 +1,4 @@
-package com.sifno.whmapper.client;
+package com.sifno.stellarmap;
 
 
 

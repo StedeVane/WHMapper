@@ -1,7 +1,12 @@
-package com.sifno.whmapper.server;
+package com.sifno.stellarmap;
 
+import com.sifno.stellarmap.ConstellationServer;
+import com.sifno.stellarmap.Location;
+import com.sifno.stellarmap.RegionServer;
 import com.sifno.whmapper.client.Signature;
 import com.sifno.whmapper.client.SolarSystemClient;
+import com.sifno.whmapper.server.Stargate;
+import com.sifno.whmapper.server.Wormhole;
 
 import java.util.*;
 
@@ -12,10 +17,10 @@ import java.util.*;
  * Time: 13:58
  * To change this template use File | Settings | File Templates.
  */
-public class SolarSystem implements Location {
+public class SolarSystemServer implements Location {
     private int id;
     private String name;
-    private Constellation constellation;
+    private ConstellationServer constellation;
     private double security;
 
     private double luminosity;
@@ -28,7 +33,7 @@ public class SolarSystem implements Location {
 
     private transient Set<Stargate> stargateSet = new HashSet<>();
 
-    public SolarSystem() {    }
+    public SolarSystemServer() {    }
 
     public SolarSystemClient getSolarSystemClient() {
         SolarSystemClient result = new SolarSystemClient();
@@ -72,7 +77,7 @@ public class SolarSystem implements Location {
         return  stargateSet;
     }
 
-   /* SolarSystem(String classType,String name) {
+   /* SolarSystemServer(String classType,String name) {
         this.name = name;
         this.classType = classType;
 
@@ -119,11 +124,11 @@ public class SolarSystem implements Location {
         this.id = id;
     }
 
-    public Constellation getConstellation() {
+    public ConstellationServer getConstellation() {
         return constellation;
     }
 
-    public void setConstellation(Constellation constellation) {
+    public void setConstellation(ConstellationServer constellation) {
         this.constellation = constellation;
     }
 
@@ -135,7 +140,7 @@ public class SolarSystem implements Location {
         this.security = security;
     }
 
-    public Region getRegion() {
+    public RegionServer getRegion() {
         return constellation.getRegion();
     }
 
@@ -156,10 +161,10 @@ public class SolarSystem implements Location {
     public boolean equals(Object obj) {
         if (obj == this)
             return true;
-        if (!(obj instanceof SolarSystem))
+        if (!(obj instanceof SolarSystemServer))
             return false;
 
-        SolarSystem solarSystem = (SolarSystem) obj;
+        SolarSystemServer solarSystem = (SolarSystemServer) obj;
         return solarSystem.name.equals(name);
     }
 

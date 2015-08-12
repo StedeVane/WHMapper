@@ -1,21 +1,25 @@
-package com.sifno.whmapper.server;
+package com.sifno.stellarmap;
+
+import com.sifno.stellarmap.Endpoint;
+import com.sifno.stellarmap.Link;
+import com.sifno.whmapper.server.Stargate;
 
 /**
  * Created by Крочак on 16.07.15.
  */
-public class StargateJump extends Jump {
+public class StargateLink extends Link {
 
     private Stargate gw1 , gw2;
 
-    public StargateJump() {}
+    public StargateLink() {}
 
 
-    public StargateJump(Stargate gw1, Stargate gw2) {
+    public StargateLink(Stargate gw1, Stargate gw2) {
         if(gw1 != null || gw2 != null) {
             this.gw1 = gw1;
             this.gw2 = gw2;
         } else {
-            throw new IllegalArgumentException("Jump cannot contain null values");
+            throw new IllegalArgumentException("Link cannot contain null values");
         }
     }
 

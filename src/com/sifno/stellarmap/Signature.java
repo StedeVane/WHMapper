@@ -1,8 +1,5 @@
-package com.sifno.whmapper.client;
+package com.sifno.stellarmap;
 
-
-import com.sifno.whmapper.server.SolarSystem;
-import com.sifno.whmapper.server.Wormhole;
 
 import java.io.Serializable;
 import java.sql.Time;
@@ -18,7 +15,7 @@ import java.util.List;
  */
 public class Signature implements Serializable {
 
-    private SolarSystem system;
+    private SolarSystemServer system;
 
     private String id;
     private ScanGroup scanGroup;
@@ -33,7 +30,7 @@ public class Signature implements Serializable {
     public Signature() {}
 
 
-    public Signature(SolarSystem solarSystem) {
+    public Signature(SolarSystemServer solarSystem) {
         if (solarSystem != null)
             this.system = solarSystem;
         else
@@ -91,16 +88,16 @@ public class Signature implements Serializable {
         this.type = type;
     }
 
-    public SolarSystem getSystem() {
+    public SolarSystemServer getSystem() {
         return system;
     }
 
-    public void setSystem(SolarSystem system) {
+    public void setSystem(SolarSystemServer system) {
         if (system != null) {
             this.system = system;
         }
         else {
-            throw new IllegalArgumentException("Jump cannot contain null values");
+            throw new IllegalArgumentException("Link cannot contain null values");
         }
     }
 
@@ -128,7 +125,7 @@ public class Signature implements Serializable {
             if (!line[0].matches("[A-Z]{3}\\-[0-9]{3}"))
                 continue;
 
-            Signature signature = new Signature(new SolarSystem());//WormholeMap.currentSystem);
+            Signature signature = new Signature(new SolarSystemServer());//WormholeMap.currentSystem);
             signature.setId(line[0]);
 
             if (line[1].equals("Cosmic Anomaly"))

@@ -3,21 +3,20 @@ package com.sifno.whmapper.client;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.google.gwt.core.client.GWT;
-import com.sifno.whmapper.server.SolarSystem;
 
 /**
  * Created by Pavel on 01.08.2015.
  */
 @RemoteServiceRelativePath("LayoutMap")
-public interface LayoutMap extends RemoteService {
+public interface Server extends RemoteService {
     /**
      * Utility/Convenience class.
-     * Use LayoutMap.App.getInstance() to access static instance of LayoutMapAsync
+     * Use Server.App.getInstance() to access static instance of LayoutMapAsync
      */
     public static class App {
-        private static final LayoutMapAsync ourInstance = (LayoutMapAsync) GWT.create(LayoutMap.class);
+        private static final ServerAsync ourInstance = (ServerAsync) GWT.create(Server.class);
 
-        public static LayoutMapAsync getInstance() {
+        public static ServerAsync getInstance() {
             return ourInstance;
         }
     }

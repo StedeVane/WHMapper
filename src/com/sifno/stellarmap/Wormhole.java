@@ -1,6 +1,10 @@
-package com.sifno.whmapper.server;
+package com.sifno.stellarmap;
 
+import com.sifno.stellarmap.Endpoint;
+import com.sifno.stellarmap.SolarSystemServer;
+import com.sifno.stellarmap.WormholeLink;
 import com.sifno.whmapper.client.Signature;
+import com.sifno.whmapper.server.Index;
 
 import java.io.Serializable;
 
@@ -13,7 +17,7 @@ import java.io.Serializable;
  */
 public class Wormhole extends Signature implements Endpoint, Serializable {
 
-    private WormholeJump jump;
+    private WormholeLink jump;
     private Index index;
 
     public Wormhole() {
@@ -25,17 +29,17 @@ public class Wormhole extends Signature implements Endpoint, Serializable {
 
         setType("Unstable Wormhole");
         setGroup(Group.Wormhole);
-        jump = new WormholeJump(this);
+        jump = new WormholeLink(this);
     }
 
 
-    public Wormhole(SolarSystem solarSystem) {
+    public Wormhole(SolarSystemServer solarSystem) {
         super(solarSystem);
 
         setType("Unstable Wormhole");
         setGroup(Group.Wormhole);
         setScanGroup(ScanGroup.Signature);
-        jump = new WormholeJump(this);
+        jump = new WormholeLink(this);
     }
 
 

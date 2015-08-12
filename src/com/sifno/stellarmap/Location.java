@@ -1,4 +1,4 @@
-package com.sifno.whmapper.server;
+package com.sifno.stellarmap;
 
 import java.io.Serializable;
 

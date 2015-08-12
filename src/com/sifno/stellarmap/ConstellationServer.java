@@ -1,15 +1,15 @@
-package com.sifno.whmapper.server;
+package com.sifno.stellarmap;
 
 /**
  * Created by Pavel on 26.07.2015.
  */
-public class Constellation implements Location {
+public class ConstellationServer implements Location {
 
     private int id;
     private String name;
-    private Region region;
+    private RegionServer region;
 
-    public Constellation() {}
+    public ConstellationServer() {}
 
     @Override
     public String getName() {
@@ -29,11 +29,11 @@ public class Constellation implements Location {
         this.id = id;
     }
 
-    public Region getRegion() {
+    public RegionServer getRegion() {
         return region;
     }
 
-    public void setRegion(Region region) {
+    public void setRegion(RegionServer region) {
         this.region = region;
     }
 

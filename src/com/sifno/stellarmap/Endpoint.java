@@ -1,4 +1,4 @@
-package com.sifno.whmapper.server;
+package com.sifno.stellarmap;
 
 import java.io.Serializable;
 
@@ -8,6 +8,6 @@ import java.io.Serializable;
 public interface Endpoint extends Serializable {
 
     Endpoint getOpposite();
-    SolarSystem getSystem();
+    SolarSystemServer getSystem();
 
 }

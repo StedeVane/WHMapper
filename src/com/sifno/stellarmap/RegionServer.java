@@ -1,15 +1,15 @@
-package com.sifno.whmapper.server;
+package com.sifno.stellarmap;
 
 /**
  * Created by Pavel on 26.07.2015.
  */
-public class Region implements Location {
+public class RegionServer implements Location {
 
     private int id;
     private String name;
     private int fractionID;
 
-    public Region() {}
+    public RegionServer() {}
 
     @Override
     public String getName() {

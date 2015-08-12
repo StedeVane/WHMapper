@@ -1,9 +1,13 @@
-package com.sifno.whmapper.server;
+package com.sifno.stellarmap;
+
+import com.sifno.stellarmap.Endpoint;
+import com.sifno.stellarmap.Link;
+import com.sifno.whmapper.server.Wormhole;
 
 /**
  * Created by Крочак on 16.07.15.
  */
-public class WormholeJump extends Jump {
+public class WormholeLink extends Link {
 
     Wormhole wh1, wh2;
 
@@ -16,14 +20,14 @@ public class WormholeJump extends Jump {
     }
 
 
-    public WormholeJump() {}
+    public WormholeLink() {}
 
-    public WormholeJump(Wormhole wh1) {
+    public WormholeLink(Wormhole wh1) {
         this(wh1, null);
         size = 1;
     }
 
-    public WormholeJump(Wormhole wh1, Wormhole wh2) {
+    public WormholeLink(Wormhole wh1, Wormhole wh2) {
         this.wh1 = wh1;
         this.wh2 = wh2;
         size = 2;
