@@ -25,7 +25,13 @@ public interface SolarSystem extends Location{
 
     public void add(Stargate stargate);
 
-    public Collection<Stargate> getStargates() {
-        return  stargateSet;
+    public Collection<Stargate> getStargates();
+
+    public static SolarSystemClient createClient(SolarSystem solarSystem) {
+        SolarSystemClient to_return = new SolarSystemClient();
+
+        
+
+        return
     }
 }

@@ -162,10 +162,10 @@ public class NewEden {
                 Stargate stargate1 = stargateIdMap.get(result.getInt("id"));
                 Stargate stargate2 = stargateIdMap.get(result.getInt("destination_stargate_id"));
                 if (stargate1.getLink()==null && stargate2.getLink()==null) {
-                    StargateLink jump = new StargateLink(stargate1, stargate2);
-                    stargate1.setLink(jump);
-                    stargate2.setLink(jump);
-                    stargateJumpSet.add(jump);
+                    StargateLink link = new StargateLink(stargate1, stargate2);
+                    stargate1.setLink(link);
+                    stargate2.setLink(link);
+                    stargateJumpSet.add(link);
                 }
             }
 

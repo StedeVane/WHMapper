@@ -1,6 +1,7 @@
 package com.sifno.whmapper.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.sifno.stellarmap.SolarSystem;
 import com.sifno.stellarmap.SolarSystemServer;
 import com.sifno.whmapper.client.Server;
 import com.sifno.whmapper.client.MyClass;
@@ -15,7 +16,10 @@ public class ServerImpl extends RemoteServiceServlet implements Server {
     }
 
     @Override
-    public SolarSystemClient getSolarSystemClient(String name) {
+    public SolarSystemClient getSolarSystem(String name) {
+
+        SolarSystem solarSystem
+
         SolarSystemServer result = NewEden.getSolarSystem(name);
         return result.getSolarSystemClient();
     }

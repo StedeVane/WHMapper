@@ -19,10 +19,6 @@ public class SolarSystemServer extends AbstractSolarSystem implements SolarSyste
 
     public SolarSystemServer() {    }
 
-    public Collection<Stargate> getStargates() {
-        return  stargateSet;
-    }
-
     public void add(Signature signature) {
         signatureList.add(signature);
     }
@@ -46,6 +42,10 @@ public class SolarSystemServer extends AbstractSolarSystem implements SolarSyste
 
     public void add(Stargate stargate) {
         stargateSet.add(stargate);
+    }
+
+    public Collection<Stargate> getStargates() {
+        return  stargateSet;
     }
 
 

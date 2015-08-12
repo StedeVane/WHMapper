@@ -4,6 +4,7 @@ package com.sifno.stellarmap;
 
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -19,4 +20,15 @@ public class SolarSystemClient extends AbstractSolarSystem implements SolarSyste
             e.printStackTrace();
         }
     }
+
+    @Override
+    public Collection<Stargate> getStargates() {
+        try {
+            throw new Exception("not implemented yet");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

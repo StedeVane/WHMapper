@@ -22,7 +22,5 @@ public interface Server extends RemoteService {
         }
     }
 
-    public MyClass getObject(String str);
-
-    public SolarSystemClient getSolarSystemClient(String name);
+    public SolarSystemClient getSolarSystem(String name);
 }
