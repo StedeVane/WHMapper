@@ -1,5 +1,6 @@
 package com.sifno.stellarmap;
 
+import com.sifno.stellarmap.SolarSystemServer;
 import com.sifno.whmapper.server.Index;
 
 import java.io.Serializable;

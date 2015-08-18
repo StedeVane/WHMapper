@@ -1,6 +1,8 @@
 package com.sifno.stellarmap;
 
 
+import com.sifno.stellarmap.SolarSystemServer;
+
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.ArrayList;

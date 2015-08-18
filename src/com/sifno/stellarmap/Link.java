@@ -1,7 +1,5 @@
 package com.sifno.stellarmap;
 
-import com.sifno.stellarmap.Endpoint;
-
 import java.io.Serializable;
 
 /**

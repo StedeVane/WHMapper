@@ -8,6 +8,6 @@ import java.io.Serializable;
 public interface Endpoint extends Serializable {
 
     Endpoint getOpposite();
-    SolarSystem getSystem();
+    com.sifno.stellarmap.SolarSystem getSystem();
 
 }

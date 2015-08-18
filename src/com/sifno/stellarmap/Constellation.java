@@ -1,9 +1,38 @@
 package com.sifno.stellarmap;
 
+import com.sifno.stellarmap.dataobject.ConstellationData;
+
 /**
- * Created by Алёна on 12.08.2015.
+ * Created by Алёна on 18.08.2015.
  */
-public interface Constellation extends Location {
-    public Region getRegion();
-    public void setRegion(Region region);
+public class Constellation extends AbstractStellarMapObject  {
+    private ConstellationData data;
+
+    private Region region;
+
+    public Constellation(StellarMap stellarMap) {
+        super(stellarMap);
+    }
+
+    public ConstellationData getData() {
+        return data;
+    }
+
+    public void setData(ConstellationData data) {
+        this.data = data;
+    }
+
+    public int getID() {
+        return data.getID();
+    }
+
+    public String getName() {
+        return data.getName();
+    }
+
+    public Region getRegion() {
+        if (region == null)
+            region = stellarMap.getRegion(data.getRegionID());
+        return region;
+    }
 }

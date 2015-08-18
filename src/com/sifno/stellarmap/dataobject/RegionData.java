@@ -1,22 +1,17 @@
-package com.sifno.stellarmap;
+package com.sifno.stellarmap.dataobject;
 
 /**
- * Created by Pavel on 26.07.2015.
+ * Created by Алёна on 18.08.2015.
  */
-public class RegionServer extends AbstractLocation implements Region {
-
+public class RegionData extends LocationData {
 
     private int fractionID;
 
-    public RegionServer() {}
-
-    @Override
     public int getFractionID() {
         return fractionID;
     }
-    @Override
+
     public void setFractionID(int fractionID) {
         this.fractionID = fractionID;
     }
-
 }

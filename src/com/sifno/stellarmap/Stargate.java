@@ -8,7 +8,7 @@ public class Stargate implements Endpoint {
 
     private int id;
     private String name;
-    private SolarSystem system;
+    private com.sifno.stellarmap.SolarSystem system;
     private StargateLink link;
 
 
@@ -28,10 +28,10 @@ public class Stargate implements Endpoint {
     }
 
     @Override
-    public SolarSystem getSystem() {
+    public com.sifno.stellarmap.SolarSystem getSystem() {
         return system;
     }
-    public void setSystem(SolarSystem system) {
+    public void setSystem(com.sifno.stellarmap.SolarSystem system) {
         this.system = system;
     }
 

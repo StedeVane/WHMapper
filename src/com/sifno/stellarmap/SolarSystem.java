@@ -1,37 +1,56 @@
 package com.sifno.stellarmap;
 
-import java.util.Collection;
+import com.sifno.stellarmap.dataobject.SolarSystemData;
 
 /**
- * Created by Алёна on 12.08.2015.
+ * Created by Алёна on 18.08.2015.
  */
-public interface SolarSystem extends Location{
-    public Constellation getConstellation();
-    public void setConstellation(Constellation constellation);
+public class SolarSystem extends AbstractStellarMapObject {
+    private SolarSystemData data;
 
-    public Region getRegion();
+    private Constellation constellation;
 
-    public double getSecurity();
-    public void setSecurity(double security);
-
-    public String getClassType();
-    public void setClassType(String classType);
-
-    public double getLuminosity();
-    public void setLuminosity(double luminosity);
-
-    public int getSunType();
-    public void setSunType(int sunType);
-
-    public void add(Stargate stargate);
-
-    public Collection<Stargate> getStargates();
-
-    public static SolarSystemClient createClient(SolarSystem solarSystem) {
-        SolarSystemClient to_return = new SolarSystemClient();
-
-        
-
-        return
+    public SolarSystem(StellarMap stellarMap) {
+        super(stellarMap);
     }
+
+    public SolarSystemData getData() {
+        return data;
+    }
+
+    public void setData(SolarSystemData data) {
+        this.data = data;
+    }
+
+    public int getID() {
+        return data.getID();
+    }
+
+    public String getName() {
+        return data.getName();
+    }
+
+    public Constellation getConstellation() {
+        if (constellation == null)
+            constellation = stellarMap.getConstellation(data.getConstellationID());
+        return constellation;
+    }
+
+    public double getSecurity() {
+        return data.getSecurity();
+    }
+
+    public double getLuminosity() {
+        return data.getLuminosity();
+    }
+
+    public int getSunType() {
+        return data.getSunTypeID();
+    }
+
+    public int getSystemClass() {
+        return data.getSystemClassID();
+    }
+
+
 }

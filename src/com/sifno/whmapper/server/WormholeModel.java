@@ -2,6 +2,7 @@ package com.sifno.whmapper.server;
 
 //import edu.uci.ics.jung.graph.*;
 import com.sifno.stellarmap.*;
+import com.sifno.stellarmap.SolarSystem;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.ObservableGraph;
 import edu.uci.ics.jung.graph.UndirectedGraph;

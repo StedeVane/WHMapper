@@ -1,5 +1,7 @@
 package com.sifno.whmapper.server;
 
+import com.sifno.stellarmap.Stargate;
+import com.sifno.stellarmap.StargateLink;
 import com.sifno.stellarmap.*;
 
 import java.io.File;
