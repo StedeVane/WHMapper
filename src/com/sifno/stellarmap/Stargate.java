@@ -1,49 +1,56 @@
 package com.sifno.stellarmap;
 
+import com.sifno.stellarmap.dataobject.StargateData;
+
 /**
  * Created by Крочак on 16.07.15.
  */
-public class Stargate implements Endpoint {
+public class Stargate extends AbstractStellarMapObject implements Endpoint {
 
+    private StargateData data;
 
     private int id;
     private String name;
-    private com.sifno.stellarmap.SolarSystem system;
+    private SolarSystem system;
     private StargateLink link;
 
-
-
-    public int getId() {
-        return id;
+    public Stargate(StellarMap stellarMap) {
+        super(stellarMap);
     }
-    public void setId(int id) {
-        this.id = id;
+
+    public StargateData getData() {
+        return data;
+    }
+
+    public void setData(StargateData data) {
+        this.data = data;
+    }
+
+    public int getID() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
 
     @Override
-    public com.sifno.stellarmap.SolarSystem getSystem() {
+    public SolarSystem getSystem() {
+        if (system == null)
+            system = stellarMap.getSolarSystem(data.getSolarSystemID());
         return system;
     }
-    public void setSystem(com.sifno.stellarmap.SolarSystem system) {
-        this.system = system;
-    }
 
+    //TODO LINK
     public StargateLink getLink() {
         return link;
     }
+
     public void setLink(StargateLink link) {
         this.link = link;
     }
 
-    public Stargate() {
-    }
+
 
     @Override
     public Endpoint getOpposite() {

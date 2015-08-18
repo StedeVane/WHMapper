@@ -2,6 +2,10 @@ package com.sifno.stellarmap;
 
 import com.sifno.stellarmap.dataobject.SolarSystemData;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by Алёна on 18.08.2015.
  */
@@ -9,6 +13,7 @@ public class SolarSystem extends AbstractStellarMapObject {
     private SolarSystemData data;
 
     private Constellation constellation;
+    private Set<Stargate> stargates;
 
     public SolarSystem(StellarMap stellarMap) {
         super(stellarMap);
@@ -50,6 +55,12 @@ public class SolarSystem extends AbstractStellarMapObject {
 
     public int getSystemClass() {
         return data.getSystemClassID();
+    }
+
+    public Collection<Stargate> getStargates() {
+        if (stargates == null)
+            stargates = new HashSet<>(stellarMap.getStargates(data.getID()));
+        return stargates;
     }
 
 

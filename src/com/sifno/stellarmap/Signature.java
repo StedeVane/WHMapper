@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class Signature implements Serializable {
 
-    private SolarSystemServer system;
+    private SolarSystem system;
 
     private String id;
     private ScanGroup scanGroup;
@@ -32,7 +32,7 @@ public class Signature implements Serializable {
     public Signature() {}
 
 
-    public Signature(SolarSystemServer solarSystem) {
+    public Signature(SolarSystem solarSystem) {
         if (solarSystem != null)
             this.system = solarSystem;
         else
@@ -90,11 +90,11 @@ public class Signature implements Serializable {
         this.type = type;
     }
 
-    public SolarSystemServer getSystem() {
+    public SolarSystem getSystem() {
         return system;
     }
 
-    public void setSystem(SolarSystemServer system) {
+    public void setSystem(SolarSystem system) {
         if (system != null) {
             this.system = system;
         }
@@ -127,7 +127,7 @@ public class Signature implements Serializable {
             if (!line[0].matches("[A-Z]{3}\\-[0-9]{3}"))
                 continue;
 
-            Signature signature = new Signature(new SolarSystemServer());//WormholeMap.currentSystem);
+            Signature signature = new Signature(new SolarSystem());//WormholeMap.currentSystem);
             signature.setId(line[0]);
 
             if (line[1].equals("Cosmic Anomaly"))

@@ -1,5 +1,9 @@
 package com.sifno.stellarmap.dataobject;
 
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * Created by Алёна on 18.08.2015.
  */
@@ -9,6 +13,8 @@ public class SolarSystemData extends LocationData {
     private double luminosity;
     private int sunTypeID;
     private int systemClassID;
+    
+    private Set<Integer> stargates;
 
     public int getConstellationID() {
         return constellationID;
@@ -48,5 +54,20 @@ public class SolarSystemData extends LocationData {
 
     public void setSystemClassID(int systemClassID) {
         this.systemClassID = systemClassID;
+    }
+
+
+    public Set<Integer> getStargates() {
+        return stargates;
+    }
+
+    public void setStargates(Set<Integer> stargates) {
+        this.stargates = stargates;
+    }
+
+    public boolean add(int stargateID) {
+        if (stargates == null)
+            stargates = new HashSet<>();
+        return stargates.add(stargateID);
     }
 }
