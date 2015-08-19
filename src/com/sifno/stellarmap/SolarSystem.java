@@ -19,6 +19,11 @@ public class SolarSystem extends AbstractStellarMapObject {
         super(stellarMap);
     }
 
+    public SolarSystem(StellarMap stellarMap, SolarSystemData data) {
+        super(stellarMap);
+        this.data = data;
+    }
+
     public SolarSystemData getData() {
         return data;
     }
@@ -53,13 +58,13 @@ public class SolarSystem extends AbstractStellarMapObject {
         return data.getSunTypeID();
     }
 
-    public int getSystemClass() {
+    public String getSystemClass() {
         return data.getSystemClassID();
     }
 
     public Collection<Stargate> getStargates() {
         if (stargates == null)
-            stargates = new HashSet<>(stellarMap.getStargates(data.getID()));
+            stargates = new HashSet<>(stellarMap.getStargates(data.getStargates()));
         return stargates;
     }
 

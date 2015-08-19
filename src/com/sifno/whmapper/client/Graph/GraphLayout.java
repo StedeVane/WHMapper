@@ -1,6 +1,6 @@
 package com.sifno.whmapper.client.Graph;
 
-import com.sifno.stellarmap.SolarSystemClient;
+
 
 
 import java.awt.geom.Point2D;
@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class GraphLayout {
 
-    Map<SolarSystemClient, Point2D> m;
+  //  Map<SolarSystemClient, Point2D> m;
 
 
 }

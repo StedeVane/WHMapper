@@ -12,6 +12,11 @@ public class Region extends AbstractStellarMapObject {
         super(stellarMap);
     }
 
+    public Region(StellarMap stellarMap, RegionData data) {
+        super(stellarMap);
+        this.data = data;
+    }
+
     public RegionData getData() {
         return data;
     }

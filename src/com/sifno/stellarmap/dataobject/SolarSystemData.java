@@ -12,7 +12,7 @@ public class SolarSystemData extends LocationData {
     private double security;
     private double luminosity;
     private int sunTypeID;
-    private int systemClassID;
+    private String systemClassID;
     
     private Set<Integer> stargates;
 
@@ -48,11 +48,11 @@ public class SolarSystemData extends LocationData {
         this.sunTypeID = sunTypeID;
     }
 
-    public int getSystemClassID() {
+    public String getSystemClassID() {
         return systemClassID;
     }
 
-    public void setSystemClassID(int systemClassID) {
+    public void setSystemClassID(String systemClassID) {
         this.systemClassID = systemClassID;
     }
 

@@ -17,11 +17,11 @@ import java.util.*;
 
 public class WormholeModel {
 
-    private Graph<SolarSystemServer, Link> graph;
+    private Graph<SolarSystem, Link> graph;
 
     //private Map<String,SolarSystemServer> systemList;
 
-    private void add(SolarSystemServer s1, SolarSystemServer s2) {
+    private void add(SolarSystem s1, SolarSystem s2) {
         graph.addEdge(new WormholeLink(new Wormhole(s1), new Wormhole(s2)),s1,s2);
     }
 
@@ -61,13 +61,13 @@ public class WormholeModel {
 //        solarSystems.addAll(NewEden.getSolarSystems(NewEden.getConstellation("Okomon")));
 //        solarSystems.addAll(NewEden.getSolarSystems(NewEden.getConstellation("Ihilakken")));
 
-        Set<SolarSystemServer> solarSystems = new HashSet<>(NewEden.getSolarSystems(NewEden.getRegion("The Forge")));
+      //  Set<SolarSystem> solarSystems = new HashSet<>(NewEden.getSolarSystems(NewEden.getRegion("The Forge")));
 
-        initSolarSystems(solarSystems);
+     //   initSolarSystems(solarSystems);
     }
 
 
-    public Graph<SolarSystemServer, Link> getGraph() {
+    public Graph<SolarSystem, Link> getGraph() {
         return graph;
     }
 }

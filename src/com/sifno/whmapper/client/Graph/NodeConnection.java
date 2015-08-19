@@ -40,8 +40,8 @@ public class NodeConnection extends GraphComponent {
         });
 
 
-        ssw1.addPositionListener(new PositionHandler(this));
-        ssw2.addPositionListener(new PositionHandler(this));
+   //     ssw1.addPositionListener(new PositionHandler(this));
+   //     ssw2.addPositionListener(new PositionHandler(this));
 
 
     }
@@ -49,15 +49,15 @@ public class NodeConnection extends GraphComponent {
 
     public void updateShape() {
 
-        int x = Math.min(ssw1.getX(), ssw2.getX());
-        int y = Math.min(ssw1.getY(), ssw2.getY());
-
-        int w = Math.abs(ssw1.getX() - ssw2.getX());
-        int h = Math.abs(ssw1.getY() - ssw2.getY());
-
-        //shape = new Rectangle2D.Double(x,y,w,h);
-        shape = new Line2D.Double(ssw1.getX(),ssw1.getY(),ssw2.getX(),ssw2.getY());
+//        int x = Math.min(ssw1.getX(), ssw2.getX());
+//        int y = Math.min(ssw1.getY(), ssw2.getY());
 //
+//        int w = Math.abs(ssw1.getX() - ssw2.getX());
+//        int h = Math.abs(ssw1.getY() - ssw2.getY());
+//
+//        //shape = new Rectangle2D.Double(x,y,w,h);
+//        shape = new Line2D.Double(ssw1.getX(),ssw1.getY(),ssw2.getX(),ssw2.getY());
+////
 //        int ax, ay, bx, by;
 //        double cosf;
 //        ax = ssw2.getX()-ssw1.getX(); ay = ssw2.getY()-ssw1.getY();

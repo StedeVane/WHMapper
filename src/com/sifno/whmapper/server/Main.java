@@ -2,10 +2,14 @@ package com.sifno.whmapper.server;
 
 
 
+import com.sifno.stellarmap.Region;
 import com.sifno.stellarmap.Signature;
+import com.sifno.stellarmap.StellarMap;
+import com.sifno.stellarmap.dataobject.RegionData;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by ������ on 29.06.15.
@@ -14,19 +18,16 @@ public class Main extends JFrame {
 
 
 
-    @Override
-    public void paintComponents(Graphics g) {
-        super.paintComponents(g);
-
-
-    }
 
     public Main() {
 
+        ServerDataLoader sdl = new ServerDataLoader();
+        StellarMap map = new StellarMap(sdl);
 
+        RegionData r = sdl.downloadRegion(10000002);
 
-        WormholeMap wormholeMap = new WormholeMap();
-        add(wormholeMap);
+      //  WormholeMap wormholeMap = new WormholeMap();
+      //  add(wormholeMap);
 
         Label label = new Label();
        // label.set

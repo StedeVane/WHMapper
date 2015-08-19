@@ -14,6 +14,11 @@ public class Constellation extends AbstractStellarMapObject  {
         super(stellarMap);
     }
 
+    public Constellation(StellarMap stellarMap, ConstellationData data) {
+        super(stellarMap);
+        this.data = data;
+    }
+
     public ConstellationData getData() {
         return data;
     }

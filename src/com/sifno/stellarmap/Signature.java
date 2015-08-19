@@ -1,7 +1,7 @@
 package com.sifno.stellarmap;
 
 
-import com.sifno.stellarmap.SolarSystemServer;
+
 
 import java.io.Serializable;
 import java.sql.Time;
@@ -127,7 +127,7 @@ public class Signature implements Serializable {
             if (!line[0].matches("[A-Z]{3}\\-[0-9]{3}"))
                 continue;
 
-            Signature signature = new Signature(new SolarSystem());//WormholeMap.currentSystem);
+            Signature signature = null; //new Signature(new SolarSystem());//WormholeMap.currentSystem);
             signature.setId(line[0]);
 
             if (line[1].equals("Cosmic Anomaly"))

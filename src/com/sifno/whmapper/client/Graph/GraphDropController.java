@@ -37,14 +37,14 @@ public class GraphDropController extends AbsolutePositionDropController {
     public void onMove(DragContext context) {
         super.onMove(context);
 
-        WHMapper.x.setText("x: " + (context.desiredDraggableX - vv.getAbsoluteLeft() - DOMUtil.getBorderLeft(vv.getElement()) ));
-        WHMapper.y.setText("y: " + (context.desiredDraggableY - vv.getAbsoluteTop() - DOMUtil.getBorderTop(vv.getElement()) ));
+   //     WHMapper.x.setText("x: " + (context.desiredDraggableX - vv.getAbsoluteLeft() - DOMUtil.getBorderLeft(vv.getElement()) ));
+   //     WHMapper.y.setText("y: " + (context.desiredDraggableY - vv.getAbsoluteTop() - DOMUtil.getBorderTop(vv.getElement()) ));
 
         if (!(context.draggable instanceof SolarSystemWidget)) return;
 
         SolarSystemWidget ssw = (SolarSystemWidget) context.draggable;
 
-        ssw.firePositionChange();
+       // ssw.firePositionChange();
 
 //        WHMapper.x.setText("x: " + context.draggable.getAbsoluteLeft());
 //        WHMapper.y.setText("y: " + context.draggable.getAbsoluteTop());

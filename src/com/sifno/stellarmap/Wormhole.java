@@ -1,6 +1,6 @@
 package com.sifno.stellarmap;
 
-import com.sifno.stellarmap.SolarSystemServer;
+
 import com.sifno.whmapper.server.Index;
 
 import java.io.Serializable;
@@ -30,7 +30,7 @@ public class Wormhole extends Signature implements Endpoint, Serializable {
     }
 
 
-    public Wormhole(SolarSystemServer solarSystem) {
+    public Wormhole(SolarSystem solarSystem) {
         super(solarSystem);
 
         setType("Unstable Wormhole");

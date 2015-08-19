@@ -9,13 +9,16 @@ public class Stargate extends AbstractStellarMapObject implements Endpoint {
 
     private StargateData data;
 
-    private int id;
-    private String name;
     private SolarSystem system;
     private StargateLink link;
 
     public Stargate(StellarMap stellarMap) {
         super(stellarMap);
+    }
+
+    public Stargate(StellarMap stellarMap, StargateData data) {
+        super(stellarMap);
+        this.data = data;
     }
 
     public StargateData getData() {
@@ -27,11 +30,11 @@ public class Stargate extends AbstractStellarMapObject implements Endpoint {
     }
 
     public int getID() {
-        return id;
+        return data.getID();
     }
 
     public String getName() {
-        return name;
+        return data.getName();
     }
 
     @Override
@@ -41,27 +44,20 @@ public class Stargate extends AbstractStellarMapObject implements Endpoint {
         return system;
     }
 
-    //TODO LINK
     public StargateLink getLink() {
+        if (link==null)
+            link = stellarMap.getStargateLink(data.getID(),data.getDestinationStargateID());
         return link;
     }
 
-    public void setLink(StargateLink link) {
-        this.link = link;
-    }
-
-
-
     @Override
     public Endpoint getOpposite() {
-        if (link ==null)
-            return null;
-        return link.getOpposite(this);
+        return getLink().getOpposite(this);
     }
 
 
     @Override
     public String toString() {
-        return name;
+        return data.toString();
     }
 }
