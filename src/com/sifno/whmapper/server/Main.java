@@ -2,10 +2,14 @@ package com.sifno.whmapper.server;
 
 
 
+import com.sifno.stellarmap.Constellation;
 import com.sifno.stellarmap.Region;
 import com.sifno.stellarmap.Signature;
 import com.sifno.stellarmap.StellarMap;
+import com.sifno.stellarmap.dataobject.ConstellationData;
 import com.sifno.stellarmap.dataobject.RegionData;
+import com.sifno.stellarmap.dataobject.SolarSystemData;
+import com.sifno.stellarmap.dataobject.StargateData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +29,9 @@ public class Main extends JFrame {
         StellarMap map = new StellarMap(sdl);
 
         RegionData r = sdl.downloadRegion(10000002);
+        ConstellationData c = sdl.downloadConstellation(20000001);
+        SolarSystemData s = sdl.downloadSolarSystem(30000001);
+        StargateData sg = sdl.downloadStargate(50000001);
 
       //  WormholeMap wormholeMap = new WormholeMap();
       //  add(wormholeMap);

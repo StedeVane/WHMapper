@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.sifno.stellarmap.SolarSystem;
+import com.sifno.stellarmap.dataobject.SolarSystemData;
 import com.sifno.whmapper.client.Graph.VisualizationViewer;
 import com.sifno.whmapper.client.Graph.SolarSystemWidget;
 import edu.uci.ics.jung.graph.Graph;
@@ -17,8 +18,57 @@ import edu.uci.ics.jung.graph.Graph;
  * Created by Pavel on 01.08.2015.
  */
 public class WHMapper implements EntryPoint {
+
+    private Button button;
+    private Label label;
+
     @Override
     public void onModuleLoad() {
+
+        label = new Label("Label");
+        RootPanel.get().add(label);
+
+        button = new Button("Button");
+
+        button.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+
+//
+//                AsyncCallback<MyClass> callback = new AsyncCallback<MyClass>() {
+//                    public void onFailure(Throwable caught) {
+//
+//                        label.setText(caught.getMessage());
+//                    }
+//
+//                    public void onSuccess(MyClass result) {
+//                        label.setText(result.getName());
+//                    }
+//                };
+//
+//                Server.App.getInstance().getObject("Pavel",callback);
+
+                AsyncCallback<SolarSystemData> callback = new AsyncCallback<SolarSystemData>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        label.setText(caught.getMessage());
+                        System.out.println(caught.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(SolarSystemData result) {
+                       label.setText("Accept");
+                       // SolarSystemWidget ssw = new SolarSystemWidget(result, vv);
+                      //  vv.add(ssw, 100, 100);
+                      //  dragController.makeDraggable(ssw);
+                    }
+                };
+
+                Server.App.getInstance().getSolarSystem(30000001, callback);
+
+            }
+        });
+
+        RootPanel.get().add(button);
 
     }
 

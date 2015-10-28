@@ -4,6 +4,7 @@ import com.sifno.stellarmap.dataobject.ConstellationData;
 import com.sifno.stellarmap.dataobject.RegionData;
 import com.sifno.stellarmap.dataobject.SolarSystemData;
 import com.sifno.stellarmap.dataobject.StargateData;
+import sun.awt.dnd.SunDropTargetContextPeer;
 
 import java.util.*;
 
@@ -19,6 +20,7 @@ public class StellarMap {
     private Map<Integer, SolarSystem> solarSystemMap = new HashMap<>();
     private Map<Integer, Stargate> stargateMap = new HashMap<>();
 
+    //TODO после отладки убрать
     public StellarMap(DataLoader loader) {
         this.loader = loader;
 
@@ -36,6 +38,11 @@ public class StellarMap {
         for (SolarSystemData data: solarSystemDataSet) {
             SolarSystem solarSystem = new SolarSystem(this,data);
             solarSystemMap.put(data.getID(),solarSystem);
+        }
+        Set<StargateData> stargateDataSet = new HashSet<>(loader.downloadStargatesAll());
+        for (StargateData data: stargateDataSet) {
+            Stargate stargate =  new Stargate(this,data);
+            stargateMap.put(data.getID(),stargate);
         }
 
     }

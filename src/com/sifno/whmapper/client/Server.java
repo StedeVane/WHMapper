@@ -3,6 +3,7 @@ package com.sifno.whmapper.client;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.google.gwt.core.client.GWT;
+import com.sifno.stellarmap.dataobject.SolarSystemData;
 
 
 /**
@@ -22,5 +23,5 @@ public interface Server extends RemoteService {
         }
     }
 
- //   public Object getSolarSystem(String name);
+    public SolarSystemData getSolarSystem(int id);
 }
