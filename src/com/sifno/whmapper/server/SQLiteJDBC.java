@@ -3,7 +3,8 @@ import java.io.File;
 import java.sql.*;
 
 public class SQLiteJDBC {
-    public final static String path = "D:\\GitHub\\WHMapper\\universeDataDx.db";
+    //public final static String path = "D:\\GitHub\\WHMapper\\universeDataDx.db";
+    public final static String path = "D:\\GitHub\\WHMapper\\whmapperdb.db";
 
     Connection connection = null;
 
@@ -28,6 +29,11 @@ public class SQLiteJDBC {
     public Connection getConnection() {
         return connection;
     }
+
+    public boolean isConnected() {
+        return connection !=null;
+    }
+
     public void close() {
         try {
             connection.close();

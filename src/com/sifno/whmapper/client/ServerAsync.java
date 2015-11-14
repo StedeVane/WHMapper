@@ -1,7 +1,7 @@
 package com.sifno.whmapper.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.sifno.stellarmap.dataobject.SolarSystemData;
+import com.sifno.stellarmap.dataobject.StarSystem;
 
 
 /**
@@ -10,6 +10,6 @@ import com.sifno.stellarmap.dataobject.SolarSystemData;
 public interface ServerAsync {
 
 
-    void getSolarSystem(int id, AsyncCallback<SolarSystemData> async);
+    void getSolarSystem(int id, AsyncCallback<StarSystem> async);
 
 }

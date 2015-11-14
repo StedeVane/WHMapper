@@ -2,7 +2,7 @@ package com.sifno.whmapper.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import com.sifno.stellarmap.dataobject.SolarSystemData;
+import com.sifno.stellarmap.dataobject.StarSystem;
 import com.sifno.whmapper.client.Server;
 import com.sifno.whmapper.client.MyClass;
 
@@ -16,7 +16,7 @@ public class ServerImpl extends RemoteServiceServlet implements Server {
     }
 
     @Override
-    public SolarSystemData getSolarSystem(int id) {
+    public StarSystem getSolarSystem(int id) {
 
         System.out.println(this.getThreadLocalRequest().getHeaderNames());
         return null;

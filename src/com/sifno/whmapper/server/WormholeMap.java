@@ -1,8 +1,8 @@
 package com.sifno.whmapper.server;
 
-import com.sifno.stellarmap.Link;
+import com.sifno.oldmap.Link;
 
-import com.sifno.stellarmap.SolarSystem;
+import com.sifno.oldmap.SolarSystem;
 import edu.uci.ics.jung.algorithms.layout.*;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
@@ -22,7 +22,7 @@ import java.util.Timer;
  */
 public class WormholeMap extends JPanel {
 
-   // public static SolarSystem currentSystem  = NewEden.getSolarSystem("Jita");
+   // public static StarSystem currentSystem  = NewEden.getSolarSystem("Jita");
 
     WormholeModel model;
 

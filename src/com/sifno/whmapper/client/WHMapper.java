@@ -1,6 +1,5 @@
 package com.sifno.whmapper.client;
 
-import com.allen_sauer.gwt.dnd.client.*;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -8,11 +7,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
-import com.sifno.stellarmap.SolarSystem;
-import com.sifno.stellarmap.dataobject.SolarSystemData;
-import com.sifno.whmapper.client.Graph.VisualizationViewer;
-import com.sifno.whmapper.client.Graph.SolarSystemWidget;
-import edu.uci.ics.jung.graph.Graph;
+import com.sifno.stellarmap.dataobject.StarSystem;
 
 /**
  * Created by Pavel on 01.08.2015.
@@ -47,7 +42,7 @@ public class WHMapper implements EntryPoint {
 //
 //                Server.App.getInstance().getObject("Pavel",callback);
 
-                AsyncCallback<SolarSystemData> callback = new AsyncCallback<SolarSystemData>() {
+                AsyncCallback<StarSystem> callback = new AsyncCallback<StarSystem>() {
                     @Override
                     public void onFailure(Throwable caught) {
                         label.setText(caught.getMessage());
@@ -55,7 +50,7 @@ public class WHMapper implements EntryPoint {
                     }
 
                     @Override
-                    public void onSuccess(SolarSystemData result) {
+                    public void onSuccess(StarSystem result) {
                        label.setText("Accept");
                        // SolarSystemWidget ssw = new SolarSystemWidget(result, vv);
                       //  vv.add(ssw, 100, 100);
@@ -84,7 +79,7 @@ public class WHMapper implements EntryPoint {
 //
 //    public void onModuleLoad() {
 //
-//        Graph<Integer,Integer> graph;
+//        StellarGraph<Integer,Integer> graph;
 //
 //        //RootPanel.get().setPixelSize(600, 600);
 //
@@ -125,9 +120,9 @@ public class WHMapper implements EntryPoint {
 //        vv.add(debug2, 50, 50);
 //        dragController.makeDraggable(debug2);
 //
-//        SolarSystemWidget ssw1 = new SolarSystemWidget(new SolarSystem(), vv);
-//        SolarSystemWidget ssw2 = new SolarSystemWidget(new SolarSystem(), vv);
-//        SolarSystemWidget ssw3 = new SolarSystemWidget(new SolarSystem(), vv);
+//        SolarSystemWidget ssw1 = new SolarSystemWidget(new StarSystem(), vv);
+//        SolarSystemWidget ssw2 = new SolarSystemWidget(new StarSystem(), vv);
+//        SolarSystemWidget ssw3 = new SolarSystemWidget(new StarSystem(), vv);
 //
 //        vv.add(ssw1, 50, 100);
 //        vv.add(ssw2, 50, 150);

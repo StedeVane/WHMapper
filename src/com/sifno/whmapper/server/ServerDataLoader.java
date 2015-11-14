@@ -1,10 +1,10 @@
 package com.sifno.whmapper.server;
 
-import com.sifno.stellarmap.*;
-import com.sifno.stellarmap.dataobject.ConstellationData;
-import com.sifno.stellarmap.dataobject.RegionData;
-import com.sifno.stellarmap.dataobject.SolarSystemData;
-import com.sifno.stellarmap.dataobject.StargateData;
+import com.sifno.oldmap.*;
+import com.sifno.stellarmap.dataobject.Constellation;
+import com.sifno.stellarmap.dataobject.Region;
+import com.sifno.stellarmap.dataobject.StarSystem;
+import com.sifno.stellarmap.dataobject.Stargate;
 
 import java.io.File;
 import java.sql.Connection;
@@ -24,20 +24,20 @@ public class ServerDataLoader implements DataLoader {
 
     final String SELECT_REGIONS_ALL = "SELECT * FROM regions;";
     final String SELECT_CONSTELLATIONS_ALL = "SELECT * FROM constellations;";
-    final String SELECT_SOLARSYSTEMS_ALL =
-            "SELECT solarsystems.id, solarsystems.constellation_id, solarsystems.name,\n" +
-                    "  solarsystems.security, solarsystems.luminosity, solarsystems.sun_type_id, wormhole_classes.name AS class\n" +
-                    "FROM solarsystems\n" +
-                    "  LEFT JOIN constellations ON  solarsystems.constellation_id = constellations.id\n" +
+    final String SELECT_STARSYSTEMS_ALL =
+            "SELECT starsystems.id, starsystems.constellation_id, starsystems.name,\n" +
+                    "  starsystems.security, starsystems.luminosity, starsystems.sun_type_id, wormhole_classes.name AS class\n" +
+                    "FROM starsystems\n" +
+                    "  LEFT JOIN constellations ON  starsystems.constellation_id = constellations.id\n" +
                     "  LEFT JOIN regions ON constellations.region_id = regions.id\n" +
                     "  LEFT OUTER JOIN wormhole_class_destinations\n" +
-                    "    ON (location_id = solarsystems.id\n" +
+                    "    ON (location_id = starsystems.id\n" +
                     "        OR (location_id = constellations.id\n" +
-                    "            AND solarsystems.id NOT IN (SELECT id FROM wormhole_class_destinations, solarsystems\n" +
+                    "            AND starsystems.id NOT IN (SELECT id FROM wormhole_class_destinations, starsystems\n" +
                     "  WHERE id = location_id)\n" +
                     "        )\n" +
                     "        OR (location_id = regions.id\n" +
-                    "            AND solarsystems.id NOT IN (SELECT id FROM wormhole_class_destinations, solarsystems\n" +
+                    "            AND starsystems.id NOT IN (SELECT id FROM wormhole_class_destinations, starsystems\n" +
                     "  WHERE id = location_id)\n" +
                     "            AND constellations.id NOT IN (SELECT id FROM wormhole_class_destinations, constellations\n" +
                     "  WHERE id = location_id)\n" +
@@ -49,17 +49,17 @@ public class ServerDataLoader implements DataLoader {
 
     final String SELECT_REGION = "SELECT * FROM regions WHERE id = ?;";
     final String SELECT_CONSTELLATION = "SELECT * FROM constellations WHERE id = ?;";
-    final String SELECT_SOLARSYSTEM = "SELECT * FROM solarsystems WHERE id = ?;";
+    final String SELECT_STARSYSTEM = "SELECT * FROM starsystems WHERE id = ?;";
     final String SELECT_STARGATE = "SELECT * FROM stargates WHERE id = ?;";
 
 
     @Override
-    public RegionData downloadRegion(int regionID) {
+    public Region downloadRegion(int regionID) {
 
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
 
-        RegionData data = new RegionData();
+        Region data = new Region();
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_REGION);
@@ -68,7 +68,7 @@ public class ServerDataLoader implements DataLoader {
 
             data.setID(result.getInt("id"));
             data.setName(result.getString("name"));
-            data.setFractionID(result.getInt("fraction_id"));
+            data.setFactionID(result.getInt("fraction_id"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -77,12 +77,12 @@ public class ServerDataLoader implements DataLoader {
     }
 
     @Override
-    public ConstellationData downloadConstellation(int constellationID) {
+    public Constellation downloadConstellation(int constellationID) {
 
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
 
-        ConstellationData data = new ConstellationData();
+        Constellation data = new Constellation();
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CONSTELLATION);
@@ -100,16 +100,16 @@ public class ServerDataLoader implements DataLoader {
     }
 
     @Override
-    public SolarSystemData downloadSolarSystem(int solarSystemID) {
+    public StarSystem downloadStarSystem(int starSystemID) {
 
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
 
-        SolarSystemData data = new SolarSystemData();
+        StarSystem data = new StarSystem();
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_SOLARSYSTEM);
-            preparedStatement.setInt(1, solarSystemID);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_STARSYSTEM);
+            preparedStatement.setInt(1, starSystemID);
             ResultSet result = preparedStatement.executeQuery();
 
             data.setID(result.getInt("id"));
@@ -127,12 +127,12 @@ public class ServerDataLoader implements DataLoader {
     }
 
     @Override
-    public StargateData downloadStargate(int stargateID) {
+    public Stargate downloadStargate(int stargateID) {
 
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
 
-        StargateData data = new StargateData();
+        Stargate data = new Stargate();
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_STARGATE);
@@ -141,7 +141,7 @@ public class ServerDataLoader implements DataLoader {
 
             data.setID(result.getInt("id"));
             data.setName(result.getString("name"));
-            data.setSolarSystemID(result.getInt("solarsystem_id"));
+            data.setStarSystemID(result.getInt("starsystem_id"));
             data.setDestinationStargateID(result.getInt("destination_stargate_id"));
 
         } catch (SQLException e) {
@@ -153,18 +153,18 @@ public class ServerDataLoader implements DataLoader {
 
     //TODO Получить множество врат из базы
     @Override
-    public Collection<StargateData> downloadStargates(Collection<Integer> stargatesID) {
+    public Collection<Stargate> downloadStargates(Collection<Integer> stargatesID) {
         return null;
     }
 
 
     @Override
-    public Collection<RegionData> downloadRegionsAll() {
+    public Collection<Region> downloadRegionsAll() {
 
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
 
-        Set<RegionData> resultCollection = new HashSet<>();
+        Set<Region> resultCollection = new HashSet<>();
 
         try {
 
@@ -172,11 +172,11 @@ public class ServerDataLoader implements DataLoader {
             ResultSet result = preparedStatement.executeQuery();
 
             while (result.next()) {
-                RegionData data = new RegionData();
+                Region data = new Region();
 
                 data.setID(result.getInt("id"));
                 data.setName(result.getString("name"));
-                data.setFractionID(result.getInt("fraction_id"));
+                data.setFactionID(result.getInt("faction_id"));
 
                 resultCollection.add(data);
             }
@@ -190,19 +190,19 @@ public class ServerDataLoader implements DataLoader {
     }
 
     @Override
-    public Collection<ConstellationData> downloadConstellationsAll() {
+    public Collection<Constellation> downloadConstellationsAll() {
 
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
 
-        Set<ConstellationData> resultCollection = new HashSet<>();
+        Set<Constellation> resultCollection = new HashSet<>();
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CONSTELLATIONS_ALL);
             ResultSet result = preparedStatement.executeQuery();
 
             while (result.next()) {
-                ConstellationData data = new ConstellationData();
+                Constellation data = new Constellation();
 
                 data.setID(result.getInt("id"));
                 data.setName(result.getString("name"));
@@ -220,19 +220,19 @@ public class ServerDataLoader implements DataLoader {
     }
 
     @Override
-    public Collection<SolarSystemData> downloadSolarSystemsAll() {
+    public Collection<StarSystem> downloadStarSystemsAll() {
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
 
-        Set<SolarSystemData> resultCollection = new HashSet<>();
+        Set<StarSystem> resultCollection = new HashSet<>();
 
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_SOLARSYSTEMS_ALL);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_STARSYSTEMS_ALL);
             ResultSet result = preparedStatement.executeQuery();
 
             while (result.next()) {
-                SolarSystemData data = new SolarSystemData();
+                StarSystem data = new StarSystem();
 
                 data.setID(result.getInt("id"));
                 data.setName(result.getString("name"));
@@ -254,22 +254,23 @@ public class ServerDataLoader implements DataLoader {
     }
 
     @Override
-    public Collection<StargateData> downloadStargatesAll() {
+    public Collection<Stargate> downloadStargatesAll() {
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
 
-        Set<StargateData> resultCollection = new HashSet<>();
+        Set<Stargate> resultCollection = new HashSet<>();
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_STARGATES_ALL);
             ResultSet result = preparedStatement.executeQuery();
 
             while (result.next()) {
-                StargateData data = new StargateData();
+                Stargate data = new Stargate();
                 data.setID(result.getInt("id"));
                 data.setName(result.getString("name"));
-                data.setSolarSystemID(result.getInt("solarsystem_id"));
+                data.setStarSystemID(result.getInt("starsystem_id"));
                 data.setDestinationStargateID(result.getInt("destination_stargate_id"));
+                data.setJumpID(result.getInt("jump_id"));
 
                 resultCollection.add(data);
             }

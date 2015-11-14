@@ -1,84 +1,86 @@
 package com.sifno.whmapper.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.sifno.stellarmap.DataLoader;
-import com.sifno.stellarmap.dataobject.ConstellationData;
-import com.sifno.stellarmap.dataobject.RegionData;
-import com.sifno.stellarmap.dataobject.SolarSystemData;
-import com.sifno.stellarmap.dataobject.StargateData;
+import com.sifno.oldmap.DataLoader;
+import com.sifno.stellarmap.dataobject.Constellation;
+import com.sifno.stellarmap.dataobject.Region;
+import com.sifno.stellarmap.dataobject.StarSystem;
+import com.sifno.stellarmap.dataobject.Stargate;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Алёна on 28.10.2015.
  */
 public class ClientDataLoader implements DataLoader{
+
+
     @Override
-    public RegionData downloadRegion(int regionID) {
+    public Region downloadRegion(int regionID) {
         return null;
     }
 
     @Override
-    public ConstellationData downloadConstellation(int constellationID) {
+    public Constellation downloadConstellation(int constellationID) {
         return null;
     }
 
     @Override
-    public SolarSystemData downloadSolarSystem(int solarSystemID) {
+    public StarSystem downloadStarSystem(int solarSystemID) {
 
-        SolarSystemData data = null;
+        List<StarSystem> data = new ArrayList<>();
 
-        AsyncCallback<SolarSystemData> callback = new AsyncCallback<SolarSystemData>() {
+        AsyncCallback<StarSystem> callback = new AsyncCallback<StarSystem>() {
             @Override
             public void onFailure(Throwable caught) {
                 System.out.println(caught.getMessage());
+                data.add(null);
             }
 
             @Override
-            public void onSuccess(SolarSystemData result) {
-                data = result;
+            public void onSuccess(StarSystem result) {
+                data.add(result);
             }
         };
 
         Server.App.getInstance().getSolarSystem(solarSystemID, callback);
 
 
+        return null;
 
     }
 
-    public void waitCallback(Object obj) {
-        while (obj==null) {
 
-        }
-    }
 
     @Override
-    public Collection<StargateData> downloadStargates(Collection<Integer> stargatesID) {
+    public Collection<Stargate> downloadStargates(Collection<Integer> stargatesID) {
         return null;
     }
 
     @Override
-    public StargateData downloadStargate(int stargateID) {
+    public Stargate downloadStargate(int stargateID) {
         return null;
     }
 
     @Override
-    public Collection<RegionData> downloadRegionsAll() {
+    public Collection<Region> downloadRegionsAll() {
         return null;
     }
 
     @Override
-    public Collection<ConstellationData> downloadConstellationsAll() {
+    public Collection<Constellation> downloadConstellationsAll() {
         return null;
     }
 
     @Override
-    public Collection<SolarSystemData> downloadSolarSystemsAll() {
+    public Collection<StarSystem> downloadStarSystemsAll() {
         return null;
     }
 
     @Override
-    public Collection<StargateData> downloadStargatesAll() {
+    public Collection<Stargate> downloadStargatesAll() {
         return null;
     }
 }

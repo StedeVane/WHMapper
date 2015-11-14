@@ -1,16 +1,5 @@
 package com.sifno.whmapper.server;
 
-import com.sifno.stellarmap.Stargate;
-import com.sifno.stellarmap.StargateLink;
-import com.sifno.stellarmap.*;
-
-import java.io.File;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.*;
-
 /**
  * Created by Pavel on 26.07.2015.
  */
@@ -28,10 +17,10 @@ public class NewEden {
 //    Map<Integer, Constellation> constellationIdMap = new HashMap<>();
 //    Map<String, Constellation> constellationNameMap = new HashMap<>();
 //
-//    Map<Integer, SolarSystem> solarSystemIdMap = new HashMap<>();
-//    Map<String, SolarSystem> solarSystemNameMap = new HashMap<>();
+//    Map<Integer, StarSystem> solarSystemIdMap = new HashMap<>();
+//    Map<String, StarSystem> solarSystemNameMap = new HashMap<>();
 //
-//    Map<Region,Map<Constellation,List<SolarSystem>>> newEden = new HashMap<>();
+//    Map<Region,Map<Constellation,List<StarSystem>>> newEden = new HashMap<>();
 //
 //    Map<String,Index> indexes = new HashMap<>();
 //
@@ -91,7 +80,7 @@ public class NewEden {
 //
 //                region.setId(result.getInt("id"));
 //                region.setName(result.getString("name"));
-//                region.setFractionID(result.getInt("fraction_id"));
+//                region.setFactionID(result.getInt("fraction_id"));
 //
 //
 //                regionIdMap.put(region.getId(), region);
@@ -117,7 +106,7 @@ public class NewEden {
 //            result = preparedStatement.executeQuery();
 //
 //            while (result.next()) {
-//                SolarSystem solarSystem = new SolarSystemServer();
+//                StarSystem solarSystem = new SolarSystemServer();
 //
 //                solarSystem.setId(result.getInt("id"));
 //                solarSystem.setName(result.getString("name"));
@@ -182,7 +171,7 @@ public class NewEden {
 //        for (Constellation constellation: constellationIdMap.values()) {
 //            newEden.get(constellation.getRegion()).put(constellation,new ArrayList<>());
 //        }
-//        for (SolarSystem system: solarSystemIdMap.values()) {
+//        for (StarSystem system: solarSystemIdMap.values()) {
 //            newEden.get(system.getRegion()).get(system.getConstellation()).add(system);
 //        }
 //
@@ -204,11 +193,11 @@ public class NewEden {
 //        return instance.constellationNameMap.get(name);
 //    }
 //
-//    public static SolarSystem getSolarSystem(int id) {
+//    public static StarSystem getSolarSystem(int id) {
 //        return instance.solarSystemIdMap.get(id);
 //    }
 //
-//    public static SolarSystem getSolarSystem(String name) {
+//    public static StarSystem getSolarSystem(String name) {
 //        return instance.solarSystemNameMap.get(name);
 //    }
 //
@@ -220,16 +209,16 @@ public class NewEden {
 //        return  instance.constellationIdMap.values();
 //    }
 //
-//    public static Collection<SolarSystem> getSolarSystemsAll() {
+//    public static Collection<StarSystem> getSolarSystemsAll() {
 //        return  instance.solarSystemIdMap.values();
 //    }
 //
-//    public static Collection<SolarSystem> getSolarSystems(ConstellationServer constellation) {
+//    public static Collection<StarSystem> getSolarSystems(ConstellationServer constellation) {
 //        return instance.newEden.get(constellation.getRegion()).get(constellation);
 //    }
 //
-//    public static Collection<SolarSystem> getSolarSystems(RegionServer region) {
-//        Set<SolarSystem> result = new HashSet<>();
+//    public static Collection<StarSystem> getSolarSystems(RegionServer region) {
+//        Set<StarSystem> result = new HashSet<>();
 //        for (Constellation constellation: instance.newEden.get(region).keySet()) {
 //            result.addAll(instance.newEden.get(region).get(constellation));
 //        }

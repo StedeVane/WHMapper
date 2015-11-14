@@ -1,8 +1,8 @@
 package com.sifno.whmapper.server;
 
 //import edu.uci.ics.jung.graph.*;
-import com.sifno.stellarmap.*;
-import com.sifno.stellarmap.SolarSystem;
+import com.sifno.oldmap.*;
+import com.sifno.oldmap.SolarSystem;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.ObservableGraph;
 import edu.uci.ics.jung.graph.UndirectedGraph;
@@ -61,7 +61,7 @@ public class WormholeModel {
 //        solarSystems.addAll(NewEden.getSolarSystems(NewEden.getConstellation("Okomon")));
 //        solarSystems.addAll(NewEden.getSolarSystems(NewEden.getConstellation("Ihilakken")));
 
-      //  Set<SolarSystem> solarSystems = new HashSet<>(NewEden.getSolarSystems(NewEden.getRegion("The Forge")));
+      //  Set<StarSystem> solarSystems = new HashSet<>(NewEden.getSolarSystems(NewEden.getRegion("The Forge")));
 
      //   initSolarSystems(solarSystems);
     }
