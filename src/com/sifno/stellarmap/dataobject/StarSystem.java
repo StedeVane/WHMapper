@@ -12,8 +12,11 @@ public class StarSystem extends Location {
     private double luminosity;
     private int sunTypeID;
     private String systemClassID;
-    
     private Set<Integer> stargates;
+
+    public StarSystem() {}
+    public StarSystem(int id) {setID(id);}
+
 
     public int getConstellationID() {
         return constellationID;

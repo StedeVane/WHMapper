@@ -1,27 +1,23 @@
-package com.sifno.graphdrawing;
+package com.sifno.stellarmap.graphdrawing;
 
-import java.awt.geom.Point2D;
+
 import java.util.*;
 
 /**
- * Created by Алёна on 13.11.2015.
+ * Created by Алёна on 20.11.2015.
  */
-public class PlanarGraph<V,E> implements Graph<V,E>{
+public class UndirectedSpareGraph<V,E> implements Graph<V,E> {
 
     private Set<V> vertices = new HashSet<>();
     private Map<E, Pair<V>> edges = new HashMap<>();
-
     private Map<V,Map<E,V>> neighbors = new HashMap<>();
 
-    private Map<V, Point2D> locations = new HashMap<>();
 
     @Override
     public void addVertex(V vertex) {
         if (vertex == null) throw  new NullPointerException("Graph cannot contain null value");
-
         vertices.add(vertex);
-        locations.put(vertex, new Point2D.Double());
-        neighbors.put(vertex, new HashMap<>());
+        neighbors.put(vertex, new HashMap<E,V>());
     }
 
     @Override
@@ -33,31 +29,42 @@ public class PlanarGraph<V,E> implements Graph<V,E>{
         neighbors.get(v2).put(e,v1);
     }
 
+    @Override
+    public void removeVertex(V vertex) {
+        vertices.remove(vertex);
+        for (E e: neighbors.get(vertex).keySet()) {
+            V v = neighbors.get(vertex).get(e);
+
+            edges.remove(e);
+            neighbors.get(v).remove(e);
+        }
+        neighbors.remove(vertex);
+    }
+
+    @Override
+    public void removeEdge(E edge) {
+        edges.remove(edge);
+    }
+
+
+    @Override
     public Pair<V> getEdge(E e) {
         if (e == null) throw  new IllegalArgumentException("parameter must not be null");
         return edges.get(e);
     }
 
-    public Point2D getLocation(V vertex) {
-        return locations.get(vertex);
-    }
-
-    public void setLocation(V vertex, Point2D point) {
-        locations.put(vertex, point);
-    }
-
+    @Override
     public Collection<V> getVertices() {
         return vertices;
     }
 
+    @Override
     public Collection<E> getEdges() {
         return edges.keySet();
     }
 
+    @Override
     public Collection<V> getNeighbors(V vertex) {
         return neighbors.get(vertex).values();
     }
-
-
-
 }

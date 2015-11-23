@@ -1,4 +1,4 @@
-package com.sifno.graphdrawing;
+package com.sifno.stellarmap.graphdrawing;
 
 
 
@@ -9,23 +9,25 @@ import java.util.Map;
 /**
  * Created by Алёна on 13.11.2015.
  */
-public class FDDAlgorithm {
+public class FDDAlgorithm<V,E> {
 
-    private PlanarGraph delegate;
-    private double resistanceStrength = 15.0;
-    private double gravity = 1E3;
-    private double tension = 1E-3;
+
+
+    private PlanarGraphO<V,E> delegate;
+    private double resistanceStrength = 1.0;
+    private double gravity = 1E4;
+    private double tension = 5E-3;
     private double dt = 0.016666667;
 
-    public FDDAlgorithm(PlanarGraph delegate) {
+    public FDDAlgorithm(PlanarGraphO delegate) {
         this.delegate = delegate;
     }
 
-    public PlanarGraph getDelegate() {
+    public PlanarGraphO getDelegate() {
         return delegate;
     }
 
-    public void setDelegate(PlanarGraph delegate) {
+    public void setDelegate(PlanarGraphO<V,E> delegate) {
         this.delegate = delegate;
     }
 
@@ -46,11 +48,11 @@ public class FDDAlgorithm {
         return new Point2D.Double(p2.getX()-p1.getX(),p2.getY()-p1.getY());
     }
 
-    private Point2D getGravity(Object vertex) {
+    private Point2D getGravity(V vertex) {
         Point2D result = new Point2D.Double(0,0);
         Point2D location = delegate.getLocation(vertex);
 
-        for (Object v: delegate.getVertices()) {
+        for (V v: delegate.getVertices()) {
             if (!v.equals(vertex)) {
                 Point2D r = sub(delegate.getLocation(v), location);
                 result = add(result, mul(r, gravity / r.distanceSq(0, 0)));
@@ -59,17 +61,37 @@ public class FDDAlgorithm {
         return result;
     }
 
-    private Point2D getTension(Object vertex) {
+    private Point2D getBorderForce(V vertex) {
+        Point2D location = delegate.getLocation(vertex);
+
+        double fx = 0,fy = 0;
+        double x = location.getX();
+        double y = location.getY();
+
+        if (delegate.getWidth() != 0)
+            fx = gravity/(x) - gravity/((delegate.getWidth()-x));
+        if (delegate.getHeight() !=0)
+            fy = gravity/(y) - gravity/((delegate.getHeight()-y));
+        return new Point2D.Double(fx,fy);
+    }
+
+    private Point2D getTension(V vertex) {
         Point2D result = new Point2D.Double(0,0);
         Point2D location = delegate.getLocation(vertex);
 
-        for (Object v: delegate.getNeighbors(vertex)) {
+        for (V v: delegate.getNeighbors(vertex)) {
             if (!v.equals(vertex)) {
                 Point2D r = sub(location, delegate.getLocation(v));
                 result = add(result,mul(r,tension*r.distance(0,0))) ;
             }
         }
         return result;
+    }
+
+    private Point2D getCentralTension(V vertex) {
+        Point2D location = delegate.getLocation(vertex);
+        return new Point2D.Double(-location.getX()*1*tension,-location.getY()*1*tension);
+       // return new Point2D.Double(0,0);
     }
 
     private Point2D resistance(Point2D point) {
@@ -81,25 +103,41 @@ public class FDDAlgorithm {
     //    else return new Point2D.Double(point.getX()*mul, point.getY()*mul);
     }
 
-    private Point2D getForce(Object vertex) {
+    private Point2D getForce(V vertex) {
 
+        System.out.println(vertex + " "+ getCentralTension(vertex));
 
-        return resistance(add(getGravity(vertex), getTension(vertex)));
+        return resistance(
+                add(getCentralTension(vertex),
+                    add(getBorderForce(vertex),
+                        add(getGravity(vertex),
+                                getTension(vertex)
+                        )
+                    )
+                )
+        );
     }
 
     public  void nextFrame() {
-        Map<Object, Point2D> result = new HashMap<>();
+        Map<V, Point2D> result = new HashMap<>();
 
-        for (Object v: delegate.getVertices()) {
+        for (V v: delegate.getVertices()) {
     //        System.out.println(v+":" + "gravity=" + getGravity(v) + "  tension="+getTension(v) + "  force=" + getForce(v));
 
 
             result.put(v, add(delegate.getLocation(v), mul(getForce(v), dt)));
         }
 
-        for (Object v: delegate.getVertices()) {
+        for (V v: delegate.getVertices()) {
             delegate.setLocation(v,result.get(v));
         }
+
+        GraphEvent<V,E> event = new GraphEvent.VerticesLocation<V,E>(delegate, GraphEvent.Type.CHANGE_VERTICES_LOCATION, result);
+        delegate.fireGraphEvent(event);
+    }
+
+    public void fireEquilibrium() {
+
     }
 
 }

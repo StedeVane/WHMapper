@@ -1,8 +1,9 @@
 package com.sifno.whmapper.server;
 
-import com.sifno.graphdrawing.FDDAlgorithm;
-import com.sifno.graphdrawing.Pair;
-import com.sifno.graphdrawing.PlanarGraph;
+import com.sifno.stellarmap.graphdrawing.UndirectedSpareGraph;
+import com.sifno.stellarmap.graphdrawing.FDDAlgorithm;
+import com.sifno.stellarmap.graphdrawing.Pair;
+import com.sifno.stellarmap.graphdrawing.PlanarGraphO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,24 +16,28 @@ import java.awt.geom.Point2D;
  */
 public class GraphDrawer extends JPanel {
 
-    private PlanarGraph<Integer,Integer> graph;
+    private PlanarGraphO<Integer,Integer> graph;
 
 
     public GraphDrawer() {
 
         setPreferredSize(new Dimension(800, 400));
         setSize(new Dimension(800, 400));
-        graph = new PlanarGraph();
+        graph = new PlanarGraphO(new UndirectedSpareGraph<>());
+
+        graph.setHeight(400);
+        graph.setWidth(800);
+
         graph.addVertex(1);
-        graph.setLocation(1, new Point2D.Double(330, 200));
+        graph.setLocation(1, new Point2D.Double(130, 200));
 
         graph.addVertex(2);
-        graph.setLocation(2, new Point2D.Double(480, 200));
+        graph.setLocation(2, new Point2D.Double(280, 200));
 
         graph.addEdge(1, 1, 2);
 
         graph.addVertex(3);
-        graph.setLocation(3, new Point2D.Double(330,10));
+        graph.setLocation(3, new Point2D.Double(130,10));
         graph.addEdge(2,1,3);
 
         FDDAlgorithm alg = new FDDAlgorithm(graph);

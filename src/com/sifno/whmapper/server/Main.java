@@ -2,21 +2,8 @@ package com.sifno.whmapper.server;
 
 
 
-import com.sifno.oldmap.Link;
-import com.sifno.oldmap.Signature;
-import com.sifno.oldmap.SolarSystem;
-import com.sifno.oldmap.StellarMap;
-import com.sifno.stellarmap.StellarMapModel;
-import com.sifno.stellarmap.dataobject.Constellation;
-import com.sifno.stellarmap.dataobject.Region;
-import com.sifno.stellarmap.dataobject.StarSystem;
-import com.sifno.stellarmap.dataobject.Stargate;
-import edu.uci.ics.jung.graph.Graph;
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by ������ on 29.06.15.
@@ -57,13 +44,8 @@ public class Main extends JFrame {
       //  add(wormholeMap);
 
 
-     //   GraphDrawer gd = new GraphDrawer();
-     //   add(gd);
-
-        Map<Integer,Integer> m = new HashMap<>();
-        m.put(null,1);
-        m.put(1,null);
-        m.put(new Integer(1), 2);
+        GraphDrawer gd = new GraphDrawer();
+        add(gd);
 
 
         Label label = new Label("Hello");

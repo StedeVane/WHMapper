@@ -2,8 +2,6 @@ package com.sifno.whmapper.client.Graph;
 
 import com.allen_sauer.gwt.dnd.client.DragContext;
 import com.allen_sauer.gwt.dnd.client.drop.AbsolutePositionDropController;
-import com.allen_sauer.gwt.dnd.client.util.DOMUtil;
-import com.sifno.whmapper.client.WHMapper;
 
 
 /**
@@ -40,9 +38,9 @@ public class GraphDropController extends AbsolutePositionDropController {
    //     WHMapper.x.setText("x: " + (context.desiredDraggableX - vv.getAbsoluteLeft() - DOMUtil.getBorderLeft(vv.getElement()) ));
    //     WHMapper.y.setText("y: " + (context.desiredDraggableY - vv.getAbsoluteTop() - DOMUtil.getBorderTop(vv.getElement()) ));
 
-        if (!(context.draggable instanceof SolarSystemWidget)) return;
+        if (!(context.draggable instanceof StarSystemWidget)) return;
 
-        SolarSystemWidget ssw = (SolarSystemWidget) context.draggable;
+        StarSystemWidget ssw = (StarSystemWidget) context.draggable;
 
        // ssw.firePositionChange();
 

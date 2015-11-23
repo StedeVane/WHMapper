@@ -1,13 +1,9 @@
 package com.sifno.whmapper.client.Graph;
 
-import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.levigo.util.gwtawt.client.WebGraphics;
-import com.sifno.whmapper.client.WHMapper;
-import com.sifno.whmapper.server.Main;
 
 import java.awt.*;
-import java.awt.geom.*;
 
 /**
  * Created by Алёна on 07.08.2015.
@@ -21,9 +17,9 @@ public class NodeConnection extends GraphComponent {
 
     private Shape shape;
 
-    private SolarSystemWidget ssw1, ssw2;
+    private StarSystemWidget ssw1, ssw2;
 
-    public NodeConnection(GraphComponent parent, SolarSystemWidget ssw1, SolarSystemWidget ssw2) {
+    public NodeConnection(GraphComponent parent, StarSystemWidget ssw1, StarSystemWidget ssw2) {
         super(parent);
         this.ssw1 = ssw1;
         this.ssw2 = ssw2;

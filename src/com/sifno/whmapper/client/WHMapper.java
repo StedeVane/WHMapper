@@ -1,13 +1,17 @@
 package com.sifno.whmapper.client;
 
+import com.allen_sauer.gwt.dnd.client.DragEndEvent;
+import com.allen_sauer.gwt.dnd.client.DragHandlerAdapter;
+import com.allen_sauer.gwt.dnd.client.PickupDragController;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
+
 import com.sifno.stellarmap.dataobject.StarSystem;
+import com.sifno.whmapper.client.Graph.StarSystemWidget;
+import com.sifno.whmapper.client.Graph.VisualizationViewer;
+
 
 /**
  * Created by Pavel on 01.08.2015.
@@ -17,6 +21,8 @@ public class WHMapper implements EntryPoint {
     private Button button;
     private Label label;
 
+    public static PickupDragController dragController;
+
     @Override
     public void onModuleLoad() {
 
@@ -25,47 +31,47 @@ public class WHMapper implements EntryPoint {
 
         button = new Button("Button");
 
-        button.addClickHandler(new ClickHandler() {
-            public void onClick(ClickEvent event) {
-
-//
-//                AsyncCallback<MyClass> callback = new AsyncCallback<MyClass>() {
-//                    public void onFailure(Throwable caught) {
-//
-//                        label.setText(caught.getMessage());
-//                    }
-//
-//                    public void onSuccess(MyClass result) {
-//                        label.setText(result.getName());
-//                    }
-//                };
-//
-//                Server.App.getInstance().getObject("Pavel",callback);
-
-                AsyncCallback<StarSystem> callback = new AsyncCallback<StarSystem>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        label.setText(caught.getMessage());
-                        System.out.println(caught.getMessage());
-                    }
-
-                    @Override
-                    public void onSuccess(StarSystem result) {
-                       label.setText("Accept");
-                       // SolarSystemWidget ssw = new SolarSystemWidget(result, vv);
-                      //  vv.add(ssw, 100, 100);
-                      //  dragController.makeDraggable(ssw);
-                    }
-                };
-
-                Server.App.getInstance().getSolarSystem(30000001, callback);
-
-            }
-        });
+        VisualizationViewer vv = new VisualizationViewer();
+        vv.addStyleName("gwt-GraphPanel");
 
         RootPanel.get().add(button);
+        RootPanel.get().add(vv);
 
+        dragController = new PickupDragController(vv,true);
+        dragController.addDragHandler(new DragHandlerAdapter() {
+            @Override
+            public void onDragEnd(DragEndEvent event) {
+                super.onDragEnd(event);
+
+                if (!(event.getContext().draggable instanceof StarSystemWidget)) return;
+
+                StarSystemWidget ssw = (StarSystemWidget) event.getContext().draggable;
+                ssw.firePositionChange();
+            }
+        });
+        dragController.registerDropController(vv.getDropController());
+
+//        vv.add(debug2, 50, 50);
+//        dragController.makeDraggable(debug2);
+
+        StarSystemWidget ssw1 = new StarSystemWidget(new StarSystem(1), vv);
+        StarSystemWidget ssw2 = new StarSystemWidget(new StarSystem(2), vv);
+        StarSystemWidget ssw3 = new StarSystemWidget(new StarSystem(3), vv);
+
+        vv.add(ssw1, 51, 100);
+        vv.add(ssw2, 49, 150);
+        vv.add(ssw3, 50, 250);
+
+
+
+        dragController.makeDraggable(ssw1);
+        dragController.makeDraggable(ssw2);
+        dragController.makeDraggable(ssw3);
+
+        vv.addConnection(1,ssw1, ssw2);
+        vv.addConnection(2,ssw3, ssw2);
     }
+}
 
 //    private Label label;
 //    private Button button, drawConnection;
@@ -107,9 +113,9 @@ public class WHMapper implements EntryPoint {
 //            public void onDragEnd(DragEndEvent event) {
 //                super.onDragEnd(event);
 //
-//                if (!(event.getContext().draggable instanceof SolarSystemWidget)) return;
+//                if (!(event.getContext().draggable instanceof StarSystemWidget)) return;
 //
-//                SolarSystemWidget ssw = (SolarSystemWidget) event.getContext().draggable;
+//                StarSystemWidget ssw = (StarSystemWidget) event.getContext().draggable;
 //                ssw.firePositionChange();
 //            }
 //        });
@@ -120,9 +126,9 @@ public class WHMapper implements EntryPoint {
 //        vv.add(debug2, 50, 50);
 //        dragController.makeDraggable(debug2);
 //
-//        SolarSystemWidget ssw1 = new SolarSystemWidget(new StarSystem(), vv);
-//        SolarSystemWidget ssw2 = new SolarSystemWidget(new StarSystem(), vv);
-//        SolarSystemWidget ssw3 = new SolarSystemWidget(new StarSystem(), vv);
+//        StarSystemWidget ssw1 = new StarSystemWidget(new StarSystem(), vv);
+//        StarSystemWidget ssw2 = new StarSystemWidget(new StarSystem(), vv);
+//        StarSystemWidget ssw3 = new StarSystemWidget(new StarSystem(), vv);
 //
 //        vv.add(ssw1, 50, 100);
 //        vv.add(ssw2, 50, 150);
@@ -169,7 +175,7 @@ public class WHMapper implements EntryPoint {
 //
 //                    @Override
 //                    public void onSuccess(SolarSystemClient result) {
-//                        SolarSystemWidget ssw = new SolarSystemWidget(result, vv);
+//                        StarSystemWidget ssw = new StarSystemWidget(result, vv);
 //                        vv.add(ssw, 100, 100);
 //                        dragController.makeDraggable(ssw);
 //                    }
@@ -195,4 +201,3 @@ public class WHMapper implements EntryPoint {
 //        });
 //
 //    }
-}

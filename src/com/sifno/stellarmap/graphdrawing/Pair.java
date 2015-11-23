@@ -1,4 +1,4 @@
-package com.sifno.graphdrawing;
+package com.sifno.stellarmap.graphdrawing;
 /*
  * Created on Apr 2, 2006
  *
