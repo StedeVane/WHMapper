@@ -2,8 +2,10 @@ package com.sifno.whmapper.client.Graph;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.levigo.util.gwtawt.client.WebGraphics;
+import com.sifno.whmapper.client.WHMapper;
 
 import java.awt.*;
+import java.awt.geom.Line2D;
 
 /**
  * Created by Алёна on 07.08.2015.
@@ -25,6 +27,7 @@ public class NodeConnection extends GraphComponent {
         this.ssw2 = ssw2;
 
 
+
         updateShape();
 
         addMouseClickListener(new MouseClickListener() {
@@ -35,9 +38,10 @@ public class NodeConnection extends GraphComponent {
             }
         });
 
-
-   //     ssw1.addPositionListener(new PositionHandler(this));
-   //     ssw2.addPositionListener(new PositionHandler(this));
+        WHMapper.label.setText("3");
+        ssw1.addPositionListener(new PositionHandler(this));
+        ssw2.addPositionListener(new PositionHandler(this));
+        WHMapper.label.setText("4");
 
 
     }
@@ -52,7 +56,7 @@ public class NodeConnection extends GraphComponent {
 //        int h = Math.abs(ssw1.getY() - ssw2.getY());
 //
 //        //shape = new Rectangle2D.Double(x,y,w,h);
-//        shape = new Line2D.Double(ssw1.getX(),ssw1.getY(),ssw2.getX(),ssw2.getY());
+        shape = new Line2D.Double(ssw1.getX(),ssw1.getY(),ssw2.getX(),ssw2.getY());
 ////
 //        int ax, ay, bx, by;
 //        double cosf;
@@ -71,7 +75,7 @@ public class NodeConnection extends GraphComponent {
     @Override
     public void paint(WebGraphics g) {
 
-        Color defaultColor;
+        g.setColor(Color.BLUE);
         if (click) g.setColor(Color.GREEN);
 
         //g.getContext2d().translate(ssw1.getX(),ssw1.getY());

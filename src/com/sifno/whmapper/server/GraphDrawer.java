@@ -1,7 +1,7 @@
 package com.sifno.whmapper.server;
 
 import com.sifno.stellarmap.graphdrawing.UndirectedSpareGraph;
-import com.sifno.stellarmap.graphdrawing.FDDAlgorithm;
+import com.sifno.stellarmap.graphdrawing.layout.ForceDirectedAlgorithm;
 import com.sifno.stellarmap.graphdrawing.Pair;
 import com.sifno.stellarmap.graphdrawing.PlanarGraphO;
 
@@ -40,12 +40,12 @@ public class GraphDrawer extends JPanel {
         graph.setLocation(3, new Point2D.Double(130,10));
         graph.addEdge(2,1,3);
 
-        FDDAlgorithm alg = new FDDAlgorithm(graph);
+        //ForceDirectedAlgorithm alg = new ForceDirectedAlgorithm(graph);
 
         Timer timer = new Timer(16, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                alg.nextFrame();
+       //         alg.balance();
      //           System.out.println("paint");
                 repaint();
             }

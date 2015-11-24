@@ -42,7 +42,7 @@ public class GraphDropController extends AbsolutePositionDropController {
 
         StarSystemWidget ssw = (StarSystemWidget) context.draggable;
 
-       // ssw.firePositionChange();
+        ssw.firePositionChange();
 
 //        WHMapper.x.setText("x: " + context.draggable.getAbsoluteLeft());
 //        WHMapper.y.setText("y: " + context.draggable.getAbsoluteTop());

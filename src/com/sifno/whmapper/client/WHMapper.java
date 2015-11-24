@@ -9,8 +9,17 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 
 import com.sifno.stellarmap.dataobject.StarSystem;
+import com.sifno.stellarmap.graphdrawing.Graph;
+import com.sifno.stellarmap.graphdrawing.UndirectedSpareGraph;
+import com.sifno.stellarmap.graphdrawing.layout.ForceDirectedAlgorithm;
+import com.sifno.stellarmap.graphdrawing.layout.ForceDirectedLayout;
+import com.sifno.stellarmap.graphdrawing.layout.Layout;
+import com.sifno.stellarmap.graphdrawing.layout.TransferableLayout;
 import com.sifno.whmapper.client.Graph.StarSystemWidget;
 import com.sifno.whmapper.client.Graph.VisualizationViewer;
+
+import java.awt.*;
+import java.awt.geom.Point2D;
 
 
 /**
@@ -19,7 +28,9 @@ import com.sifno.whmapper.client.Graph.VisualizationViewer;
 public class WHMapper implements EntryPoint {
 
     private Button button;
-    private Label label;
+    public static Label label;
+
+
 
     public static PickupDragController dragController;
 
@@ -54,22 +65,38 @@ public class WHMapper implements EntryPoint {
 //        vv.add(debug2, 50, 50);
 //        dragController.makeDraggable(debug2);
 
-        StarSystemWidget ssw1 = new StarSystemWidget(new StarSystem(1), vv);
-        StarSystemWidget ssw2 = new StarSystemWidget(new StarSystem(2), vv);
-        StarSystemWidget ssw3 = new StarSystemWidget(new StarSystem(3), vv);
+//        StarSystemWidget ssw1 = new StarSystemWidget(new StarSystem(1), vv);
+//        StarSystemWidget ssw2 = new StarSystemWidget(new StarSystem(2), vv);
+//        StarSystemWidget ssw3 = new StarSystemWidget(new StarSystem(3), vv);
+//
+//        vv.add(ssw1, 51, 100);
+//        vv.add(ssw2, 49, 150);
+//        vv.add(ssw3, 50, 250);
+//
+//        dragController.makeDraggable(ssw1);
+//        dragController.makeDraggable(ssw2);
+//        dragController.makeDraggable(ssw3);
+//
+//        vv.addConnection(1,ssw1, ssw2);
+//        vv.addConnection(2,ssw3, ssw2);
 
-        vv.add(ssw1, 51, 100);
-        vv.add(ssw2, 49, 150);
-        vv.add(ssw3, 50, 250);
 
+        Layout<Integer,Integer> layout = new TransferableLayout<>(new Dimension(1000,600));
+        Graph<Integer,Integer> graph = new UndirectedSpareGraph<>();
 
+        graph.addVertex(1);
+        graph.addVertex(2);
+        graph.addVertex(3);
+        graph.addEdge(1, 1, 2);
+        graph.addEdge(2, 2, 3);
 
-        dragController.makeDraggable(ssw1);
-        dragController.makeDraggable(ssw2);
-        dragController.makeDraggable(ssw3);
+        layout.setGraph(graph);
+        layout.setLocation(1, new Point2D.Double(50, 200));
+        layout.setLocation(2,new Point2D.Double(150,200));
+        layout.setLocation(3,new Point2D.Double(50,400));
 
-        vv.addConnection(1,ssw1, ssw2);
-        vv.addConnection(2,ssw3, ssw2);
+        vv.setLayout(layout);
+
     }
 }
 

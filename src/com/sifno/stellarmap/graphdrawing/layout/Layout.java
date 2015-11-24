@@ -4,51 +4,26 @@ import com.sifno.stellarmap.graphdrawing.Graph;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
- * Created by Алёна on 23.11.2015.
+ * Created by Алёна on 24.11.2015.
  */
-public class Layout<V,E> {
-    private Graph<V,E> graph;
-    private Dimension size;
+public interface Layout<V,E> {
 
-    private Map<V, Point2D> locations = new HashMap<>();
-    private Set<V> locked = new HashSet<>();
+    public Graph<V, E> getGraph();
+    public void setGraph(Graph<V, E> graph);
 
-    public void setGraph(Graph<V, E> graph) {
-        this.graph = graph;
-    }
+    public Dimension getSize();
+    public void setSize(Dimension size);
 
-    public Graph<V, E> getGraph() {
-        return graph;
-    }
+    public void lock(V vertex, boolean b);
+    public boolean isLocked(V vertex);
 
-    public void setSize(Dimension size) {
-        this.size = size;
-    }
+    public Point2D getLocation(V vertex);
+    public void setLocation(V vertex, Point2D point);
 
-    public Dimension getSize() {
-        return size;
-    }
+    public Map<V, Point2D> getLocations();
+    public void setLocations(Map<V, Point2D> locations);
 
-    public void lock(V vertex, boolean b) {
-        if (b) locked.add(vertex);
-        else locked.remove(vertex);
-    }
-
-    public boolean isLocked(V vertex) {
-        return locked.contains(vertex);
-    }
-
-    public void setLocation(V vertex, Point2D point) {
-        locations.put(vertex,point);
-    }
-
-    public Point2D getLocation(V vertex) {
-        return locations.get(vertex);
-    }
 }

@@ -46,11 +46,13 @@ public class GraphCanvas extends GraphComposite {
     public void repaint() {
 
 
-        g.setFillColor(background);
+      //  g.setFillColor(background);
+        g.setFillColor(Color.CYAN);
         g.fill(new Rectangle2D.Double(0, 0, canvas.getCoordinateSpaceWidth(), canvas.getCoordinateSpaceHeight()));
    //     g.clearRect(0,0,canvas.getCoordinateSpaceWidth(),canvas.getCoordinateSpaceHeight());
-
+        WHMapper.label.setText("7");
         paint(g);
+
     }
 
     public Canvas getCanvas() {
