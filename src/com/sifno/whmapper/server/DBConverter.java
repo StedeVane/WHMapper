@@ -7,17 +7,15 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Алёна on 10.11.2015.
- */
+
 public class DBConverter {
 
 
 
     public static SQLiteJDBC whmapperdb = new SQLiteJDBC(new File("D:\\GitHub\\WHMapper\\whmapperdb.db"));
-    public static SQLiteJDBC evedb = new SQLiteJDBC(new File("D:\\Coding\\eve resurce\\Parallax_1.0_115480_db\\universeDataDx.db"));
+    public static SQLiteJDBC evedb = new SQLiteJDBC(new File("D:\\Coding\\eve resurce\\YC-118-1_1.0_116645\\universeDataDx.db"));
 
-    public static SQLiteJDBC olddb = new SQLiteJDBC(new File(SQLiteJDBC.path));
+    public static SQLiteJDBC olddb = new SQLiteJDBC(new File("D:\\GitHub\\WHMapper\\universeDataDx.db"));
 
 
     private void CopyInteger(ResultSet result, PreparedStatement insertStatement, String fromColumn, int toColumn ) throws SQLException {

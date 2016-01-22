@@ -18,6 +18,8 @@ public class ServerImpl extends RemoteServiceServlet implements Server {
     @Override
     public StarSystem getSolarSystem(int id) {
 
+
+
         System.out.println(this.getThreadLocalRequest().getHeaderNames());
         return null;
       // return null;

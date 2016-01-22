@@ -81,7 +81,7 @@ public class ForceDirectedAlgorithm<V,E> {
 
         if (mul > 0) return point;
         else return new Point2D.Double(0,0);
-    //    else return new Point2D.Double(point.getX()*mul, point.getY()*mul);
+    //    else return new Point2D.Double(point.get-X()*mul, point.getY()*mul);
     }
 
     private Point2D getForce(V vertex) {

@@ -2,6 +2,8 @@ package com.sifno.whmapper.server;
 
 
 
+import com.sifno.stellarmap.StellarMapCache;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,41 +17,41 @@ public class Main extends JFrame {
 
     public Main() {
 
-     //   DBConverter dbConverter = new DBConverter();
+      //  DBConverter dbConverter = new DBConverter();
 
-    //    dbConverter.ImportRegions();
-    //    dbConverter.ImportConstellations();
-    //    dbConverter.ImportStarsystems();
-    //    dbConverter.ImportStargates();
+//        dbConverter.ImportRegions();
+//        dbConverter.ImportConstellations();
+//        dbConverter.ImportStarsystems();
+//        dbConverter.ImportStargates();
 
-//        ServerDataLoader sdl = new ServerDataLoader();
+        ServerDataLoader sdl = new ServerDataLoader();
 //
-//        StellarMapModel model = new StellarMapModel();
-//        model.addRegions(sdl.downloadRegionsAll());
-//        model.addConstellations(sdl.downloadConstellationsAll());
-//        model.addStarSystems(sdl.downloadStarSystemsAll());
-//        model.addStargates(sdl.downloadStargatesAll());
+        StellarMapCache model = new StellarMapCache();
+        model.addRegions(sdl.loadRegionsAll());
+        model.addConstellations(sdl.loadConstellationsAll());
+        model.addStarSystems(sdl.loadStarSystemsAll());
+        model.addStargates(sdl.loadStargatesAll());
 //
 //        Graph<Integer, Integer> g = null;
 
 
 //        StellarMap map = new StellarMap(sdl);
 //
-//        Region r = sdl.downloadRegion(10000002);
-//        Constellation c = sdl.downloadConstellation(20000001);
+//        Region r = sdl.loadRegion(10000002);
+//        Constellation c = sdl.loadConstellation(20000001);
 //        StarSystem s = sdl.downloadSolarSystem(30000001);
-//        Stargate sg = sdl.downloadStargate(50000001);
+//        Stargate sg = sdl.loadStargate(50000001);
 
       //  WormholeMap wormholeMap = new WormholeMap();
       //  add(wormholeMap);
 
 
-        GraphDrawer gd = new GraphDrawer();
-        add(gd);
-
-
-        Label label = new Label("Hello");
-     //   add(label);
+//        GraphDrawer gd = new GraphDrawer();
+//        add(gd);
+//
+//
+//        Label label = new Label("Hello");
+//     //   add(label);
 
 
        // label.set

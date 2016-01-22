@@ -1,7 +1,7 @@
 package com.sifno.whmapper.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.sifno.oldmap.DataLoader;
+import com.sifno.whmapper.server.DataLoader;
 import com.sifno.stellarmap.dataobject.Constellation;
 import com.sifno.stellarmap.dataobject.Region;
 import com.sifno.stellarmap.dataobject.StarSystem;
@@ -18,17 +18,17 @@ public class ClientDataLoader implements DataLoader{
 
 
     @Override
-    public Region downloadRegion(int regionID) {
+    public Region loadRegion(int regionID) {
         return null;
     }
 
     @Override
-    public Constellation downloadConstellation(int constellationID) {
+    public Constellation loadConstellation(int constellationID) {
         return null;
     }
 
     @Override
-    public StarSystem downloadStarSystem(int solarSystemID) {
+    public StarSystem loadStarSystem(int solarSystemID) {
 
         List<StarSystem> data = new ArrayList<>();
 
@@ -55,32 +55,32 @@ public class ClientDataLoader implements DataLoader{
 
 
     @Override
-    public Collection<Stargate> downloadStargates(Collection<Integer> stargatesID) {
+    public Collection<Stargate> loadStargates(Collection<Integer> stargatesID) {
         return null;
     }
 
     @Override
-    public Stargate downloadStargate(int stargateID) {
+    public Stargate loadStargate(int stargateID) {
         return null;
     }
 
     @Override
-    public Collection<Region> downloadRegionsAll() {
+    public Collection<Region> loadRegionsAll() {
         return null;
     }
 
     @Override
-    public Collection<Constellation> downloadConstellationsAll() {
+    public Collection<Constellation> loadConstellationsAll() {
         return null;
     }
 
     @Override
-    public Collection<StarSystem> downloadStarSystemsAll() {
+    public Collection<StarSystem> loadStarSystemsAll() {
         return null;
     }
 
     @Override
-    public Collection<Stargate> downloadStargatesAll() {
+    public Collection<Stargate> loadStargatesAll() {
         return null;
     }
 }

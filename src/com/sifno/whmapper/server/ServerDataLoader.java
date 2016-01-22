@@ -1,6 +1,5 @@
 package com.sifno.whmapper.server;
 
-import com.sifno.oldmap.*;
 import com.sifno.stellarmap.dataobject.Constellation;
 import com.sifno.stellarmap.dataobject.Region;
 import com.sifno.stellarmap.dataobject.StarSystem;
@@ -54,7 +53,7 @@ public class ServerDataLoader implements DataLoader {
 
 
     @Override
-    public Region downloadRegion(int regionID) {
+    public Region loadRegion(int regionID) {
 
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
@@ -77,7 +76,7 @@ public class ServerDataLoader implements DataLoader {
     }
 
     @Override
-    public Constellation downloadConstellation(int constellationID) {
+    public Constellation loadConstellation(int constellationID) {
 
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
@@ -100,7 +99,7 @@ public class ServerDataLoader implements DataLoader {
     }
 
     @Override
-    public StarSystem downloadStarSystem(int starSystemID) {
+    public StarSystem loadStarSystem(int starSystemID) {
 
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
@@ -127,7 +126,7 @@ public class ServerDataLoader implements DataLoader {
     }
 
     @Override
-    public Stargate downloadStargate(int stargateID) {
+    public Stargate loadStargate(int stargateID) {
 
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
@@ -153,13 +152,13 @@ public class ServerDataLoader implements DataLoader {
 
     //TODO Получить множество врат из базы
     @Override
-    public Collection<Stargate> downloadStargates(Collection<Integer> stargatesID) {
+    public Collection<Stargate> loadStargates(Collection<Integer> stargatesID) {
         return null;
     }
 
 
     @Override
-    public Collection<Region> downloadRegionsAll() {
+    public Collection<Region> loadRegionsAll() {
 
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
@@ -190,7 +189,7 @@ public class ServerDataLoader implements DataLoader {
     }
 
     @Override
-    public Collection<Constellation> downloadConstellationsAll() {
+    public Collection<Constellation> loadConstellationsAll() {
 
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
@@ -220,7 +219,7 @@ public class ServerDataLoader implements DataLoader {
     }
 
     @Override
-    public Collection<StarSystem> downloadStarSystemsAll() {
+    public Collection<StarSystem> loadStarSystemsAll() {
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
 
@@ -254,7 +253,7 @@ public class ServerDataLoader implements DataLoader {
     }
 
     @Override
-    public Collection<Stargate> downloadStargatesAll() {
+    public Collection<Stargate> loadStargatesAll() {
         SQLiteJDBC database = new SQLiteJDBC(new File(SQLiteJDBC.path));
         Connection connection = database.getConnection();
 
