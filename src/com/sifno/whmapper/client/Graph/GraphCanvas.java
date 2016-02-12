@@ -9,9 +9,6 @@ import com.sifno.whmapper.client.WHMapper;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
-/**
- * Created by Алёна on 07.08.2015.
- */
 public class GraphCanvas extends GraphComposite {
 
     private final Canvas canvas;

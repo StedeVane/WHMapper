@@ -164,13 +164,13 @@ public class DBParse {
 
 
 
-// fields
-//        Set<String> fields = new HashSet<>();
+// fieldsMap
+//        Set<String> fieldsMap = new HashSet<>();
 //        for (Map m :map.values()) {
-//            fields.addAll(m.keySet());
+//            fieldsMap.addAll(m.keySet());
 //        }
 //
-//        System.out.println(fields);
+//        System.out.println(fieldsMap);
 
 
 

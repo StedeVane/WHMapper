@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by Алёна on 28.10.2015.
- */
 public class ClientDataLoader implements DataLoader{
 
 

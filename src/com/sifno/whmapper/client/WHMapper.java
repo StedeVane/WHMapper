@@ -8,17 +8,11 @@ import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 
-import com.sifno.stellarmap.dataobject.StarSystem;
-import com.sifno.stellarmap.graphdrawing.Graph;
+import com.sifno.stellarmap.graphdrawing.PlanarGraph;
 import com.sifno.stellarmap.graphdrawing.UndirectedSpareGraph;
-import com.sifno.stellarmap.graphdrawing.layout.ForceDirectedAlgorithm;
-import com.sifno.stellarmap.graphdrawing.layout.ForceDirectedLayout;
-import com.sifno.stellarmap.graphdrawing.layout.Layout;
-import com.sifno.stellarmap.graphdrawing.layout.TransferableLayout;
+import com.sifno.whmapper.client.Graph.GraphViewer;
 import com.sifno.whmapper.client.Graph.StarSystemWidget;
-import com.sifno.whmapper.client.Graph.VisualizationViewer;
 
-import java.awt.*;
 import java.awt.geom.Point2D;
 
 
@@ -42,13 +36,13 @@ public class WHMapper implements EntryPoint {
 
         button = new Button("Button");
 
-        VisualizationViewer vv = new VisualizationViewer();
-        vv.addStyleName("gwt-GraphPanel");
+        GraphViewer gv = new GraphViewer();
+        gv.addStyleName("gwt-GraphPanel");
 
         RootPanel.get().add(button);
-        RootPanel.get().add(vv);
+        RootPanel.get().add(gv);
 
-        dragController = new PickupDragController(vv,true);
+        dragController = new PickupDragController(gv,true);
         dragController.addDragHandler(new DragHandlerAdapter() {
             @Override
             public void onDragEnd(DragEndEvent event) {
@@ -60,7 +54,7 @@ public class WHMapper implements EntryPoint {
                 ssw.firePositionChange();
             }
         });
-        dragController.registerDropController(vv.getDropController());
+        dragController.registerDropController(gv.getDropController());
 
 //        vv.add(debug2, 50, 50);
 //        dragController.makeDraggable(debug2);
@@ -81,8 +75,9 @@ public class WHMapper implements EntryPoint {
 //        vv.addConnection(2,ssw3, ssw2);
 
 
-        Layout<Integer,Integer> layout = new TransferableLayout<>(new Dimension(1000,600));
-        Graph<Integer,Integer> graph = new UndirectedSpareGraph<>();
+//        Layout<Integer,Integer> layout = new TransferableLayout<>(new Dimension(1000,600));
+        PlanarGraph<Integer,Integer> graph = new PlanarGraph<>(new UndirectedSpareGraph<Integer,Integer>());
+
 
         graph.addVertex(1);
         graph.addVertex(2);
@@ -90,12 +85,11 @@ public class WHMapper implements EntryPoint {
         graph.addEdge(1, 1, 2);
         graph.addEdge(2, 2, 3);
 
-        layout.setGraph(graph);
-        layout.setLocation(1, new Point2D.Double(50, 200));
-        layout.setLocation(2,new Point2D.Double(150,200));
-        layout.setLocation(3,new Point2D.Double(50,400));
+        graph.setLocation(1, new Point2D.Double(50, 200));
+        graph.setLocation(2, new Point2D.Double(150, 200));
+        graph.setLocation(3, new Point2D.Double(50, 400));
 
-        vv.setLayout(layout);
+        gv.setGraph(graph);
 
     }
 }
@@ -104,7 +98,7 @@ public class WHMapper implements EntryPoint {
 //    private Button button, drawConnection;
 //
 //    public static PickupDragController dragController;
-//    private VisualizationViewer vv;
+//    private GraphViewer vv;
 //
 //    public static Label x,y;
 //
@@ -129,7 +123,7 @@ public class WHMapper implements EntryPoint {
 //        y = new Label("y:");
 //        RootPanel.get().add(y);
 //
-//        vv = new VisualizationViewer();
+//        vv = new GraphViewer();
 //        vv.addStyleName("gwt-GraphPanel");
 //        RootPanel.get().add(vv);
 //

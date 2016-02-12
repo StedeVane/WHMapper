@@ -3,36 +3,30 @@ package com.sifno.whmapper.client.Graph;
 import com.allen_sauer.gwt.dnd.client.drop.DropController;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.sifno.stellarmap.dataobject.StarSystem;
-import com.sifno.stellarmap.graphdrawing.*;
-import com.google.gwt.user.client.Timer;
-import com.sifno.stellarmap.graphdrawing.layout.ForceDirectedAlgorithm;
-import com.sifno.stellarmap.graphdrawing.layout.ForceDirectedLayout;
-import com.sifno.stellarmap.graphdrawing.layout.Layout;
-import com.sifno.stellarmap.graphdrawing.layout.TransferableLayout;
+import com.sifno.stellarmap.graphdrawing.PlanarGraph;
+import com.sifno.stellarmap.graphdrawing.Layout;
 import com.sifno.whmapper.client.WHMapper;
 
 
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Pavel on 05.08.2015.
  */
-public class VisualizationViewer extends AbsolutePanel {
+public class GraphViewer extends AbsolutePanel {
 
     DropController dropController;
     GraphCanvas graphCanvas;
 
-    Layout<Integer,Integer> layout;
+    PlanarGraph<Integer,Integer> graph;
     Map<Integer,StarSystemWidget> widgetMap = new HashMap<>();
 
 
 
-    public VisualizationViewer() {
+    public GraphViewer() {
 
-  //      setPixelSize(800,500);
         setPixelSize(800, 500);
         graphCanvas = new GraphCanvas(null);
 
@@ -43,19 +37,19 @@ public class VisualizationViewer extends AbsolutePanel {
         dropController = new GraphDropController(this);
     }
 
-    public Layout<Integer, Integer> getLayout() {
-        return layout;
+    public Layout<Integer, Integer> getGraph() {
+        return graph;
     }
 
 
 
 //  public void setSize()
 
-    public void setLayout(Layout<Integer, Integer> layout) {
-        this.layout = layout;
+    public void setGraph(PlanarGraph<Integer, Integer> graph) {
+        this.graph = graph;
 
-        int w = layout.getSize().width;
-        int h = layout.getSize().height;
+        int w = graph.getSize().width;
+        int h = graph.getSize().height;
 
         super.setPixelSize(w, h);
         graphCanvas.getCanvas().setCoordinateSpaceWidth(w);
@@ -65,16 +59,16 @@ public class VisualizationViewer extends AbsolutePanel {
         clear();
         add(graphCanvas.getCanvas());
 
-        for (Integer v: layout.getGraph().getVertices()) {
+        for (Integer v: graph.getVertices()) {
             StarSystemWidget ssw = new StarSystemWidget(new StarSystem(v),this);
             widgetMap.put(v,ssw);
-            add(ssw, (int) layout.getLocation(v).getX(), (int) layout.getLocation(v).getY());
+            add(ssw, (int) graph.getLocation(v).getX(), (int) graph.getLocation(v).getY());
         }
 
-        WHMapper.label.setText("1");
-        for (Integer e: layout.getGraph().getEdges()) {
-            StarSystemWidget ssw1 = widgetMap.get(layout.getGraph().getEdge(e).getFirst());
-            StarSystemWidget ssw2 = widgetMap.get(layout.getGraph().getEdge(e).getSecond());
+//        WHMapper.label.setText("1");
+        for (Integer e: graph.getEdges()) {
+            StarSystemWidget ssw1 = widgetMap.get(graph.getEdge(e).getFirst());
+            StarSystemWidget ssw2 = widgetMap.get(graph.getEdge(e).getSecond());
             addConnection(e,ssw1,ssw2);
         }
 

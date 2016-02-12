@@ -2,9 +2,6 @@ package com.sifno.whmapper.client;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-/**
- * Created by Pavel on 01.08.2015.
- */
 public class MyClass implements IsSerializable {
 
     private String name = "default";

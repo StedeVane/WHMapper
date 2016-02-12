@@ -4,14 +4,11 @@ import com.allen_sauer.gwt.dnd.client.DragContext;
 import com.allen_sauer.gwt.dnd.client.drop.AbsolutePositionDropController;
 
 
-/**
- * Created by Pavel on 08.08.2015.
- */
 public class GraphDropController extends AbsolutePositionDropController {
 
-    VisualizationViewer vv;
+    GraphViewer vv;
 
-    public GraphDropController(VisualizationViewer dropTarget) {
+    public GraphDropController(GraphViewer dropTarget) {
         super(dropTarget);
         this.vv = dropTarget;
     }

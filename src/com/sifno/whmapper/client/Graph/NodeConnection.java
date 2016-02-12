@@ -7,9 +7,6 @@ import com.sifno.whmapper.client.WHMapper;
 import java.awt.*;
 import java.awt.geom.Line2D;
 
-/**
- * Created by Алёна on 07.08.2015.
- */
 public class NodeConnection extends GraphComponent {
 
 

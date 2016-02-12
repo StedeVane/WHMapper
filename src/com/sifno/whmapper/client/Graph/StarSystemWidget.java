@@ -9,9 +9,6 @@ import com.sifno.stellarmap.dataobject.StarSystem;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Pavel on 02.08.2015.
- */
 public class StarSystemWidget extends FocusPanel {
 
     List<PositionListener> positionListenerList;

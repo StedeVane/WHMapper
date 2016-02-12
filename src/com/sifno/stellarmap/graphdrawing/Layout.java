@@ -1,4 +1,4 @@
-package com.sifno.stellarmap.graphdrawing.layout;
+package com.sifno.stellarmap.graphdrawing;
 
 import com.sifno.stellarmap.graphdrawing.Graph;
 
@@ -10,9 +10,6 @@ import java.util.Map;
  * Created by Алёна on 24.11.2015.
  */
 public interface Layout<V,E> {
-
-    public Graph<V, E> getGraph();
-    public void setGraph(Graph<V, E> graph);
 
     public Dimension getSize();
     public void setSize(Dimension size);

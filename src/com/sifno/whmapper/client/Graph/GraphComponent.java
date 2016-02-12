@@ -8,9 +8,6 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-/**
- * Created by Алёна on 07.08.2015.
- */
 public abstract class GraphComponent {
 
     List<MouseClickListener> mouseClickListenerList;

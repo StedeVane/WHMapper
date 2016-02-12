@@ -3,9 +3,6 @@ package com.sifno.stellarmap.graphdrawing;
 
 import java.util.*;
 
-/**
- * Created by Алёна on 20.11.2015.
- */
 public class UndirectedSpareGraph<V,E> implements Graph<V,E> {
 
     private Set<V> vertices = new HashSet<>();

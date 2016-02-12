@@ -6,20 +6,17 @@ import com.sifno.stellarmap.dataobject.Region;
 import com.sifno.stellarmap.dataobject.StarSystem;
 import com.sifno.stellarmap.dataobject.Stargate;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-/**
- * Created by Алёна on 10.11.2015.
- */
-public class StellarMapCache {
+
+public class StellarMapInfoCache {
 
     private Map<Integer, Region> regionMap = new HashMap<>();
     private Map<Integer, Constellation> constellationMap = new HashMap<>();
     private Map<Integer, StarSystem> starSystemMap = new HashMap<>();
     private Map<Integer, Stargate> stargateMap = new HashMap<>();
 
+    private Map<Integer, List<Stargate>> stargateJumpMap = new HashMap<>();
 
 
 
@@ -28,10 +25,14 @@ public class StellarMapCache {
         Region region = regionMap.get(regionID);
         return region;
     }
+    public Collection<Region> getRegions() {
+        return regionMap.values();
+    }
 
     public void addRegion(Region region) {
         regionMap.put(region.getID(), region);
     }
+
     public void addRegions(Collection<Region> regions) {
         for (Region region: regions) {
             regionMap.put(region.getID(), region);
@@ -42,6 +43,10 @@ public class StellarMapCache {
     public Constellation getConstellation(int constellationID) {
         Constellation constellation = constellationMap.get(constellationID);
         return constellation;
+    }
+
+    public Collection<Constellation> getConstellations() {
+        return constellationMap.values();
     }
 
     public void addConstellation(Constellation constellation) {
@@ -59,6 +64,11 @@ public class StellarMapCache {
         return starSystem;
     }
 
+    public Collection<StarSystem> getStarSystems() {
+        return starSystemMap.values();
+    }
+
+
     public void addStarSystem(StarSystem starSystem) {
         starSystemMap.put(starSystem.getID(),starSystem);
     }
@@ -73,13 +83,32 @@ public class StellarMapCache {
         return stargate;
     }
 
+    public Collection<Stargate> getStargates() {
+        return stargateMap.values();
+    }
+
     public void addStargate(Stargate stargate) {
-        stargateMap.put(stargate.getID(),stargate);
+        stargateMap.put(stargate.getID(), stargate);
+        addStargateJump(stargate.getJumpID(), stargate);
     }
     public void addStargates(Collection<Stargate> stargates) {
         for (Stargate stargate: stargates) {
             stargateMap.put(stargate.getID(),stargate);
+            addStargateJump(stargate.getJumpID(), stargate);
         }
+    }
+
+    public Collection<Stargate> getStargateJump(Integer jumpID) {
+        return stargateJumpMap.get(jumpID);
+    }
+
+    private void addStargateJump(Integer jumpID, Stargate stargate) {
+        List<Stargate> jump = stargateJumpMap.get(jumpID);
+        if (jump == null) {
+            jump = new LinkedList<>();
+            stargateJumpMap.put(jumpID,jump);
+        }
+        jump.add(stargate);
     }
 
 }

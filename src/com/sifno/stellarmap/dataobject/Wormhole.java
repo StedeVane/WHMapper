@@ -1,8 +1,6 @@
 package com.sifno.stellarmap.dataobject;
 
-/**
- * Created by Алёна on 22.01.2016.
- */
+
 public class Wormhole extends Signature {
 
     private int destinationWormholeID;
@@ -18,5 +16,11 @@ public class Wormhole extends Signature {
         setType("Wormhole");
     }
 
+    public Wormhole(Signature signature) {
+        super(signature);
+        setScanGroup(ScanGroup.Signature);
+        setGroup(Group.Wormhole);
+        setType("Wormhole");
+    }
 
 }

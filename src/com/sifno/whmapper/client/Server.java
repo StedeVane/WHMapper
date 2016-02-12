@@ -5,10 +5,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.google.gwt.core.client.GWT;
 import com.sifno.stellarmap.dataobject.StarSystem;
 
-
-/**
- * Created by Pavel on 01.08.2015.
- */
 @RemoteServiceRelativePath("LayoutMap")
 public interface Server extends RemoteService {
     /**

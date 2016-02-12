@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by Алёна on 07.08.2015.
- */
 public class GraphComposite extends GraphComponent {
 
     List<GraphComponent> children;
