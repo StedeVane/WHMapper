@@ -1,6 +1,7 @@
 package com.sifno.stellarmap.graphdrawing;
 
 
+import java.io.Serializable;
 import java.util.*;
 
 public class UndirectedSpareGraph<V,E> implements Graph<V,E> {

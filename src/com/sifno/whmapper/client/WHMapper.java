@@ -4,6 +4,9 @@ import com.allen_sauer.gwt.dnd.client.DragEndEvent;
 import com.allen_sauer.gwt.dnd.client.DragHandlerAdapter;
 import com.allen_sauer.gwt.dnd.client.PickupDragController;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
@@ -13,6 +16,7 @@ import com.sifno.stellarmap.graphdrawing.UndirectedSpareGraph;
 import com.sifno.whmapper.client.Graph.GraphViewer;
 import com.sifno.whmapper.client.Graph.StarSystemWidget;
 
+import java.awt.*;
 import java.awt.geom.Point2D;
 
 
@@ -24,6 +28,7 @@ public class WHMapper implements EntryPoint {
     private Button button;
     public static Label label;
 
+    private GraphViewer gv;
 
 
     public static PickupDragController dragController;
@@ -36,7 +41,7 @@ public class WHMapper implements EntryPoint {
 
         button = new Button("Button");
 
-        GraphViewer gv = new GraphViewer();
+        gv = new GraphViewer();
         gv.addStyleName("gwt-GraphPanel");
 
         RootPanel.get().add(button);
@@ -85,13 +90,38 @@ public class WHMapper implements EntryPoint {
         graph.addEdge(1, 1, 2);
         graph.addEdge(2, 2, 3);
 
-        graph.setLocation(1, new Point2D.Double(50, 200));
-        graph.setLocation(2, new Point2D.Double(150, 200));
-        graph.setLocation(3, new Point2D.Double(50, 400));
+        graph.setLocation(1, new Point.Double(50, 200));
+        graph.setLocation(2, new Point.Double(150, 200));
+        graph.setLocation(3, new Point.Double(50, 400));
 
         gv.setGraph(graph);
 
+        button.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+
+                AsyncCallback<PlanarGraph<Integer,Integer>> callback = new AsyncCallback<PlanarGraph<Integer,Integer>>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        label.setText(caught.getMessage());
+
+                        System.out.println(caught.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(PlanarGraph<Integer,Integer> result) {
+                        gv.setGraph(result);
+                        label.setText(result.toString());
+                    }
+                };
+
+                Server.App.getInstance().updateRequest(callback);
+
+            }
+        });
+
     }
+
+
 }
 
 //    private Label label;

@@ -6,7 +6,7 @@ body {
     margin: 8px;
 }
 
-.gwt-GraphPanel {border: 10px dotted red}
+.gwt-GraphPanel {border: 10px dotted green}
 
 .gwt-SolarSystemWidget {
     border: 1px solid black;

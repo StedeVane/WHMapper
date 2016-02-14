@@ -3,20 +3,27 @@ package com.sifno.stellarmap.graphdrawing;
 import com.google.gwt.user.client.Random;
 
 import java.awt.*;
+import java.awt.Point;
 import java.awt.geom.Point2D;
+
 import java.util.*;
 
 public class PlanarGraph<V,E> implements Layout<V,E>, Graph<V,E> {
 
     Graph<V,E> delegate;
 
+
+
     private Dimension size = new Dimension(800,500);
-    private Map<V, Point2D> locations = new HashMap<>();
+    private Map<V, Point.Double> locations = new HashMap<>();
     private Set<V> locked = new HashSet<>();
 
 
     public PlanarGraph(Graph<V,E> graph) {
         this.delegate = graph;
+    }
+
+    public PlanarGraph() {
     }
 
     @Override
@@ -33,7 +40,7 @@ public class PlanarGraph<V,E> implements Layout<V,E>, Graph<V,E> {
 
         this.size = size;
 
-        for (Point2D point: getLocations().values()) {
+        for (Point.Double point: getLocations().values()) {
             point.setLocation(point.getX()*widthRatio, point.getY()*heightRatio);
         }
     }
@@ -50,30 +57,32 @@ public class PlanarGraph<V,E> implements Layout<V,E>, Graph<V,E> {
     }
 
     @Override
-    public Point2D getLocation(V vertex) {
+    public Point.Double getLocation(V vertex) {
         return locations.get(vertex);
     }
 
     @Override
-    public void setLocation(V vertex, Point2D point) {
+    public void setLocation(V vertex, Point.Double point) {
         locations.put(vertex,point);
     }
 
     @Override
-    public Map<V, Point2D> getLocations() {
+    public Map<V, Point2D.Double> getLocations() {
         return locations;
     }
 
     //TODO возможно от этого метода нужно избавится когда-нибудь
     @Override
-    public void setLocations(Map<V, Point2D> locations) {
+    public void setLocations(Map<V, Point.Double> locations) {
         this.locations = locations;
     }
 
     @Override
     public void addVertex(V vertex) {
         delegate.addVertex(vertex);
-        locations.put(vertex, new Point2D.Double(Random.nextDouble() * getSize().getWidth(), Random.nextDouble() * getSize().getHeight()));
+        java.util.Random random = new java.util.Random();
+        locations.put(vertex, new Point.Double(random.nextDouble() * getSize().getWidth(), random.nextDouble() * getSize().getHeight()));
+
     }
 
     @Override

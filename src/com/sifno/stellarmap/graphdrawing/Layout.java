@@ -17,10 +17,10 @@ public interface Layout<V,E> {
     public void lock(V vertex, boolean b);
     public boolean isLocked(V vertex);
 
-    public Point2D getLocation(V vertex);
-    public void setLocation(V vertex, Point2D point);
+    public Point.Double getLocation(V vertex);
+    public void setLocation(V vertex, Point.Double point);
 
-    public Map<V, Point2D> getLocations();
-    public void setLocations(Map<V, Point2D> locations);
+    public Map<V, Point.Double> getLocations();
+    public void setLocations(Map<V, Point.Double> locations);
 
 }

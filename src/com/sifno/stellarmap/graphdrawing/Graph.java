@@ -1,8 +1,9 @@
 package com.sifno.stellarmap.graphdrawing;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public interface Graph<V,E> {
+public interface Graph<V,E> extends Serializable {
     public void addVertex(V vertex);
     public void addEdge(E e, V v1, V v2);
 
