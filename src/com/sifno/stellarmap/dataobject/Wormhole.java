@@ -9,18 +9,24 @@ public class Wormhole extends Signature {
     private int wormholeIndex;
     private int wormholeClass;
 
-    public Wormhole() {
-        super();
+    private void init() {
         setScanGroup(ScanGroup.Signature);
         setGroup(Group.Wormhole);
         setType("Wormhole");
     }
 
+    public Wormhole() {
+        init();
+    }
+
+    public Wormhole(Integer starSystemID) {
+        super(starSystemID);
+        init();
+    }
+
     public Wormhole(Signature signature) {
         super(signature);
-        setScanGroup(ScanGroup.Signature);
-        setGroup(Group.Wormhole);
-        setType("Wormhole");
+        init();
     }
 
 }

@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class Signature {
 
-    private static int freeID = 0;
+  //  private static int freeID = 0;
 
     private int id;
 
@@ -23,7 +23,11 @@ public class Signature {
     private double signal;
 
     public Signature() {
-        this(freeID++); //TODO скорее всего проблемы с многопточностью
+     //   this(freeID++); //TODO скорее всего проблемы с многопточностью
+    }
+
+    public Signature(Integer starSystemID) {
+        this.starSystemID = starSystemID;
     }
 
     protected Signature(Signature signature) {

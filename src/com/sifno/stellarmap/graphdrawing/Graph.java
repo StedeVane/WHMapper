@@ -11,6 +11,7 @@ public interface Graph<V,E> extends Serializable {
     public void removeEdge(E edge);
 
     public Pair<V> getEdge(E e);
+    public E getEdge(V v1, V v2);
 
     public Collection<V> getVertices();
     public Collection<E> getEdges();

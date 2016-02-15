@@ -10,6 +10,30 @@ public class UndirectedSpareGraph<V,E> implements Graph<V,E> {
     private Map<E, Pair<V>> edges = new HashMap<>();
     private Map<V,Map<E,V>> neighbors = new HashMap<>();
 
+    public UndirectedSpareGraph() {
+        vertices = new HashSet<>();
+        edges = new HashMap<>();
+        neighbors = new HashMap<>();
+    }
+
+    public UndirectedSpareGraph(Graph<V,E> graph) {
+        vertices = new HashSet<>(graph.getVertices());
+
+        edges = new HashMap<>();
+        for (E edge: graph.getEdges()) {
+            edges.put(edge,graph.getEdge(edge));
+        }
+
+        neighbors = new HashMap<>();
+        for (V vertix: vertices) {
+            Map<E,V> neighorEdges = new HashMap<>();
+            for (V neighor: graph.getNeighbors(vertix)) {
+                neighorEdges.put(graph.getEdge(vertix,neighor),neighor);
+            }
+            neighbors.put(vertix, neighorEdges);
+        }
+    }
+
 
     @Override
     public void addVertex(V vertex) {
@@ -49,6 +73,17 @@ public class UndirectedSpareGraph<V,E> implements Graph<V,E> {
     public Pair<V> getEdge(E e) {
         if (e == null) throw  new IllegalArgumentException("parameter must not be null");
         return edges.get(e);
+    }
+
+    @Override
+    public E getEdge(V v1, V v2) {
+        Map<E,V> neighorEdges = neighbors.get(v1);
+        if (neighorEdges==null) return null;
+
+        for (E edge: neighorEdges.keySet()) {
+            if (v1.equals(neighorEdges.get(edge))) return edge;
+        }
+        return null;
     }
 
     @Override

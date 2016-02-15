@@ -12,8 +12,6 @@ public class PlanarGraph<V,E> implements Layout<V,E>, Graph<V,E> {
 
     Graph<V,E> delegate;
 
-
-
     private Dimension size = new Dimension(800,500);
     private Map<V, Point.Double> locations = new HashMap<>();
     private Set<V> locked = new HashSet<>();
@@ -105,6 +103,11 @@ public class PlanarGraph<V,E> implements Layout<V,E>, Graph<V,E> {
     @Override
     public Pair<V> getEdge(E e) {
         return delegate.getEdge(e);
+    }
+
+    @Override
+    public E getEdge(V v1, V v2) {
+        return delegate.getEdge(v1,v2);
     }
 
     @Override

@@ -10,21 +10,22 @@ import com.sifno.stellarmap.graphdrawing.UndirectedSpareGraph;
 
 import java.util.Collection;
 
-public class StellarMap implements Graph<Integer,Integer>{
+public class Kspace implements Graph<Integer,Integer>{
+    //TODO не добавлять wspace;
 
     private Graph<Integer,Integer> graph = new UndirectedSpareGraph<>();
     private StellarMapInfoCache info;
 
-    private static StellarMap instance;
-    public static StellarMap getInstance() {
+    private static Kspace instance;
+    public static Kspace getInstance() {
         if (instance == null) {
-            instance = new StellarMap();
+            instance = new Kspace();
         }
         return instance;
     }
 
 
-    private StellarMap() {
+    private Kspace() {
         ServerDataLoader sdl = new ServerDataLoader();
         info = new StellarMapInfoCache();
 
@@ -76,6 +77,11 @@ public class StellarMap implements Graph<Integer,Integer>{
     @Override
     public Pair<Integer> getEdge(Integer edge) {
         return graph.getEdge(edge);
+    }
+
+    @Override
+    public Integer getEdge(Integer v1, Integer v2) {
+        return graph.getEdge(v1,v2);
     }
 
     @Override
