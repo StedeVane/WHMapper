@@ -72,4 +72,8 @@ public class StarSystem extends Location {
             stargates = new HashSet<>();
         return stargates.add(stargateID);
     }
+
+    public boolean isKSpace() {
+        return this.getID() < 31000000;
+    }
 }

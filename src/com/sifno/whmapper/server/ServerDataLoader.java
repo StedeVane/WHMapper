@@ -14,9 +14,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by Алёна on 19.08.2015.
- */
 public class ServerDataLoader implements DataLoader {
 
 

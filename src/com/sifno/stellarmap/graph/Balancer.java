@@ -1,6 +1,4 @@
-package com.sifno.stellarmap.graphdrawing;
-
-import com.sifno.stellarmap.graphdrawing.PlanarGraph;
+package com.sifno.stellarmap.graph;
 
 import java.awt.*;
 
@@ -9,14 +7,14 @@ import java.util.Map;
 
 
 public class Balancer<V,E> {
-    private PlanarGraph<V,E> graph;
+    private PlanarGraphImpl<V,E> graph;
 
-    private double resistanceStrength = 1.0;
+    private double resistanceStrength = 10.0;
     private double gravity = 1E4;
     private double tension = 5E-3;
     private double dt = 0.016666667;
 
-    public Balancer(PlanarGraph graph) {
+    public Balancer(PlanarGraphImpl graph) {
         this.graph = graph;
     }
 
@@ -77,7 +75,7 @@ public class Balancer<V,E> {
 
     private Point.Double getForce(V vertex) {
 
-        System.out.println(vertex + " "+ getCentralTension(vertex));
+//        System.out.println(vertex + " "+ getCentralTension(vertex));
 
         return resistance(
                 add(getCentralTension(vertex),
@@ -113,8 +111,8 @@ public class Balancer<V,E> {
 
     public void leadToEquilibrium() {
         // this.layout = layout;
-
-        while (!nextFrame()) { }
+        int count = 0;
+        while (!nextFrame()&&count++<100) { }
 
     }
 

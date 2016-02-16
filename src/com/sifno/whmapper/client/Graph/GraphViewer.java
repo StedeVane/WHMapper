@@ -3,8 +3,8 @@ package com.sifno.whmapper.client.Graph;
 import com.allen_sauer.gwt.dnd.client.drop.DropController;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.sifno.stellarmap.dataobject.StarSystem;
-import com.sifno.stellarmap.graphdrawing.PlanarGraph;
-import com.sifno.stellarmap.graphdrawing.Layout;
+import com.sifno.stellarmap.graph.PlanarGraphImpl;
+import com.sifno.stellarmap.graph.Layout;
 import com.sifno.whmapper.client.WHMapper;
 
 
@@ -20,7 +20,7 @@ public class GraphViewer extends AbsolutePanel {
     DropController dropController;
     GraphCanvas graphCanvas;
 
-    PlanarGraph<Integer,Integer> graph;
+    PlanarGraphImpl<Integer,Integer> graph;
     Map<Integer,StarSystemWidget> widgetMap = new HashMap<>();
 
 
@@ -45,7 +45,8 @@ public class GraphViewer extends AbsolutePanel {
 
 //  public void setSize()
 
-    public void setGraph(PlanarGraph<Integer, Integer> graph) {
+    public void setGraph(PlanarGraphImpl<Integer, Integer> graph) {
+
         this.graph = graph;
 
         int w = graph.getSize().width;
@@ -73,6 +74,15 @@ public class GraphViewer extends AbsolutePanel {
         }
 
         repaint();
+    }
+
+    @Override
+    public void clear() {
+        super.clear();
+        graphCanvas = new GraphCanvas(null);
+
+        graphCanvas.getCanvas().setCoordinateSpaceWidth(800);
+        graphCanvas.getCanvas().setCoordinateSpaceHeight(500);
     }
 
     public void add(StarSystemWidget w, int left, int top) {

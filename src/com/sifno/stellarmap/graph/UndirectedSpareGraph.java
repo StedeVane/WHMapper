@@ -1,10 +1,9 @@
-package com.sifno.stellarmap.graphdrawing;
+package com.sifno.stellarmap.graph;
 
 
-import java.io.Serializable;
 import java.util.*;
 
-public class UndirectedSpareGraph<V,E> implements Graph<V,E> {
+public class UndirectedSpareGraph<V,E> implements GraphModel<V,E> {
 
     private Set<V> vertices = new HashSet<>();
     private Map<E, Pair<V>> edges = new HashMap<>();
@@ -66,6 +65,11 @@ public class UndirectedSpareGraph<V,E> implements Graph<V,E> {
     @Override
     public void removeEdge(E edge) {
         edges.remove(edge);
+    }
+
+    @Override
+    public boolean containsVertex(V vertex) {
+        return vertices.contains(vertex);
     }
 
 

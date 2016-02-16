@@ -1,4 +1,4 @@
-package com.sifno.stellarmap.graphdrawing;
+package com.sifno.stellarmap.graph;
 /*
  * Created on Apr 2, 2006
  *
@@ -91,6 +91,9 @@ public final class Pair<T> implements Collection<T>, Serializable
         else
             throw new IllegalArgumentException("Pair may only be created from an " +
                     "array of 2 elements");
+    }
+
+    private Pair() {
     }
 
     /**

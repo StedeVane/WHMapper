@@ -4,28 +4,26 @@ package com.sifno.whmapper.server;
 import com.sifno.stellarmap.StellarMapInfoCache;
 import com.sifno.stellarmap.dataobject.StarSystem;
 import com.sifno.stellarmap.dataobject.Stargate;
-import com.sifno.stellarmap.graphdrawing.Graph;
-import com.sifno.stellarmap.graphdrawing.Pair;
-import com.sifno.stellarmap.graphdrawing.UndirectedSpareGraph;
+import com.sifno.stellarmap.graph.Graph;
+import com.sifno.stellarmap.graph.GraphAdapter;
+import com.sifno.stellarmap.graph.UndirectedSpareGraph;
 
-import java.util.Collection;
-
-public class Kspace implements Graph<Integer,Integer>{
-    //TODO не добавлять wspace;
+public class KSpace extends GraphAdapter<Integer,Integer> {
+    //TODO не добавлять wSpace;
 
     private Graph<Integer,Integer> graph = new UndirectedSpareGraph<>();
     private StellarMapInfoCache info;
 
-    private static Kspace instance;
-    public static Kspace getInstance() {
+    private static KSpace instance;
+    public static KSpace getInstance() {
         if (instance == null) {
-            instance = new Kspace();
+            instance = new KSpace();
         }
         return instance;
     }
 
 
-    private Kspace() {
+    private KSpace() {
         ServerDataLoader sdl = new ServerDataLoader();
         info = new StellarMapInfoCache();
 
@@ -37,7 +35,8 @@ public class Kspace implements Graph<Integer,Integer>{
 
 
         for (StarSystem starSystem: info.getStarSystems()) {
-            graph.addVertex(starSystem.getID());
+            if (starSystem.isKSpace())
+                graph.addVertex(starSystem.getID());
         }
 
         for (Stargate stargate: info.getStargates()) {
@@ -50,52 +49,5 @@ public class Kspace implements Graph<Integer,Integer>{
 
         }
 
-    }
-
-
-
-    @Override
-    public void addVertex(Integer vertex) {
-        graph.addVertex(vertex);
-    }
-
-    @Override
-    public void addEdge(Integer edge, Integer v1, Integer v2) {
-        graph.addEdge(edge,v1,v2);
-    }
-
-    @Override
-    public void removeVertex(Integer vertex) {
-        graph.removeVertex(vertex);
-    }
-
-    @Override
-    public void removeEdge(Integer edge) {
-        graph.removeEdge(edge);
-    }
-
-    @Override
-    public Pair<Integer> getEdge(Integer edge) {
-        return graph.getEdge(edge);
-    }
-
-    @Override
-    public Integer getEdge(Integer v1, Integer v2) {
-        return graph.getEdge(v1,v2);
-    }
-
-    @Override
-    public Collection<Integer> getVertices() {
-        return getVertices();
-    }
-
-    @Override
-    public Collection<Integer> getEdges() {
-        return getEdges();
-    }
-
-    @Override
-    public Collection<Integer> getNeighbors(Integer vertex) {
-        return getNeighbors(vertex);
     }
 }

@@ -3,10 +3,7 @@ package com.sifno.whmapper.server;
 import com.sifno.stellarmap.Pilot;
 import com.sifno.stellarmap.dataobject.Signature;
 import com.sifno.stellarmap.dataobject.Wormhole;
-import com.sifno.stellarmap.graphdrawing.Graph;
-import com.sifno.stellarmap.graphdrawing.Pair;
-import com.sifno.stellarmap.graphdrawing.PlanarGraph;
-import com.sifno.stellarmap.graphdrawing.UndirectedSpareGraph;
+import com.sifno.stellarmap.graph.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,29 +11,38 @@ import java.util.Set;
 
 public class Reality {
 
-//    Map<String,PlanarGraph<Integer,Integer>> graphs;
+//    Map<String,PlanarGraphImpl<Integer,Integer>> graphs;
+
+    public Integer p = null;
 
     Set<Pilot> pilots;
 
-    Kspace kspace;
-    Graph<Integer,Integer> wspace;
 
-    Map<PlanarGraph<Integer,Integer> planarGraph;
+    KSpace kSpace;
+    Graph<Integer,Integer> wSpace;
+
+    PlanarGraphImpl<Integer,Integer> planarGraphImpl;
 
     Map<Integer,Signature> signatureMap = new HashMap<>();
 
     private Map<Integer, Pair<Integer>> edges = new HashMap<>();
 
-    public Reality(Kspace kspace) {
-        this.kspace = kspace;
-        wspace = new UndirectedSpareGraph<>();
+    public Reality(KSpace kSpace) {
+        this.kSpace = kSpace;
+        wSpace = new UndirectedSpareGraph<>();
+        planarGraphImpl = new PlanarGraphImpl<>(wSpace);
     }
 
 
     public void jump(Integer ss1, Integer ss2) {
-        if (wspace.getEdge(ss1,ss2)== null || kspace.getEdge(ss1,ss2)==null) {
+        if (wSpace.getEdge(ss1,ss2)== null || kSpace.getEdge(ss1,ss2)==null) {
             connectSystems(ss1,ss2);
         }
+    }
+
+    public void location(Integer ss) {
+        if (!kSpace.containsVertex(ss))
+            planarGraphImpl.addVertex(ss);
     }
 
     private void connectSystems(Integer ss1, Integer ss2) {
@@ -51,22 +57,18 @@ public class Reality {
         signatureMap.put(w1.getId(),w1);
         signatureMap.put(w2.getId(),w2);
 
-        wspace.addVertex(w1.getStarSystemID());
-        wspace.addVertex(w2.getStarSystemID());
-        wspace.addEdge(wormholeJumpID,ss1,ss2);
-    }
-
-    private void addVertex(Integer vertex) {
-
-    }
-
-    private void addEdge(Integer edge, Integer v1, Integer v2) {
-
+        planarGraphImpl.addVertex(w1.getStarSystemID());
+        planarGraphImpl.addVertex(w2.getStarSystemID());
+        planarGraphImpl.addEdge(wormholeJumpID,ss1,ss2);
     }
 
 
-    public PlanarGraph<Integer,Integer> getPlanarGraph() {
-        return new PlanarGraph<>(wspace);
+
+
+    public PlanarGraphImpl<Integer,Integer> getPlanarGraphImpl() {
+        Balancer balancer = new Balancer(planarGraphImpl);
+        balancer.leadToEquilibrium();
+        return planarGraphImpl;
     }
 
 

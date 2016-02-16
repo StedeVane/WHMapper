@@ -4,10 +4,11 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.google.gwt.core.client.GWT;
 import com.sifno.stellarmap.dataobject.StarSystem;
-import com.sifno.stellarmap.graphdrawing.PlanarGraph;
+import com.sifno.stellarmap.graph.PlanarGraphImpl;
 
 @RemoteServiceRelativePath("LayoutMap")
 public interface Server extends RemoteService {
+
     /**
      * Utility/Convenience class.
      * Use Server.App.getInstance() to access static instance of LayoutMapAsync
@@ -20,6 +21,10 @@ public interface Server extends RemoteService {
         }
     }
 
-    public PlanarGraph<Integer,Integer> updateRequest();
+    public PlanarGraphImpl<Integer,Integer> updateRequest();
     public StarSystem getSolarSystem(int id);
+
+    public PlanarGraphImpl<Integer, Integer> testUpdate(String systemID);
+
+
 }

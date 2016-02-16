@@ -33,15 +33,15 @@ public class Main extends JFrame {
 //        Graph<Integer, Integer> g = null;
 
 
-//        Kspace map = new Kspace(sdl);
+//        kSpace map = new kSpace(sdl);
 //
 //        Region r = sdl.loadRegion(10000002);
 //        Constellation c = sdl.loadConstellation(20000001);
 //        StarSystem s = sdl.downloadSolarSystem(30000001);
 //        Stargate sg = sdl.loadStargate(50000001);
 
-      //  WormholeMap wspace = new WormholeMap();
-      //  add(wspace);
+      //  WormholeMap wSpace = new WormholeMap();
+      //  add(wSpace);
 
 
 //        GraphDrawer gd = new GraphDrawer();
@@ -79,7 +79,7 @@ public class Main extends JFrame {
                                 "RAB-085\tCosmic Signature\t\t\t0,00%\t2,50 AU"
                 );
 
-                Kspace.getInstance();
+                KSpace.getInstance();
 
                 return;
             }

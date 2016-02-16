@@ -11,13 +11,13 @@ import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 
-import com.sifno.stellarmap.graphdrawing.PlanarGraph;
-import com.sifno.stellarmap.graphdrawing.UndirectedSpareGraph;
+import com.google.gwt.user.client.ui.TextArea;
+import com.sifno.stellarmap.graph.PlanarGraphImpl;
+import com.sifno.stellarmap.graph.UndirectedSpareGraph;
 import com.sifno.whmapper.client.Graph.GraphViewer;
 import com.sifno.whmapper.client.Graph.StarSystemWidget;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
 
 
 /**
@@ -27,6 +27,7 @@ public class WHMapper implements EntryPoint {
 
     private Button button;
     public static Label label;
+    public static TextArea textArea;
 
     private GraphViewer gv;
 
@@ -38,6 +39,10 @@ public class WHMapper implements EntryPoint {
 
         label = new Label("Label");
         RootPanel.get().add(label);
+
+        textArea = new TextArea();
+        RootPanel.get().add(textArea);
+        textArea.setText("31000001");
 
         button = new Button("Button");
 
@@ -61,27 +66,7 @@ public class WHMapper implements EntryPoint {
         });
         dragController.registerDropController(gv.getDropController());
 
-//        vv.add(debug2, 50, 50);
-//        dragController.makeDraggable(debug2);
-
-//        StarSystemWidget ssw1 = new StarSystemWidget(new StarSystem(1), vv);
-//        StarSystemWidget ssw2 = new StarSystemWidget(new StarSystem(2), vv);
-//        StarSystemWidget ssw3 = new StarSystemWidget(new StarSystem(3), vv);
-//
-//        vv.add(ssw1, 51, 100);
-//        vv.add(ssw2, 49, 150);
-//        vv.add(ssw3, 50, 250);
-//
-//        dragController.makeDraggable(ssw1);
-//        dragController.makeDraggable(ssw2);
-//        dragController.makeDraggable(ssw3);
-//
-//        vv.addConnection(1,ssw1, ssw2);
-//        vv.addConnection(2,ssw3, ssw2);
-
-
-//        Layout<Integer,Integer> layout = new TransferableLayout<>(new Dimension(1000,600));
-        PlanarGraph<Integer,Integer> graph = new PlanarGraph<>(new UndirectedSpareGraph<Integer,Integer>());
+        PlanarGraphImpl<Integer,Integer> graph = new PlanarGraphImpl<>(new UndirectedSpareGraph<Integer,Integer>());
 
 
         graph.addVertex(1);
@@ -99,7 +84,7 @@ public class WHMapper implements EntryPoint {
         button.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
 
-                AsyncCallback<PlanarGraph<Integer,Integer>> callback = new AsyncCallback<PlanarGraph<Integer,Integer>>() {
+                AsyncCallback<PlanarGraphImpl<Integer,Integer>> callback = new AsyncCallback<PlanarGraphImpl<Integer,Integer>>() {
                     @Override
                     public void onFailure(Throwable caught) {
                         label.setText(caught.getMessage());
@@ -108,13 +93,14 @@ public class WHMapper implements EntryPoint {
                     }
 
                     @Override
-                    public void onSuccess(PlanarGraph<Integer,Integer> result) {
+                    public void onSuccess(PlanarGraphImpl<Integer,Integer> result) {
                         gv.setGraph(result);
                         label.setText(result.toString());
                     }
                 };
 
-                Server.App.getInstance().updateRequest(callback);
+                Server.App.getInstance().testUpdate(textArea.getText(),callback);
+//                Server.App.getInstance().updateRequest(callback);
 
             }
         });

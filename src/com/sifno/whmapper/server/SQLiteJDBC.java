@@ -3,8 +3,8 @@ import java.io.File;
 import java.sql.*;
 
 public class SQLiteJDBC {
-    //public final static String path = "D:\\GitHub\\WHMapper\\universeDataDx.db";
-    public final static String path = "F:\\GitHub\\WHMapper\\whmapperdb.db";
+   // public final static String path = "D:\\GitHub\\WHMapper\\universeDataDx.db";
+    public final static String path = "D:\\GitHub\\WHMapper\\whmapperdb.db";
 
     Connection connection = null;
 

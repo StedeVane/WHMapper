@@ -13,4 +13,9 @@ public class GodObject {
         return signatureCount++;
     }
 
+    private static Reality reality = new Reality(KSpace.getInstance());
+    public static Reality getReality() {
+        return reality;
+    }
+
 }

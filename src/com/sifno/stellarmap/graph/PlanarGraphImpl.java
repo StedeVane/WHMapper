@@ -1,6 +1,7 @@
-package com.sifno.stellarmap.graphdrawing;
+package com.sifno.stellarmap.graph;
 
-import com.google.gwt.user.client.Random;
+import com.sifno.stellarmap.graph.event.GraphLayoutListener;
+import com.sifno.stellarmap.graph.event.GraphListener;
 
 import java.awt.*;
 import java.awt.Point;
@@ -8,20 +9,19 @@ import java.awt.geom.Point2D;
 
 import java.util.*;
 
-public class PlanarGraph<V,E> implements Layout<V,E>, Graph<V,E> {
+public class PlanarGraphImpl<V,E> extends AbstractGraph<V,E> implements PlanarGraph<V,E> {
 
-    Graph<V,E> delegate;
 
     private Dimension size = new Dimension(800,500);
     private Map<V, Point.Double> locations = new HashMap<>();
     private Set<V> locked = new HashSet<>();
 
 
-    public PlanarGraph(Graph<V,E> graph) {
-        this.delegate = graph;
+    public PlanarGraphImpl(Graph<V, E> graph) {
+        super(graph);
     }
 
-    public PlanarGraph() {
+    protected PlanarGraphImpl() {
     }
 
     @Override
@@ -76,53 +76,37 @@ public class PlanarGraph<V,E> implements Layout<V,E>, Graph<V,E> {
     }
 
     @Override
+    public void addLayoutListener(GraphLayoutListener<V, E> layoutListener) {
+
+    }
+
+    @Override
+    public void removeLayoutListener(GraphLayoutListener<V, E> layoutListener) {
+
+    }
+
+    @Override
     public void addVertex(V vertex) {
-        delegate.addVertex(vertex);
+        super.addVertex(vertex);
         java.util.Random random = new java.util.Random();
         locations.put(vertex, new Point.Double(random.nextDouble() * getSize().getWidth(), random.nextDouble() * getSize().getHeight()));
 
     }
 
     @Override
-    public void addEdge(E e, V v1, V v2) {
-        delegate.addEdge(e,v1,v2);
-    }
-
-    @Override
     public void removeVertex(V vertex) {
-        delegate.removeVertex(vertex);
+        super.removeVertex(vertex);
         locations.remove(vertex);
         locked.remove(vertex);
     }
 
     @Override
-    public void removeEdge(E edge) {
-        delegate.removeEdge(edge);
+    public void addGraphListener(GraphListener<V, E> graphListener) {
+
     }
 
     @Override
-    public Pair<V> getEdge(E e) {
-        return delegate.getEdge(e);
-    }
+    public void removeGraphListener(GraphListener<V, E> graphListener) {
 
-    @Override
-    public E getEdge(V v1, V v2) {
-        return delegate.getEdge(v1,v2);
     }
-
-    @Override
-    public Collection<V> getVertices() {
-        return delegate.getVertices();
-    }
-
-    @Override
-    public Collection<E> getEdges() {
-        return delegate.getEdges();
-    }
-
-    @Override
-    public Collection<V> getNeighbors(V vertex) {
-        return delegate.getNeighbors(vertex);
-    }
-
 }
