@@ -29,4 +29,35 @@ public class Wormhole extends Signature {
         init();
     }
 
+    public int getDestinationWormholeID() {
+        return destinationWormholeID;
+    }
+
+    public void setDestinationWormholeID(int destinationWormholeID) {
+        this.destinationWormholeID = destinationWormholeID;
+    }
+
+    public int getJumpID() {
+        return jumpID;
+    }
+
+    public void setJumpID(int jumpID) {
+        this.jumpID = jumpID;
+    }
+
+    public int getWormholeIndex() {
+        return wormholeIndex;
+    }
+
+    public void setWormholeIndex(int wormholeIndex) {
+        this.wormholeIndex = wormholeIndex;
+    }
+
+    public int getWormholeClass() {
+        return wormholeClass;
+    }
+
+    public void setWormholeClass(int wormholeClass) {
+        this.wormholeClass = wormholeClass;
+    }
 }

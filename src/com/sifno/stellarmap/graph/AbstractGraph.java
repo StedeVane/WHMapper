@@ -1,64 +1,55 @@
 package com.sifno.stellarmap.graph;
 
-import java.util.Collection;
+import com.sifno.stellarmap.graph.event.GraphEvent;
+import com.sifno.stellarmap.graph.event.GraphListener;
 
-public abstract class AbstractGraph<V,E> implements Graph<V,E> {
-    GraphModel<V,E> model;
+import java.util.ArrayList;
+import java.util.List;
 
-    public AbstractGraph(GraphModel<V, E> model) {
-        this.model = model;
+public abstract class AbstractGraph<V,E> implements Graph<V,E>{
+    protected transient List<GraphListener<V,E>> graphListeners;
+
+    public void addGraphListener(GraphListener<V, E> graphListener) {
+        if (graphListeners==null)
+            graphListeners = new ArrayList<>();
+        graphListeners.add(graphListener);
     }
 
-    protected AbstractGraph() {}
 
-
-    @Override
-    public void addVertex(V vertex) {
-        model.addVertex(vertex);
+    public void removeGraphListener(GraphListener<V, E> graphListener) {
+        if (graphListeners!=null)
+            graphListeners.remove(graphListener);
     }
 
-    @Override
-    public void addEdge(E e, V v1, V v2) {
-        model.addEdge(e, v1, v2);
-    }
-
-    @Override
-    public void removeVertex(V vertex) {
-        model.removeVertex(vertex);
-    }
-
-    @Override
-    public void removeEdge(E edge) {
-        model.removeEdge(edge);
+    protected void fireGraphEvent(GraphEvent<V, E> event) {
+        if (graphListeners!=null) {
+            for (GraphListener<V,E> graphListener : graphListeners) {
+                graphListener.handleGraphEvent(event);
+            }
+        }
     }
 
     @Override
-    public boolean containsVertex(V vertex) {
-        return model.containsVertex(vertex);
+    public boolean addVertex(V vertex) {
+        fireGraphEvent(new GraphEvent.Vertex<>(this, GraphEvent.Type.VERTEX_ADDED, vertex));
+        return true;
     }
 
     @Override
-    public Pair<V> getEdge(E e) {
-        return model.getEdge(e);
+    public boolean addEdge(E e, V v1, V v2) {
+        fireGraphEvent(new GraphEvent.Edge<>(this, GraphEvent.Type.EDGE_ADDED,e));
+        return true;
     }
 
     @Override
-    public E getEdge(V v1, V v2) {
-        return model.getEdge(v1, v2);
+    public boolean removeVertex(V vertex) {
+        fireGraphEvent(new GraphEvent.Vertex<>(this, GraphEvent.Type.VERTEX_REMOVED,vertex));
+        return true;
     }
 
     @Override
-    public Collection<V> getVertices() {
-        return model.getVertices();
-    }
-
-    @Override
-    public Collection<E> getEdges() {
-        return model.getEdges();
-    }
-
-    @Override
-    public Collection<V> getNeighbors(V vertex) {
-        return model.getNeighbors(vertex);
+    public boolean removeEdge(E edge) {
+        fireGraphEvent(new GraphEvent.Edge<>(this, GraphEvent.Type.EDGE_REMOVED,edge));
+        return true;
     }
 }

@@ -7,14 +7,14 @@ import java.util.Map;
 
 
 public class Balancer<V,E> {
-    private PlanarGraphImpl<V,E> graph;
+    private PlanarGraph<V,E> graph;
 
-    private double resistanceStrength = 10.0;
+    private double resistanceStrength = 5.0;
     private double gravity = 1E4;
     private double tension = 5E-3;
     private double dt = 0.016666667;
 
-    public Balancer(PlanarGraphImpl graph) {
+    public Balancer(PlanarGraph graph) {
         this.graph = graph;
     }
 
@@ -112,7 +112,7 @@ public class Balancer<V,E> {
     public void leadToEquilibrium() {
         // this.layout = layout;
         int count = 0;
-        while (!nextFrame()&&count++<100) { }
+        while (!nextFrame()&&count++<10000) { }
 
     }
 

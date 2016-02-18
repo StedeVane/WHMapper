@@ -6,7 +6,9 @@ import com.sifno.stellarmap.StellarMapInfoCache;
 import com.sifno.stellarmap.dataobject.Signature;
 
 import javax.swing.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Main extends JFrame {
 
@@ -30,7 +32,7 @@ public class Main extends JFrame {
         model.addStarSystems(sdl.loadStarSystemsAll());
         model.addStargates(sdl.loadStargatesAll());
 //
-//        Graph<Integer, Integer> g = null;
+//        GraphAdapter<Integer, Integer> g = null;
 
 
 //        kSpace map = new kSpace(sdl);
@@ -67,19 +69,25 @@ public class Main extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+
+                Set<Integer> s = new HashSet<Integer>();
+                boolean f = s.add(5);
+                boolean d = s.add(5);
+
+
      //           new Main();
-
-                List<Signature> signatures =  Signature.parse(
-                        "BVI-856\tCosmic Signature\t\t\t0,00%\t2,39 AU\n" +
-                                "GTJ-136\tCosmic Signature\tData Site\tCentral Guristas Sparking Transmitter\t100,00%\t1,90 AU\n" +
-                                "HVH-625\tCosmic Signature\t\t\t0,00%\t4,93 AU\n" +
-                                "HZW-357\tCosmic Signature\tWormhole\tUnstable Wormhole\t100,00%\t4,99 AU\n" +
-                                "ICM-204\tCosmic Signature\t\t\t0,00%\t5,87 AU\n" +
-                                "MFV-568\tCosmic Signature\t\t\t0,00%\t6,29 AU\n" +
-                                "RAB-085\tCosmic Signature\t\t\t0,00%\t2,50 AU"
-                );
-
-                KSpace.getInstance();
+//
+//                List<Signature> signatures =  Signature.parse(
+//                        "BVI-856\tCosmic Signature\t\t\t0,00%\t2,39 AU\n" +
+//                                "GTJ-136\tCosmic Signature\tData Site\tCentral Guristas Sparking Transmitter\t100,00%\t1,90 AU\n" +
+//                                "HVH-625\tCosmic Signature\t\t\t0,00%\t4,93 AU\n" +
+//                                "HZW-357\tCosmic Signature\tWormhole\tUnstable Wormhole\t100,00%\t4,99 AU\n" +
+//                                "ICM-204\tCosmic Signature\t\t\t0,00%\t5,87 AU\n" +
+//                                "MFV-568\tCosmic Signature\t\t\t0,00%\t6,29 AU\n" +
+//                                "RAB-085\tCosmic Signature\t\t\t0,00%\t2,50 AU"
+//                );
+//
+//                KSpace.getInstance();
 
                 return;
             }

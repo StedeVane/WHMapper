@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 
 import com.google.gwt.user.client.ui.TextArea;
-import com.sifno.stellarmap.graph.PlanarGraphImpl;
+import com.sifno.stellarmap.graph.PlanarGraph;
 import com.sifno.stellarmap.graph.UndirectedSpareGraph;
 import com.sifno.whmapper.client.Graph.GraphViewer;
 import com.sifno.whmapper.client.Graph.StarSystemWidget;
@@ -66,7 +66,7 @@ public class WHMapper implements EntryPoint {
         });
         dragController.registerDropController(gv.getDropController());
 
-        PlanarGraphImpl<Integer,Integer> graph = new PlanarGraphImpl<>(new UndirectedSpareGraph<Integer,Integer>());
+        PlanarGraph<Integer,Integer> graph = new PlanarGraph<>(new UndirectedSpareGraph<Integer,Integer>());
 
 
         graph.addVertex(1);
@@ -84,7 +84,7 @@ public class WHMapper implements EntryPoint {
         button.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
 
-                AsyncCallback<PlanarGraphImpl<Integer,Integer>> callback = new AsyncCallback<PlanarGraphImpl<Integer,Integer>>() {
+                AsyncCallback<PlanarGraph<Integer,Integer>> callback = new AsyncCallback<PlanarGraph<Integer,Integer>>() {
                     @Override
                     public void onFailure(Throwable caught) {
                         label.setText(caught.getMessage());
@@ -93,7 +93,7 @@ public class WHMapper implements EntryPoint {
                     }
 
                     @Override
-                    public void onSuccess(PlanarGraphImpl<Integer,Integer> result) {
+                    public void onSuccess(PlanarGraph<Integer,Integer> result) {
                         gv.setGraph(result);
                         label.setText(result.toString());
                     }

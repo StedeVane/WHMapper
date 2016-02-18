@@ -1,5 +1,8 @@
 package com.sifno.stellarmap.graph.event;
 
 
-public class GraphListener<V,E>  {
+import com.google.gwt.event.dom.client.ClickEvent;
+
+public interface GraphListener<V,E>  {
+    void handleGraphEvent(GraphEvent<V, E> event);
 }

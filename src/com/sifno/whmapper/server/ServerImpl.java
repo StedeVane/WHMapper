@@ -4,7 +4,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import com.sifno.stellarmap.dataobject.StarSystem;
 import com.sifno.stellarmap.graph.Balancer;
-import com.sifno.stellarmap.graph.PlanarGraphImpl;
+import com.sifno.stellarmap.graph.PlanarGraph;
 import com.sifno.stellarmap.graph.UndirectedSpareGraph;
 import com.sifno.whmapper.client.Server;
 import com.sifno.whmapper.client.MyClass;
@@ -19,10 +19,10 @@ public class ServerImpl extends RemoteServiceServlet implements Server {
     }
 
     @Override
-    public PlanarGraphImpl<Integer, Integer> updateRequest() {
+    public PlanarGraph<Integer, Integer> updateRequest() {
         String str = this.getThreadLocalRequest().getHeader("eve_solarsystemid");
 
-        PlanarGraphImpl<Integer,Integer> graph  = new PlanarGraphImpl<>(new UndirectedSpareGraph<Integer,Integer>());
+        PlanarGraph<Integer,Integer> graph  = new PlanarGraph<>(new UndirectedSpareGraph<Integer,Integer>());
         graph.addVertex(Integer.valueOf(str));
         Balancer<Integer,Integer> balancer = new Balancer<>(graph);
         balancer.leadToEquilibrium();
@@ -41,7 +41,7 @@ public class ServerImpl extends RemoteServiceServlet implements Server {
     }
 
     @Override
-    public PlanarGraphImpl<Integer, Integer> testUpdate(String systemID) {
+    public PlanarGraph<Integer, Integer> testUpdate(String systemID) {
         Reality reality = GodObject.getReality();
 
 
@@ -53,7 +53,7 @@ public class ServerImpl extends RemoteServiceServlet implements Server {
             reality.p = Integer.valueOf(systemID);
         }
 
-        return reality.getPlanarGraphImpl();
+        return reality.getPlanarGraph();
     }
 }
 

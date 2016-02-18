@@ -11,7 +11,6 @@ import com.sifno.stellarmap.graph.UndirectedSpareGraph;
 public class KSpace extends GraphAdapter<Integer,Integer> {
     //TODO не добавлять wSpace;
 
-    private Graph<Integer,Integer> graph = new UndirectedSpareGraph<>();
     private StellarMapInfoCache info;
 
     private static KSpace instance;
@@ -24,6 +23,8 @@ public class KSpace extends GraphAdapter<Integer,Integer> {
 
 
     private KSpace() {
+        super(new UndirectedSpareGraph<>());
+
         ServerDataLoader sdl = new ServerDataLoader();
         info = new StellarMapInfoCache();
 
@@ -36,14 +37,14 @@ public class KSpace extends GraphAdapter<Integer,Integer> {
 
         for (StarSystem starSystem: info.getStarSystems()) {
             if (starSystem.isKSpace())
-                graph.addVertex(starSystem.getID());
+                addVertex(starSystem.getID());
         }
 
         for (Stargate stargate: info.getStargates()) {
-            if (graph.getEdge(stargate.getJumpID()) == null) {
+            if (getEdge(stargate.getJumpID()) == null) {
                 Stargate destinationStargate =  info.getStargate(stargate.getDestinationStargateID());
                 if (destinationStargate != null) {
-                    graph.addEdge(stargate.getJumpID(),stargate.getStarSystemID(),destinationStargate.getStarSystemID());
+                    addEdge(stargate.getJumpID(),stargate.getStarSystemID(),destinationStargate.getStarSystemID());
                 }
             }
 

@@ -4,7 +4,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.google.gwt.core.client.GWT;
 import com.sifno.stellarmap.dataobject.StarSystem;
-import com.sifno.stellarmap.graph.PlanarGraphImpl;
+import com.sifno.stellarmap.graph.PlanarGraph;
 
 @RemoteServiceRelativePath("LayoutMap")
 public interface Server extends RemoteService {
@@ -21,10 +21,10 @@ public interface Server extends RemoteService {
         }
     }
 
-    public PlanarGraphImpl<Integer,Integer> updateRequest();
+    public PlanarGraph<Integer,Integer> updateRequest();
     public StarSystem getSolarSystem(int id);
 
-    public PlanarGraphImpl<Integer, Integer> testUpdate(String systemID);
+    public PlanarGraph<Integer, Integer> testUpdate(String systemID);
 
 
 }
